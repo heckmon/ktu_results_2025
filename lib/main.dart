@@ -16,6 +16,7 @@ class Base extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
+          scaffoldBackgroundColor: Colors.white,
           textTheme: GoogleFonts.latoTextTheme(),
         ),
         home: const Scaffold(appBar: Appbar(), body: AppBody()));

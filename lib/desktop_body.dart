@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ktu_results/result.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class AppBody extends StatefulWidget {
@@ -8,6 +9,9 @@ class AppBody extends StatefulWidget {
   @override
   State<AppBody> createState() => _AppBodyState();
 }
+
+final _dropctrl = TextEditingController();
+String _dropvalue = "--SELECT--";
 
 class _AppBodyState extends State<AppBody> {
   @override
@@ -231,6 +235,12 @@ class _AppBodyState extends State<AppBody> {
                               padding: const EdgeInsets.symmetric(
                                   vertical: 12, horizontal: 22.0),
                               child: DropdownMenu(
+                                onSelected: (String? val) {
+                                  setState(() {
+                                    _dropvalue = val ?? "--SELECT--";
+                                  });
+                                },
+                                controller: _dropctrl,
                                 enableSearch: false,
                                 trailingIcon: const Icon(
                                   FontAwesomeIcons.chevronDown,
@@ -260,7 +270,9 @@ class _AppBodyState extends State<AppBody> {
                                         WidgetStatePropertyAll(Colors.white)),
                                 dropdownMenuEntries: const [
                                   DropdownMenuEntry(
-                                      value: "--SELECT--", label: "--SELECT--"),
+                                      value: "--SELECT--",
+                                      label: "--SELECT--",
+                                      enabled: false),
                                   DropdownMenuEntry(
                                       value: "B.Tech", label: "B.Tech"),
                                   DropdownMenuEntry(
@@ -300,7 +312,6 @@ class _AppBodyState extends State<AppBody> {
                                   DropdownMenuEntry(value: "BBA", label: "BBA"),
                                   DropdownMenuEntry(value: "BCA", label: "BCA"),
                                 ],
-                                onSelected: (val) {},
                               ),
                             )
                           ],
@@ -313,8 +324,13 @@ class _AppBodyState extends State<AppBody> {
                           width: 1330,
                           height: 200,
                           child: Card(
+                            surfaceTintColor: Colors.grey[400],
+                            color: Colors.white,
+                            elevation: 7,
                             shadowColor: Colors.black,
-                            shape: const BeveledRectangleBorder(),
+                            shape: const BeveledRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(3))),
                             margin: const EdgeInsets.all(30),
                             child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -322,8 +338,11 @@ class _AppBodyState extends State<AppBody> {
                                   Container(
                                       padding: const EdgeInsets.all(5),
                                       height: 30,
-                                      child: const Text("Exam")),
-                                  const Divider()
+                                      child: const Text("Exam",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold))),
+                                  const Divider(),
+                                  resultField(),
                                 ]),
                           ),
                         ))
@@ -335,6 +354,33 @@ class _AppBodyState extends State<AppBody> {
         ),
       ],
     );
+  }
+
+  Widget resultField() {
+    if (_dropvalue == "--SELECT--") {
+      return const Center(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          child: SizedBox(
+            width: double.infinity,
+            height: 60.5,
+            child: Card(
+              elevation: 3,
+              color: Colors.white,
+              shape: BeveledRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(2))),
+              child: Center(
+                child: Text("NO RECORDS FOUND",
+                    style: TextStyle(
+                        color: Color(0xff8b0051), fontWeight: FontWeight.bold)),
+              ),
+            ),
+          ),
+        ),
+      );
+    } else {
+      return const Card();
+    }
   }
 
   Widget styledListTile(String text, VoidCallback onPressed,
@@ -377,7 +423,7 @@ class _AppBodyState extends State<AppBody> {
   Widget styledPopup(String hint, Map<String, VoidCallback> data) {
     return Semantics(
       child: PopupMenuButton(
-        tooltip:"",
+        tooltip: "",
         color: Colors.white,
         position: PopupMenuPosition.under,
         icon: Row(
