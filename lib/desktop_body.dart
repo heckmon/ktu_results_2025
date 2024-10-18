@@ -377,9 +377,9 @@ class _AppBodyState extends State<AppBody> {
   Widget styledPopup(String hint, Map<String, VoidCallback> data) {
     return Semantics(
       child: PopupMenuButton(
+        tooltip:"",
         color: Colors.white,
         position: PopupMenuPosition.under,
-        tooltip: hint,
         icon: Row(
           children: [
             Text(
