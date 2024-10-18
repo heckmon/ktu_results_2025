@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:ktu_results/result.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class AppBody extends StatefulWidget {
@@ -396,8 +395,18 @@ class _AppBodyState extends State<AppBody> {
                           size: 16, color: Colors.white)),
                 ),
               ),
-              trailing: ElevatedButton(
-                  onPressed: () {}, child: const Text("View Result")),
+              trailing: SizedBox(
+                height: 40,
+                width: 122.5,
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.black,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(4)),
+                        backgroundColor: const Color(0xffebebeb)),
+                    onPressed: () {},
+                    child: const Text("View Result")),
+              ),
             );
           },
           separatorBuilder: (ctx, index) => const Divider(),
