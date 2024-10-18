@@ -322,7 +322,7 @@ class _AppBodyState extends State<AppBody> {
                         flex: 9,
                         child: SizedBox(
                           width: 1330,
-                          height: 200,
+                          height: _dropvalue == "--SELECT--" ? 200 : 1300,
                           child: Card(
                             surfaceTintColor: Colors.grey[400],
                             color: Colors.white,
@@ -379,7 +379,31 @@ class _AppBodyState extends State<AppBody> {
         ),
       );
     } else {
-      return const Card();
+      return Expanded(
+        child: ListView.separated(
+          itemBuilder: (ctx, index) {
+            return ListTile(
+              leading: const CircleAvatar(
+                backgroundColor: Color(0xff8b0051),
+                radius: 17,
+                child: CircleAvatar(
+                  backgroundColor: Colors.white,
+                  radius: 14.5,
+                  child: CircleAvatar(
+                      radius: 13,
+                      backgroundColor: Color(0xff8b0051),
+                      child: Icon(FontAwesomeIcons.fileSignature,
+                          size: 16, color: Colors.white)),
+                ),
+              ),
+              trailing: ElevatedButton(
+                  onPressed: () {}, child: const Text("View Result")),
+            );
+          },
+          separatorBuilder: (ctx, index) => const Divider(),
+          itemCount: 10,
+        ),
+      );
     }
   }
 
