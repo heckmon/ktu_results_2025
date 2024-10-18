@@ -111,7 +111,8 @@ class _AppBodyState extends State<AppBody> {
         ),
         Stack(
           children: [
-            Image.asset("assets/images/banner.jpg"),
+            Image.asset("assets/images/banner.jpg",
+                width: double.infinity, fit: BoxFit.cover),
             Column(
               children: [
                 SizedBox(
