@@ -233,9 +233,14 @@ class _AppBodyState extends State<AppBody> {
                               padding: const EdgeInsets.only(left: 12.0),
                               child: Text(
                                 _heading,
-                                style: const TextStyle(
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.bold),
+                                style: _heading == "Examination Result"
+                                    ? const TextStyle(
+                                        fontSize: 20.0,
+                                        fontWeight: FontWeight.bold)
+                                    : const TextStyle(
+                                        color: Color(0xff8b0051),
+                                        fontSize: 15.0,
+                                        fontWeight: FontWeight.bold),
                               ),
                             ),
                             const Expanded(child: SizedBox()),
@@ -409,97 +414,193 @@ class _AppBodyState extends State<AppBody> {
                           ],
                         ),
                       ),
-                      SizedBox(
-                        width: _isClicked ? 1120 : 1330,
-                        height: _dropvalue == "--SELECT--" || _isClicked == true
-                            ? 200
-                            : 750,
-                        child: _isClicked
-                            ? const Card(
-                                elevation: 7,
-                                color: Colors.white,
-                                child: Row(
-                                  children: [
-                                    Flexible(
-                                        flex: 1,
-                                        child: Column(
-                                          children: [
-                                            Align(
-                                              alignment: Alignment.topLeft,
-                                              child: Text(
-                                                "Register Number",
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 16),
-                                              ),
-                                            ),
-                                            TextField(
-                                              decoration: InputDecoration(
-                                                  border: OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(5)),
-                                                  ),
-                                                  label: Text(
-                                                      "Enter Register Number")),
-                                            ),
-                                          ],
-                                        )),
-                                    Flexible(
-                                        flex: 1,
-                                        child: Column(
-                                          children: [
-                                            Align(
-                                              alignment: Alignment.topLeft,
-                                              child: Text(
-                                                "Date Of Birth",
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 16),
-                                              ),
-                                            ),
-                                            TextField(
-                                              readOnly: true,
-                                              decoration: InputDecoration(
-                                                  border: OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  5))),
-                                                  hintText: "mm/dd/yyyy",
-                                                  suffixIcon: Icon(
-                                                      FontAwesomeIcons
-                                                          .calendar)),
-                                            ),
-                                          ],
-                                        ))
-                                  ],
-                                ),
-                              )
-                            : Card(
-                                surfaceTintColor: Colors.grey[400],
-                                color: Colors.white,
-                                elevation: 7,
-                                shadowColor: Colors.black,
-                                shape: const BeveledRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(3))),
-                                margin: const EdgeInsets.all(30),
-                                child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                      Padding(
+                        padding: _isClicked
+                            ? const EdgeInsets.only(top: 20)
+                            : const EdgeInsets.all(0),
+                        child: SizedBox(
+                          width: _isClicked ? 1130 : 1330,
+                          height:
+                              _dropvalue == "--SELECT--" || _isClicked == true
+                                  ? 200
+                                  : 750,
+                          child: _isClicked
+                              ? Card(
+                                  elevation: 7,
+                                  color: Colors.white,
+                                  child: Column(
                                     children: [
-                                      Container(
-                                          padding: const EdgeInsets.all(5),
-                                          height: 30,
-                                          child: const Text("Exam",
-                                              style: TextStyle(
-                                                  fontWeight:
-                                                      FontWeight.bold))),
-                                      const Divider(),
-                                      resultField(),
-                                    ]),
-                              ),
+                                      const Row(
+                                        children: [
+                                          Flexible(
+                                              flex: 1,
+                                              child: Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 14.0,
+                                                    vertical: 10.0),
+                                                child: Column(
+                                                  children: [
+                                                    Align(
+                                                      alignment:
+                                                          Alignment.topLeft,
+                                                      child: Text(
+                                                        "Register Number",
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontSize: 16),
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding: EdgeInsets.only(
+                                                          top: 8.0),
+                                                      child: TextField(
+                                                        decoration:
+                                                            InputDecoration(
+                                                                enabledBorder:
+                                                                    OutlineInputBorder(
+                                                                  borderSide:
+                                                                      BorderSide(
+                                                                    color: Color(
+                                                                        0xffbbbfc1),
+                                                                    width: 1,
+                                                                  ),
+                                                                  borderRadius:
+                                                                      BorderRadius.all(
+                                                                          Radius.circular(
+                                                                              5.5)),
+                                                                ),
+                                                                label: Text(
+                                                                  "Enter Register Number",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          18,
+                                                                      color: Color(
+                                                                          0xffbbbfc1)),
+                                                                )),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              )),
+                                          Flexible(
+                                              flex: 1,
+                                              child: Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 14.0,
+                                                    vertical: 10.0),
+                                                child: Column(
+                                                  children: [
+                                                    Align(
+                                                      alignment:
+                                                          Alignment.topLeft,
+                                                      child: Text(
+                                                        "Date Of Birth",
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontSize: 16),
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding: EdgeInsets.only(
+                                                          top: 8.0),
+                                                      child: TextField(
+                                                        readOnly: true,
+                                                        decoration:
+                                                            InputDecoration(
+                                                                enabledBorder:
+                                                                    OutlineInputBorder(
+                                                                        borderSide:
+                                                                            BorderSide(
+                                                                          color:
+                                                                              Color(0xffbbbfc1),
+                                                                          width:
+                                                                              1,
+                                                                        ),
+                                                                        borderRadius:
+                                                                            BorderRadius.all(Radius.circular(
+                                                                                5.5))),
+                                                                hintText:
+                                                                    "mm/dd/yyyy",
+                                                                hintStyle: TextStyle(
+                                                                    color: Colors
+                                                                        .black,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400),
+                                                                suffixIcon:
+                                                                    Icon(
+                                                                  FontAwesomeIcons
+                                                                      .calendar,
+                                                                  size: 12.0,
+                                                                )),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ))
+                                        ],
+                                      ),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 13),
+                                        child: Align(
+                                          alignment: Alignment.bottomRight,
+                                          child: SizedBox(
+                                            width: 143,
+                                            height: 40,
+                                            child: ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                foregroundColor: Colors.white,
+                                                backgroundColor:
+                                                    const Color(0xff6d52b1),
+                                                shape:
+                                                    const RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                    Radius.circular(5),
+                                                  ),
+                                                ),
+                                              ),
+                                              onPressed: () {},
+                                              child: const Text(
+                                                "View Results",
+                                                style:
+                                                    TextStyle(fontSize: 16.5),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                )
+                              : Card(
+                                  surfaceTintColor: Colors.grey[400],
+                                  color: Colors.white,
+                                  elevation: 7,
+                                  shadowColor: Colors.black,
+                                  shape: const BeveledRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(3))),
+                                  margin: const EdgeInsets.all(30),
+                                  child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                            padding: const EdgeInsets.all(5),
+                                            height: 30,
+                                            child: const Text("Exam",
+                                                style: TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.bold))),
+                                        const Divider(),
+                                        resultField(),
+                                      ]),
+                                ),
+                        ),
                       )
                     ],
                   ),
@@ -665,7 +766,7 @@ class _AppBodyState extends State<AppBody> {
                       } else {
                         setState(() {
                           _isClicked = true;
-                          _heading = _data[index];
+                          _heading = "Exam:  ${_data[index]}";
                         });
                       }
                     },
