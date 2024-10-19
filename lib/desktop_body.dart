@@ -17,190 +17,192 @@ class _AppBodyState extends State<AppBody> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-    return Column(
-      children: [
-        Container(
-          color: Colors.white,
-          width: double.infinity,
-          height: 90.0,
-          child: Row(
-            children: [
-              const SizedBox(width: 10),
-              SizedBox(
-                height: 175.0,
-                width: 175.0,
-                child: Image.asset("assets/images/logo.png"),
-              ),
-              styledTButton(
-                  "Home", () => _launchUrl("https://ktu.edu.in/home")),
-              styledPopup("University", {
-                "About us": () =>
-                    _launchUrl("https://ktu.edu.in/university/about"),
-                "Values, Vision & Mission": () => _launchUrl(
-                    "https://ktu.edu.in/university/visionandmission"),
-                "Acts and Statutes": () =>
-                    _launchUrl("https://ktu.edu.in/university/statutes"),
-                "Meeting Minutes": () =>
-                    _launchUrl("https://ktu.edu.in/university/meetingminutes"),
-              }),
-              styledPopup("People", {
-                "Board of Governors": () => _launchUrl(
-                    "https://ktu.edu.in/administration/boardofgovernors"),
-                "Syndicate": () =>
-                    _launchUrl("https://ktu.edu.in/administration/syndicate"),
-                "Authorities": () =>
-                    _launchUrl("https://ktu.edu.in/administration/Authorities"),
-                "Statutory Officers": () => _launchUrl(
-                    "https://ktu.edu.in/administration/StatutoryOfficers"),
-              }),
-              styledPopup("Affiliation", {
-                "Affiliated Instituitions": () => _launchUrl(
-                    "https://ktu.edu.in/affiliation/affiliatedInstitutes"),
-                "NBA Accredited Institutions": () => _launchUrl(
-                    "https://ktu.edu.in/affiliation/affiliationNBAAccreditedInstitutes"),
-                "Norms and Rules": () => _launchUrl(
-                    "https://ktu.edu.in/affiliation/norms-and-rules"),
-                "Notifications": () => _launchUrl(
-                    "https://ktu.edu.in/affiliation/affiliationNotification"),
-              }),
-              styledPopup("Academics", {
-                "Academic Calender": () => _launchUrl(
-                    "https://ktu.edu.in/academics/academic_calendar"),
-                "Regulation & Syllabus": () =>
-                    _launchUrl("https://ktu.edu.in/academics/scheme"),
-                "MOOC Courses": () =>
-                    _launchUrl("https://ktu.edu.in/academics/mooccources"),
-                "CGPC": () => _launchUrl("https://ktu.edu.in/academics/cgpc"),
-                "Norms And Rules": () =>
-                    _launchUrl("https://ktu.edu.in/academics/norms-and-rules"),
-                "Notification": () =>
-                    _launchUrl("https://ktu.edu.in/academics/notification"),
-              }),
-              styledPopup("Examination", {
-                "Timetable": () =>
-                    _launchUrl("https://ktu.edu.in/exam/Timetable"),
-                "Result": () => _launchUrl(""),
-                "Norms and Rules": () =>
-                    _launchUrl("https://ktu.edu.in/exam/norms-and-rules"),
-                "Notification": () =>
-                    _launchUrl("https://ktu.edu.in/exam/Notification")
-              }),
-              styledPopup("Research", {
-                "Plcaes of Reseacrh": () => _launchUrl(
-                    "https://ktu.edu.in/research/PlaceOfResearchList"),
-                "Registered Reasearch Supervisors": () =>
-                    _launchUrl("https://ktu.edu.in/research/placeofresearchs"),
-                "Registered Reseacrh Scholars": () =>
-                    _launchUrl("https://ktu.edu.in/research/placeofresearchs"),
-                "Norms And Rules": () =>
-                    _launchUrl("https://ktu.edu.in/research/norms-and-rules"),
-                "Notification": () =>
-                    _launchUrl("https://ktu.edu.in/research/Notification"),
-              }),
-              styledPopup("IQAC", {
-                "About": () => _launchUrl("https://ktu.edu.in/iqac/IQACList"),
-                "HRDC Centers": () =>
-                    _launchUrl("https://ktu.edu.in/iqac/hrdccenters")
-              }),
-              styledPopup("Legal", {
-                "RTI": () => _launchUrl("https://ktu.edu.in/miscellaneous/RTI")
-              }),
-              styledTButton(
-                  "Jobs/Careers",
-                  () => _launchUrl(
-                      "https://ktu.edu.in/job&career/jobnotification")),
-            ],
-          ),
-        ),
-        Stack(
-          children: [
-            Image.asset("assets/images/banner.jpg",
-                width: double.infinity, fit: BoxFit.cover),
-            Column(
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Container(
+            color: Colors.white,
+            width: double.infinity,
+            height: 90.0,
+            child: Row(
               children: [
+                const SizedBox(width: 10),
                 SizedBox(
-                  height: screenHeight * 0.08,
+                  height: 175.0,
+                  width: 175.0,
+                  child: Image.asset("assets/images/logo.png"),
                 ),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: screenWidth * 0.17,
-                    ),
-                    const Text(
-                      "Exam",
-                      style: TextStyle(color: Colors.white, fontSize: 28),
-                    ),
-                    const SizedBox(width: 8),
-                    const Icon(
-                      FontAwesomeIcons.chevronRight,
-                      color: Colors.white,
-                      size: 12,
-                    ),
-                    const SizedBox(width: 8),
-                    const Text(
-                      "Result",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 36,
-                      ),
-                    )
-                  ],
-                ),
+                styledTButton(
+                    "Home", () => _launchUrl("https://ktu.edu.in/home")),
+                styledPopup("University", {
+                  "About us": () =>
+                      _launchUrl("https://ktu.edu.in/university/about"),
+                  "Values, Vision & Mission": () => _launchUrl(
+                      "https://ktu.edu.in/university/visionandmission"),
+                  "Acts and Statutes": () =>
+                      _launchUrl("https://ktu.edu.in/university/statutes"),
+                  "Meeting Minutes": () => _launchUrl(
+                      "https://ktu.edu.in/university/meetingminutes"),
+                }),
+                styledPopup("People", {
+                  "Board of Governors": () => _launchUrl(
+                      "https://ktu.edu.in/administration/boardofgovernors"),
+                  "Syndicate": () =>
+                      _launchUrl("https://ktu.edu.in/administration/syndicate"),
+                  "Authorities": () => _launchUrl(
+                      "https://ktu.edu.in/administration/Authorities"),
+                  "Statutory Officers": () => _launchUrl(
+                      "https://ktu.edu.in/administration/StatutoryOfficers"),
+                }),
+                styledPopup("Affiliation", {
+                  "Affiliated Instituitions": () => _launchUrl(
+                      "https://ktu.edu.in/affiliation/affiliatedInstitutes"),
+                  "NBA Accredited Institutions": () => _launchUrl(
+                      "https://ktu.edu.in/affiliation/affiliationNBAAccreditedInstitutes"),
+                  "Norms and Rules": () => _launchUrl(
+                      "https://ktu.edu.in/affiliation/norms-and-rules"),
+                  "Notifications": () => _launchUrl(
+                      "https://ktu.edu.in/affiliation/affiliationNotification"),
+                }),
+                styledPopup("Academics", {
+                  "Academic Calender": () => _launchUrl(
+                      "https://ktu.edu.in/academics/academic_calendar"),
+                  "Regulation & Syllabus": () =>
+                      _launchUrl("https://ktu.edu.in/academics/scheme"),
+                  "MOOC Courses": () =>
+                      _launchUrl("https://ktu.edu.in/academics/mooccources"),
+                  "CGPC": () => _launchUrl("https://ktu.edu.in/academics/cgpc"),
+                  "Norms And Rules": () => _launchUrl(
+                      "https://ktu.edu.in/academics/norms-and-rules"),
+                  "Notification": () =>
+                      _launchUrl("https://ktu.edu.in/academics/notification"),
+                }),
+                styledPopup("Examination", {
+                  "Timetable": () =>
+                      _launchUrl("https://ktu.edu.in/exam/Timetable"),
+                  "Result": () => _launchUrl(""),
+                  "Norms and Rules": () =>
+                      _launchUrl("https://ktu.edu.in/exam/norms-and-rules"),
+                  "Notification": () =>
+                      _launchUrl("https://ktu.edu.in/exam/Notification")
+                }),
+                styledPopup("Research", {
+                  "Plcaes of Reseacrh": () => _launchUrl(
+                      "https://ktu.edu.in/research/PlaceOfResearchList"),
+                  "Registered Reasearch Supervisors": () => _launchUrl(
+                      "https://ktu.edu.in/research/placeofresearchs"),
+                  "Registered Reseacrh Scholars": () => _launchUrl(
+                      "https://ktu.edu.in/research/placeofresearchs"),
+                  "Norms And Rules": () =>
+                      _launchUrl("https://ktu.edu.in/research/norms-and-rules"),
+                  "Notification": () =>
+                      _launchUrl("https://ktu.edu.in/research/Notification"),
+                }),
+                styledPopup("IQAC", {
+                  "About": () => _launchUrl("https://ktu.edu.in/iqac/IQACList"),
+                  "HRDC Centers": () =>
+                      _launchUrl("https://ktu.edu.in/iqac/hrdccenters")
+                }),
+                styledPopup("Legal", {
+                  "RTI": () =>
+                      _launchUrl("https://ktu.edu.in/miscellaneous/RTI")
+                }),
+                styledTButton(
+                    "Jobs/Careers",
+                    () => _launchUrl(
+                        "https://ktu.edu.in/job&career/jobnotification")),
               ],
             ),
-          ],
-        ),
-        Expanded(
-          child: Row(
+          ),
+          Stack(
             children: [
-              Flexible(
-                flex: 1,
-                child: ListView(
-                  children: [
-                    Padding(
-                        padding:
-                            const EdgeInsets.only(top: 14, right: 5, left: 5),
-                        child: styledListTile(
-                            "Timetable",
-                            trail: true,
-                            () => _launchUrl(
-                                "https://ktu.edu.in/exam/timetable"))),
-                    const Divider(height: 0, indent: 12, endIndent: 12),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                      child: Column(
-                        children: [
-                          styledListTile(
-                              "Result",
-                              selected: true,
-                              selectedTileColor: const Color(0xff6d52b1),
-                              () {}),
-                          const Divider(height: 0, indent: 4, endIndent: 4),
-                          styledListTile(
-                              "Norms And Rules",
-                              () => _launchUrl(
-                                  "https://ktu.edu.in/exam/norms-and-rules")),
-                          const Divider(height: 0, indent: 4, endIndent: 4),
-                          styledListTile(
-                              "Notification",
-                              () => _launchUrl(
-                                  "https://ktu.edu.in/exam/notification")),
-                          const Divider(height: 0, indent: 4, endIndent: 4),
-                        ],
+              Image.asset("assets/images/banner.jpg",
+                  width: double.infinity, fit: BoxFit.cover),
+              Column(
+                children: [
+                  SizedBox(
+                    height: screenHeight * 0.08,
+                  ),
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: screenWidth * 0.17,
                       ),
-                    ),
-                  ],
-                ),
+                      const Text(
+                        "Exam",
+                        style: TextStyle(color: Colors.white, fontSize: 28),
+                      ),
+                      const SizedBox(width: 8),
+                      const Icon(
+                        FontAwesomeIcons.chevronRight,
+                        color: Colors.white,
+                        size: 12,
+                      ),
+                      const SizedBox(width: 8),
+                      const Text(
+                        "Result",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 36,
+                        ),
+                      )
+                    ],
+                  ),
+                ],
               ),
-              const VerticalDivider(width: 3.5),
-              Flexible(
-                flex: 3,
-                child: Column(
-                  children: [
-                    const SizedBox(height: 2.5),
-                    Flexible(
-                      flex: 1,
-                      child: Container(
+            ],
+          ),
+          SizedBox(
+            width: double.infinity,
+            height: screenHeight - 50,
+            child: Row(
+              children: [
+                Flexible(
+                  flex: 1,
+                  child: Column(
+                    children: [
+                      Padding(
+                          padding:
+                              const EdgeInsets.only(top: 14, right: 5, left: 5),
+                          child: styledListTile(
+                              "Timetable",
+                              trail: true,
+                              () => _launchUrl(
+                                  "https://ktu.edu.in/exam/timetable"))),
+                      const Divider(height: 0, indent: 12, endIndent: 12),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                        child: Column(
+                          children: [
+                            styledListTile(
+                                "Result",
+                                selected: true,
+                                selectedTileColor: const Color(0xff6d52b1),
+                                () {}),
+                            const Divider(height: 0, indent: 4, endIndent: 4),
+                            styledListTile(
+                                "Norms And Rules",
+                                () => _launchUrl(
+                                    "https://ktu.edu.in/exam/norms-and-rules")),
+                            const Divider(height: 0, indent: 4, endIndent: 4),
+                            styledListTile(
+                                "Notification",
+                                () => _launchUrl(
+                                    "https://ktu.edu.in/exam/notification")),
+                            const Divider(height: 0, indent: 4, endIndent: 4),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const VerticalDivider(width: 3.5),
+                Flexible(
+                  flex: 3,
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 2.5),
+                      Container(
                         decoration: const BoxDecoration(
                           color: Colors.white,
                           boxShadow: [
@@ -316,42 +318,117 @@ class _AppBodyState extends State<AppBody> {
                           ],
                         ),
                       ),
-                    ),
-                    Flexible(
-                        flex: 9,
-                        child: SizedBox(
-                          width: 1330,
-                          height: _dropvalue == "--SELECT--" ? 200 : 1300,
-                          child: Card(
-                            surfaceTintColor: Colors.grey[400],
-                            color: Colors.white,
-                            elevation: 7,
-                            shadowColor: Colors.black,
-                            shape: const BeveledRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(3))),
-                            margin: const EdgeInsets.all(30),
-                            child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                      padding: const EdgeInsets.all(5),
-                                      height: 30,
-                                      child: const Text("Exam",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold))),
-                                  const Divider(),
-                                  resultField(),
-                                ]),
+                      SizedBox(
+                        width: 1330,
+                        height: _dropvalue == "--SELECT--" ? 200 : 750,
+                        child: Card(
+                          surfaceTintColor: Colors.grey[400],
+                          color: Colors.white,
+                          elevation: 7,
+                          shadowColor: Colors.black,
+                          shape: const BeveledRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(3))),
+                          margin: const EdgeInsets.all(30),
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                    padding: const EdgeInsets.all(5),
+                                    height: 30,
+                                    child: const Text("Exam",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold))),
+                                const Divider(),
+                                resultField(),
+                              ]),
+                        ),
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+          Stack(
+            children: [
+              Container(
+                color: const Color(0xff1d2733),
+                width: double.infinity,
+                height: 200,
+              ),
+              Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 205, vertical: 25),
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: 220,
+                          height: 80,
+                          child: Image.asset("assets/images/logo_tr.png"),
+                        ),
+                        const Expanded(child: SizedBox()),
+                        SizedBox(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              iconBtns(
+                                  FontAwesomeIcons.facebook,
+                                  const Color(0xff395498),
+                                  () => _launchUrl(
+                                      "https://m.facebook.com/apjaktuofficial/")),
+                              iconBtns(
+                                  FontAwesomeIcons.linkedin,
+                                  const Color(0xff0270ad),
+                                  () => _launchUrl(
+                                      "https://in.linkedin.com/school/apj-abdul-kalam-technological-university/")),
+                              iconBtns(
+                                  FontAwesomeIcons.instagram,
+                                  const Color(0xffea4c56),
+                                  () => _launchUrl(
+                                      "https://instagram.com/keralatechnologicaluniversity/")),
+                              iconBtns(
+                                  FontAwesomeIcons.twitter,
+                                  const Color(0xff029eec),
+                                  () => _launchUrl(
+                                      "https://twitter.com/apjaktuofficial")),
+                              iconBtns(
+                                  FontAwesomeIcons.youtube,
+                                  const Color(0xfff60002),
+                                  () => _launchUrl(
+                                      "https://www.youtube.com/channel/UC4lFeTaXLEhOeharO9-WS6w/featured")),
+                            ],
                           ),
-                        ))
-                  ],
-                ),
+                        )
+                      ],
+                    ),
+                  ),
+                  const Divider(thickness: 0.3),
+                  const Text(
+                    "Copyright@ APJ Abdul Kalam Technological University 2021",
+                    style: TextStyle(color: Color(0xff898b8d)),
+                  )
+                ],
               )
             ],
-          ),
-        ),
-      ],
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget iconBtns(IconData icon, Color color, VoidCallback onPressed) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 6),
+      child: IconButton.outlined(
+          iconSize: 16,
+          padding: const EdgeInsets.all(15),
+          hoverColor: color,
+          color: Colors.white,
+          onPressed: onPressed,
+          icon: Icon(icon)),
     );
   }
 
