@@ -11,6 +11,20 @@ class AppBody extends StatefulWidget {
 
 final _dropctrl = TextEditingController();
 String _dropvalue = "--SELECT--";
+bool _isClicked = false;
+String _heading = "Examination Result";
+List<String> _data = [
+  "B.Tech S8 (S) Exam Aug 2024 (2019 Scheme) (S8 Result)",
+  "B.Tech S8 (PT) (S) Exam August 2024 (2019 Scheme) (S8 Result",
+  "B.Tech S3 (S, FE) Exam June 2024 (2019 Scheme) (S3 Result)",
+  "B.Tech S5 (S, FE) Exam June 2024 (2019 Scheme) (S5 Result)",
+  "B.Tech S6 (Minor) Exam June 2024 (2021 Admn) (S6 Result)",
+  "B.Tech S6 (Hons.) Exam June 2024 (2021 Admn) (S6 Result)",
+  "B.Tech S4 (minor) Exam June 2024 (2022 admn) (S4 Result)",
+  "B.Tech S4 (Hons.) Exam June 2024 (2022 admn) (S4 Result)",
+  "B.Tech S1 (S, FE) Exam June 2024 (2019 Scheme) (S1 Result)",
+  "B.Tech S5 (S, FE) Exam June 2024 (2015 Scheme) (S5 Result)"
+];
 
 class _AppBodyState extends State<AppBody> {
   @override
@@ -215,11 +229,11 @@ class _AppBodyState extends State<AppBody> {
                         ),
                         child: Row(
                           children: [
-                            const Padding(
-                              padding: EdgeInsets.only(left: 12.0),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 12.0),
                               child: Text(
-                                "Examination Results",
-                                style: TextStyle(
+                                _heading,
+                                style: const TextStyle(
                                     fontSize: 20.0,
                                     fontWeight: FontWeight.bold),
                               ),
@@ -396,30 +410,96 @@ class _AppBodyState extends State<AppBody> {
                         ),
                       ),
                       SizedBox(
-                        width: 1330,
-                        height: _dropvalue == "--SELECT--" ? 200 : 750,
-                        child: Card(
-                          surfaceTintColor: Colors.grey[400],
-                          color: Colors.white,
-                          elevation: 7,
-                          shadowColor: Colors.black,
-                          shape: const BeveledRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(3))),
-                          margin: const EdgeInsets.all(30),
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                    padding: const EdgeInsets.all(5),
-                                    height: 30,
-                                    child: const Text("Exam",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold))),
-                                const Divider(),
-                                resultField(),
-                              ]),
-                        ),
+                        width: _isClicked ? 1120 : 1330,
+                        height: _dropvalue == "--SELECT--" || _isClicked == true
+                            ? 200
+                            : 750,
+                        child: _isClicked
+                            ? const Card(
+                                elevation: 7,
+                                color: Colors.white,
+                                child: Row(
+                                  children: [
+                                    Flexible(
+                                        flex: 1,
+                                        child: Column(
+                                          children: [
+                                            Align(
+                                              alignment: Alignment.topLeft,
+                                              child: Text(
+                                                "Register Number",
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 16),
+                                              ),
+                                            ),
+                                            TextField(
+                                              decoration: InputDecoration(
+                                                  border: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(5)),
+                                                  ),
+                                                  label: Text(
+                                                      "Enter Register Number")),
+                                            ),
+                                          ],
+                                        )),
+                                    Flexible(
+                                        flex: 1,
+                                        child: Column(
+                                          children: [
+                                            Align(
+                                              alignment: Alignment.topLeft,
+                                              child: Text(
+                                                "Date Of Birth",
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 16),
+                                              ),
+                                            ),
+                                            TextField(
+                                              readOnly: true,
+                                              decoration: InputDecoration(
+                                                  border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  5))),
+                                                  hintText: "mm/dd/yyyy",
+                                                  suffixIcon: Icon(
+                                                      FontAwesomeIcons
+                                                          .calendar)),
+                                            ),
+                                          ],
+                                        ))
+                                  ],
+                                ),
+                              )
+                            : Card(
+                                surfaceTintColor: Colors.grey[400],
+                                color: Colors.white,
+                                elevation: 7,
+                                shadowColor: Colors.black,
+                                shape: const BeveledRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(3))),
+                                margin: const EdgeInsets.all(30),
+                                child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                          padding: const EdgeInsets.all(5),
+                                          height: 30,
+                                          child: const Text("Exam",
+                                              style: TextStyle(
+                                                  fontWeight:
+                                                      FontWeight.bold))),
+                                      const Divider(),
+                                      resultField(),
+                                    ]),
+                              ),
                       )
                     ],
                   ),
@@ -534,6 +614,7 @@ class _AppBodyState extends State<AppBody> {
     } else {
       return Expanded(
         child: ListView.separated(
+          itemCount: 10,
           itemBuilder: (ctx, index) {
             return ListTile(
               leading: const CircleAvatar(
@@ -549,6 +630,26 @@ class _AppBodyState extends State<AppBody> {
                           size: 16, color: Colors.white)),
                 ),
               ),
+              title: _dropvalue == "B.Tech"
+                  ? Text(
+                      _data[index],
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xff8b0051),
+                      ),
+                    )
+                  : Text(
+                      "$_dropvalue S(${index + 1}) (S,F3) Examination May/June ${DateTime.now().year} (${DateTime.now().year - 5} Scheme) (S${index + 1} Result)",
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xff8b0051),
+                      ),
+                    ),
+              subtitle: _dropvalue == "B.Tech"
+                  ? Text(
+                      "Published On: ${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}")
+                  : Text(
+                      "Published On: ${DateTime.now().day + index}-${DateTime.now().month}-${DateTime.now().year}"),
               trailing: SizedBox(
                 height: 40,
                 width: 122.5,
@@ -558,13 +659,21 @@ class _AppBodyState extends State<AppBody> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(4)),
                         backgroundColor: const Color(0xffebebeb)),
-                    onPressed: () {},
+                    onPressed: () {
+                      if (_dropvalue != "B.Tech") {
+                        _launchUrl("");
+                      } else {
+                        setState(() {
+                          _isClicked = true;
+                          _heading = _data[index];
+                        });
+                      }
+                    },
                     child: const Text("View Result")),
               ),
             );
           },
           separatorBuilder: (ctx, index) => const Divider(),
-          itemCount: 10,
         ),
       );
     }
