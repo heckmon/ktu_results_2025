@@ -47,7 +47,7 @@ Map<String, int> _eachResult = {
   "M.arch": 6,
   "Hotel": 7,
   "MHM": 8,
-  "M.Plan": 9,
+  "B.Plan": 9,
   "MCA2": 10,
   "MCA2deg": 11,
   "PhD": 12,
@@ -288,7 +288,7 @@ class _AppBodyState extends State<AppBody> {
                             Padding(
                               padding: const EdgeInsets.symmetric(
                                   vertical: 12, horizontal: 22.0),
-                              child: DropdownMenu(
+                              child: DropdownMenu<String>(
                                 onSelected: (String? val) {
                                   setState(() {
                                     _dropvalue = val ?? "--SELECT--";
@@ -321,126 +321,35 @@ class _AppBodyState extends State<AppBody> {
                                         WidgetStatePropertyAll(Colors.black),
                                     backgroundColor:
                                         WidgetStatePropertyAll(Colors.white)),
-                                dropdownMenuEntries: const [
-                                  DropdownMenuEntry(
+                                dropdownMenuEntries: <DropdownMenuEntry<
+                                    String>>[
+                                  const DropdownMenuEntry(
                                       value: "--SELECT--",
                                       label: "--SELECT--",
                                       enabled: false),
-                                  DropdownMenuEntry(
-                                      style: ButtonStyle(
-                                          overlayColor: WidgetStatePropertyAll(
-                                              Color(0xff005faf))),
-                                      value: "B.Tech",
-                                      label: "B.Tech"),
-                                  DropdownMenuEntry(
-                                      style: ButtonStyle(
-                                          overlayColor: WidgetStatePropertyAll(
-                                              Color(0xff005faf))),
-                                      value: "M.Tech",
-                                      label: "M.Tech"),
-                                  DropdownMenuEntry(
-                                      style: ButtonStyle(
-                                          overlayColor: WidgetStatePropertyAll(
-                                              Color(0xff005faf))),
-                                      value: "MBA",
-                                      label: "MBA"),
-                                  DropdownMenuEntry(
-                                      style: ButtonStyle(
-                                          overlayColor: WidgetStatePropertyAll(
-                                              Color(0xff005faf))),
-                                      value: "MCA",
-                                      label: "MCA"),
-                                  DropdownMenuEntry(
-                                      style: ButtonStyle(
-                                          overlayColor: WidgetStatePropertyAll(
-                                              Color(0xff005faf))),
-                                      value: "B.Arch",
-                                      label: "B.Arch"),
-                                  DropdownMenuEntry(
-                                      style: ButtonStyle(
-                                          overlayColor: WidgetStatePropertyAll(
-                                              Color(0xff005faf))),
-                                      value: "M.Arch",
-                                      label: "M.Arch"),
-                                  DropdownMenuEntry(
-                                      style: ButtonStyle(
-                                          overlayColor: WidgetStatePropertyAll(
-                                              Color(0xff005faf))),
-                                      value: "Hotel",
-                                      label:
-                                          "Hotel Management and Catering Technology"),
-                                  DropdownMenuEntry(
-                                      style: ButtonStyle(
-                                          overlayColor: WidgetStatePropertyAll(
-                                              Color(0xff005faf))),
-                                      value: "MHM",
-                                      label: "MHM"),
-                                  DropdownMenuEntry(
-                                      style: ButtonStyle(
-                                          overlayColor: WidgetStatePropertyAll(
-                                              Color(0xff005faf))),
-                                      value: "M.Plan",
-                                      label: "B.Planning"),
-                                  DropdownMenuEntry(
-                                      style: ButtonStyle(
-                                          overlayColor: WidgetStatePropertyAll(
-                                              Color(0xff005faf))),
-                                      value: "MCA2",
-                                      label: "MCA(Second Year Direct)"),
-                                  DropdownMenuEntry(
-                                      style: ButtonStyle(
-                                          overlayColor: WidgetStatePropertyAll(
-                                              Color(0xff005faf))),
-                                      value: "MCA2deg",
-                                      label: "MCA Dual degree(INTEGRATED)"),
-                                  DropdownMenuEntry(
-                                      style: ButtonStyle(
-                                          overlayColor: WidgetStatePropertyAll(
-                                              Color(0xff005faf))),
-                                      value: "PhD",
-                                      label: "PhD"),
-                                  DropdownMenuEntry(
-                                      style: ButtonStyle(
-                                          overlayColor: WidgetStatePropertyAll(
-                                              Color(0xff005faf))),
-                                      value: "B.Des",
-                                      label: "B.Des"),
-                                  DropdownMenuEntry(
-                                      style: ButtonStyle(
-                                          overlayColor: WidgetStatePropertyAll(
-                                              Color(0xff005faf))),
-                                      value: "MCA2Year",
-                                      label: "MCA TWO YEARS"),
-                                  DropdownMenuEntry(
-                                      style: ButtonStyle(
-                                          overlayColor: WidgetStatePropertyAll(
-                                              Color(0xff005faf))),
-                                      value: "B.Voc",
-                                      label: "B.Voc"),
-                                  DropdownMenuEntry(
-                                      style: ButtonStyle(
-                                          overlayColor: WidgetStatePropertyAll(
-                                              Color(0xff005faf))),
-                                      value: "MBAINT",
-                                      label: "MBA INTEGRATED"),
-                                  DropdownMenuEntry(
-                                      style: ButtonStyle(
-                                          overlayColor: WidgetStatePropertyAll(
-                                              Color(0xff005faf))),
-                                      value: "MBASPEC",
-                                      label: "MBA WITH SPECIALIZATION"),
-                                  DropdownMenuEntry(
-                                      style: ButtonStyle(
-                                          overlayColor: WidgetStatePropertyAll(
-                                              Color(0xff005faf))),
-                                      value: "BCA",
-                                      label: "BCA"),
-                                  DropdownMenuEntry(
-                                      style: ButtonStyle(
-                                          overlayColor: WidgetStatePropertyAll(
-                                              Color(0xff005faf))),
-                                      value: "BBA",
-                                      label: "BBA"),
+                                  customDropDown("B.Tech", "B.Tech"),
+                                  customDropDown("M.Tech", "M.Tech"),
+                                  customDropDown("MBA", "MBA"),
+                                  customDropDown("MCA", "MCA"),
+                                  customDropDown("B.Arch", "B.Arch"),
+                                  customDropDown("M.Arch", "M.Arch"),
+                                  customDropDown("Hotel",
+                                      "Hotel Management and Catering Technology"),
+                                  customDropDown("MHM", "MHM"),
+                                  customDropDown("B.Plan", "B.Planning"),
+                                  customDropDown(
+                                      "MCA2", "MCA(Second Year Direct)"),
+                                  customDropDown(
+                                      "MCA2deg", "MCA Dual degree(INTEGRATED)"),
+                                  customDropDown("PhD", "PhD"),
+                                  customDropDown("B.Des", "B.Des"),
+                                  customDropDown("MCA2Year", "MCA TWO YEARS"),
+                                  customDropDown("B.Voc", "B.Voc"),
+                                  customDropDown("MBAINT", "MBA INTEGRATED"),
+                                  customDropDown(
+                                      "MBASPEC", "MBA WITH SPECIALIZATION"),
+                                  customDropDown("BCA", "BCA"),
+                                  customDropDown("BBA", "BBA"),
                                 ],
                               ),
                             )
@@ -713,6 +622,21 @@ class _AppBodyState extends State<AppBody> {
     );
   }
 
+  DropdownMenuEntry<String> customDropDown(dynamic value, String label) {
+    return DropdownMenuEntry(
+      style: ButtonStyle(
+          foregroundColor: WidgetStateProperty.resolveWith<Color?>((states) {
+            if (states.contains(WidgetState.hovered)) {
+              return Colors.white;
+            }
+            return Colors.black;
+          }),
+          overlayColor: const WidgetStatePropertyAll(Color(0xff005faf))),
+      value: value,
+      label: label,
+    );
+  }
+
   Widget iconBtns(IconData icon, Color color, VoidCallback onPressed) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 6),
@@ -827,7 +751,14 @@ class _AppBodyState extends State<AppBody> {
                       ),
                     );
                   }
-                  return const Center(child: CircularProgressIndicator());
+                  return RefreshIndicator(
+                    onRefresh: () async {},
+                    child: Container(
+                      width: 900,
+                      height: 50,
+                      color: const Color.fromARGB(255, 202, 200, 200),
+                    ),
+                  );
                 },
                 separatorBuilder: (ctx, index) => const Divider(),
               );
