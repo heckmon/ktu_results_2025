@@ -1,6 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher_string.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'dart:io';
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+  }
+}
 
 class AppBody extends StatefulWidget {
   const AppBody({super.key});
@@ -9,7 +21,6 @@ class AppBody extends StatefulWidget {
   State<AppBody> createState() => _AppBodyState();
 }
 
-final _dropctrl = TextEditingController();
 String _dropvalue = "--SELECT--";
 bool _isClicked = false;
 String _heading = "Examination Result";
@@ -25,6 +36,29 @@ List<String> _data = [
   "B.Tech S1 (S, FE) Exam June 2024 (2019 Scheme) (S1 Result)",
   "B.Tech S5 (S, FE) Exam June 2024 (2015 Scheme) (S5 Result)"
 ];
+
+Map<String, int> _eachResult = {
+  "--SELECT--": 0,
+  "B.Tech": 1,
+  "M.Tech": 2,
+  "MBA": 3,
+  "MCA": 4,
+  "B.Arch": 5,
+  "M.arch": 6,
+  "Hotel": 7,
+  "MHM": 8,
+  "M.Plan": 9,
+  "MCA2": 10,
+  "MCA2deg": 11,
+  "PhD": 12,
+  "B.Des": 13,
+  "MCA2Year": 14,
+  "B.Voc": 15,
+  "MBAINT": 16,
+  "MBASPEC": 17,
+  "BCA": 18,
+  "BBA": 19,
+};
 
 class _AppBodyState extends State<AppBody> {
   @override
@@ -260,7 +294,6 @@ class _AppBodyState extends State<AppBody> {
                                     _dropvalue = val ?? "--SELECT--";
                                   });
                                 },
-                                controller: _dropctrl,
                                 enableSearch: false,
                                 trailingIcon: const Icon(
                                   FontAwesomeIcons.chevronDown,
@@ -400,14 +433,14 @@ class _AppBodyState extends State<AppBody> {
                                       style: ButtonStyle(
                                           overlayColor: WidgetStatePropertyAll(
                                               Color(0xff005faf))),
-                                      value: "BBA",
-                                      label: "BBA"),
+                                      value: "BCA",
+                                      label: "BCA"),
                                   DropdownMenuEntry(
                                       style: ButtonStyle(
                                           overlayColor: WidgetStatePropertyAll(
                                               Color(0xff005faf))),
-                                      value: "BCA",
-                                      label: "BCA"),
+                                      value: "BBA",
+                                      label: "BBA"),
                                 ],
                               ),
                             )
@@ -466,9 +499,12 @@ class _AppBodyState extends State<AppBody> {
                                                                     width: 1,
                                                                   ),
                                                                   borderRadius:
-                                                                      BorderRadius.all(
-                                                                          Radius.circular(
-                                                                              5.5)),
+                                                                      BorderRadius
+                                                                          .all(
+                                                                    Radius
+                                                                        .circular(
+                                                                            5.5),
+                                                                  ),
                                                                 ),
                                                                 label: Text(
                                                                   "Enter Register Number",
@@ -691,7 +727,9 @@ class _AppBodyState extends State<AppBody> {
   }
 
   Widget resultField() {
-    if (_dropvalue == "--SELECT--") {
+    if (_dropvalue == "--SELECT--" ||
+        _eachResult[_dropvalue]! > 14 ||
+        _eachResult[_dropvalue] == 8) {
       return const Center(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20),
@@ -714,68 +752,86 @@ class _AppBodyState extends State<AppBody> {
       );
     } else {
       return Expanded(
-        child: ListView.separated(
-          itemCount: 10,
-          itemBuilder: (ctx, index) {
-            return ListTile(
-              leading: const CircleAvatar(
-                backgroundColor: Color(0xff8b0051),
-                radius: 17,
-                child: CircleAvatar(
-                  backgroundColor: Colors.white,
-                  radius: 14.5,
-                  child: CircleAvatar(
-                      radius: 13,
-                      backgroundColor: Color(0xff8b0051),
-                      child: Icon(FontAwesomeIcons.fileSignature,
-                          size: 16, color: Colors.white)),
-                ),
-              ),
-              title: _dropvalue == "B.Tech"
-                  ? Text(
-                      _data[index],
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xff8b0051),
+        child: FutureBuilder<List<dynamic>>(
+            future: publishedResult(_eachResult[_dropvalue] ?? 2),
+            builder: (context, snapshot) {
+              return ListView.separated(
+                itemCount: 10,
+                itemBuilder: (ctx, index) {
+                  if (snapshot.hasData) {
+                    return ListTile(
+                      leading: const CircleAvatar(
+                        backgroundColor: Color(0xff8b0051),
+                        radius: 17,
+                        child: CircleAvatar(
+                          backgroundColor: Colors.white,
+                          radius: 14.5,
+                          child: CircleAvatar(
+                              radius: 13,
+                              backgroundColor: Color(0xff8b0051),
+                              child: Icon(FontAwesomeIcons.fileSignature,
+                                  size: 16, color: Colors.white)),
+                        ),
                       ),
-                    )
-                  : Text(
-                      "$_dropvalue S(${index + 1}) (S,F3) Examination May/June ${DateTime.now().year} (${DateTime.now().year - 5} Scheme) (S${index + 1} Result)",
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xff8b0051),
+                      title: _dropvalue == "B.Tech"
+                          ? Text(
+                              _data[index],
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xff8b0051),
+                              ),
+                            )
+                          : Text(
+                              "${snapshot.data![index]['resultName']}",
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xff8b0051),
+                              ),
+                            ),
+                      subtitle: _dropvalue == "B.Tech"
+                          ? Text(
+                              "Published On: ${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}",
+                              style: const TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.w500),
+                            )
+                          : Text(
+                              "Published On: ${(() {
+                                String date =
+                                    snapshot.data![index]['publishDate'];
+                                List<String> newDate = date.split("-");
+                                return "${newDate[2]}-${newDate[1]}-${newDate[0]}";
+                              })()}",
+                              style: const TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.w500),
+                            ),
+                      trailing: SizedBox(
+                        height: 40,
+                        width: 122.5,
+                        child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                foregroundColor: Colors.black,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(4)),
+                                backgroundColor: const Color(0xffebebeb)),
+                            onPressed: () {
+                              if (_dropvalue != "B.Tech") {
+                                _launchUrl("");
+                              } else {
+                                setState(() {
+                                  _isClicked = true;
+                                  _heading = "Exam:  ${_data[index]}";
+                                });
+                              }
+                            },
+                            child: const Text("View Result")),
                       ),
-                    ),
-              subtitle: _dropvalue == "B.Tech"
-                  ? Text(
-                      "Published On: ${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}")
-                  : Text(
-                      "Published On: ${DateTime.now().day + index}-${DateTime.now().month}-${DateTime.now().year}"),
-              trailing: SizedBox(
-                height: 40,
-                width: 122.5,
-                child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.black,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(4)),
-                        backgroundColor: const Color(0xffebebeb)),
-                    onPressed: () {
-                      if (_dropvalue != "B.Tech") {
-                        _launchUrl("");
-                      } else {
-                        setState(() {
-                          _isClicked = true;
-                          _heading = "Exam:  ${_data[index]}";
-                        });
-                      }
-                    },
-                    child: const Text("View Result")),
-              ),
-            );
-          },
-          separatorBuilder: (ctx, index) => const Divider(),
-        ),
+                    );
+                  }
+                  return const Center(child: CircularProgressIndicator());
+                },
+                separatorBuilder: (ctx, index) => const Divider(),
+              );
+            }),
       );
     }
   }
@@ -856,4 +912,13 @@ class _AppBodyState extends State<AppBody> {
 
 Future<void> _launchUrl(String url) async {
   await launchUrlString(url);
+}
+
+Future<List<dynamic>> publishedResult(int index) async {
+  var url = Uri.parse("http://127.0.0.1:8000");
+  Map<String, String> headers = {"Content-Type": "application/json"};
+  Map<String, String> data = {"index": "$index"};
+
+  var response = await http.post(url, headers: headers, body: jsonEncode(data));
+  return jsonDecode(response.body);
 }

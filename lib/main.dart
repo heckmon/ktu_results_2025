@@ -1,9 +1,11 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ktu_results/app_bar.dart';
 import 'package:ktu_results/desktop_body.dart';
 
-void main() {
+Future<void> main() async{
+  HttpOverrides.global = MyHttpOverrides();
   runApp(const Base());
 }
 
