@@ -86,110 +86,110 @@ class _AppBodyState extends State<AppBody> {
                 ),
                 styledTButton(
                   "Home",
-                  () => _launchUrl("https://ktu.edu.in/home"),
+                  () => launchUrl("https://ktu.edu.in/home"),
                 ),
                 styledPopup(
                   "University",
                   {
                     "About us": () =>
-                        _launchUrl("https://ktu.edu.in/university/about"),
-                    "Values, Vision & Mission": () => _launchUrl(
+                        launchUrl("https://ktu.edu.in/university/about"),
+                    "Values, Vision & Mission": () => launchUrl(
                         "https://ktu.edu.in/university/visionandmission"),
                     "Acts and Statutes": () =>
-                        _launchUrl("https://ktu.edu.in/university/statutes"),
-                    "Meeting Minutes": () => _launchUrl(
+                        launchUrl("https://ktu.edu.in/university/statutes"),
+                    "Meeting Minutes": () => launchUrl(
                         "https://ktu.edu.in/university/meetingminutes"),
                   },
                 ),
                 styledPopup(
                   "People",
                   {
-                    "Board of Governors": () => _launchUrl(
+                    "Board of Governors": () => launchUrl(
                         "https://ktu.edu.in/administration/boardofgovernors"),
-                    "Syndicate": () => _launchUrl(
+                    "Syndicate": () => launchUrl(
                         "https://ktu.edu.in/administration/syndicate"),
-                    "Authorities": () => _launchUrl(
+                    "Authorities": () => launchUrl(
                         "https://ktu.edu.in/administration/Authorities"),
-                    "Statutory Officers": () => _launchUrl(
+                    "Statutory Officers": () => launchUrl(
                         "https://ktu.edu.in/administration/StatutoryOfficers"),
                   },
                 ),
                 styledPopup(
                   "Affiliation",
                   {
-                    "Affiliated Instituitions": () => _launchUrl(
+                    "Affiliated Instituitions": () => launchUrl(
                         "https://ktu.edu.in/affiliation/affiliatedInstitutes"),
-                    "NBA Accredited Institutions": () => _launchUrl(
+                    "NBA Accredited Institutions": () => launchUrl(
                         "https://ktu.edu.in/affiliation/affiliationNBAAccreditedInstitutes"),
-                    "Norms and Rules": () => _launchUrl(
+                    "Norms and Rules": () => launchUrl(
                         "https://ktu.edu.in/affiliation/norms-and-rules"),
-                    "Notifications": () => _launchUrl(
+                    "Notifications": () => launchUrl(
                         "https://ktu.edu.in/affiliation/affiliationNotification"),
                   },
                 ),
                 styledPopup(
                   "Academics",
                   {
-                    "Academic Calender": () => _launchUrl(
+                    "Academic Calender": () => launchUrl(
                         "https://ktu.edu.in/academics/academic_calendar"),
                     "Regulation & Syllabus": () =>
-                        _launchUrl("https://ktu.edu.in/academics/scheme"),
+                        launchUrl("https://ktu.edu.in/academics/scheme"),
                     "MOOC Courses": () =>
-                        _launchUrl("https://ktu.edu.in/academics/mooccources"),
+                        launchUrl("https://ktu.edu.in/academics/mooccources"),
                     "CGPC": () =>
-                        _launchUrl("https://ktu.edu.in/academics/cgpc"),
-                    "Norms And Rules": () => _launchUrl(
+                        launchUrl("https://ktu.edu.in/academics/cgpc"),
+                    "Norms And Rules": () => launchUrl(
                         "https://ktu.edu.in/academics/norms-and-rules"),
                     "Notification": () =>
-                        _launchUrl("https://ktu.edu.in/academics/notification"),
+                        launchUrl("https://ktu.edu.in/academics/notification"),
                   },
                 ),
                 styledPopup(
                   "Examination",
                   {
                     "Timetable": () =>
-                        _launchUrl("https://ktu.edu.in/exam/Timetable"),
-                    "Result": () => _launchUrl(""),
+                        launchUrl("https://ktu.edu.in/exam/Timetable"),
+                    "Result": () => launchUrl(""),
                     "Norms and Rules": () =>
-                        _launchUrl("https://ktu.edu.in/exam/norms-and-rules"),
+                        launchUrl("https://ktu.edu.in/exam/norms-and-rules"),
                     "Notification": () =>
-                        _launchUrl("https://ktu.edu.in/exam/Notification")
+                        launchUrl("https://ktu.edu.in/exam/Notification")
                   },
                 ),
                 styledPopup(
                   "Research",
                   {
-                    "Plcaes of Reseacrh": () => _launchUrl(
+                    "Plcaes of Reseacrh": () => launchUrl(
                         "https://ktu.edu.in/research/PlaceOfResearchList"),
-                    "Registered Reasearch Supervisors": () => _launchUrl(
+                    "Registered Reasearch Supervisors": () => launchUrl(
                         "https://ktu.edu.in/research/placeofresearchs"),
-                    "Registered Reseacrh Scholars": () => _launchUrl(
+                    "Registered Reseacrh Scholars": () => launchUrl(
                         "https://ktu.edu.in/research/placeofresearchs"),
-                    "Norms And Rules": () => _launchUrl(
+                    "Norms And Rules": () => launchUrl(
                         "https://ktu.edu.in/research/norms-and-rules"),
                     "Notification": () =>
-                        _launchUrl("https://ktu.edu.in/research/Notification"),
+                        launchUrl("https://ktu.edu.in/research/Notification"),
                   },
                 ),
                 styledPopup(
                   "IQAC",
                   {
                     "About": () =>
-                        _launchUrl("https://ktu.edu.in/iqac/IQACList"),
+                        launchUrl("https://ktu.edu.in/iqac/IQACList"),
                     "HRDC Centers": () =>
-                        _launchUrl("https://ktu.edu.in/iqac/hrdccenters")
+                        launchUrl("https://ktu.edu.in/iqac/hrdccenters")
                   },
                 ),
                 styledPopup(
                   "Legal",
                   {
                     "RTI": () =>
-                        _launchUrl("https://ktu.edu.in/miscellaneous/RTI")
+                        launchUrl("https://ktu.edu.in/miscellaneous/RTI")
                   },
                 ),
                 styledTButton(
                   "Jobs/Careers",
-                  () => _launchUrl(
+                  () => launchUrl(
                       "https://ktu.edu.in/job&career/jobnotification"),
                 ),
               ],
@@ -248,7 +248,7 @@ class _AppBodyState extends State<AppBody> {
                           child: styledListTile(
                               "Timetable",
                               trail: true,
-                              () => _launchUrl(
+                              () => launchUrl(
                                   "https://ktu.edu.in/exam/timetable"))),
                       const Divider(height: 0, indent: 12, endIndent: 12),
                       Padding(
@@ -263,12 +263,12 @@ class _AppBodyState extends State<AppBody> {
                             const Divider(height: 0, indent: 4, endIndent: 4),
                             styledListTile(
                                 "Norms And Rules",
-                                () => _launchUrl(
+                                () => launchUrl(
                                     "https://ktu.edu.in/exam/norms-and-rules")),
                             const Divider(height: 0, indent: 4, endIndent: 4),
                             styledListTile(
                                 "Notification",
-                                () => _launchUrl(
+                                () => launchUrl(
                                     "https://ktu.edu.in/exam/notification")),
                             const Divider(height: 0, indent: 4, endIndent: 4),
                           ],
@@ -613,27 +613,27 @@ class _AppBodyState extends State<AppBody> {
                               iconBtns(
                                   FontAwesomeIcons.facebook,
                                   const Color(0xff395498),
-                                  () => _launchUrl(
+                                  () => launchUrl(
                                       "https://m.facebook.com/apjaktuofficial/")),
                               iconBtns(
                                   FontAwesomeIcons.linkedin,
                                   const Color(0xff0270ad),
-                                  () => _launchUrl(
+                                  () => launchUrl(
                                       "https://in.linkedin.com/school/apj-abdul-kalam-technological-university/")),
                               iconBtns(
                                   FontAwesomeIcons.instagram,
                                   const Color(0xffea4c56),
-                                  () => _launchUrl(
+                                  () => launchUrl(
                                       "https://instagram.com/keralatechnologicaluniversity/")),
                               iconBtns(
                                   FontAwesomeIcons.twitter,
                                   const Color(0xff029eec),
-                                  () => _launchUrl(
+                                  () => launchUrl(
                                       "https://twitter.com/apjaktuofficial")),
                               iconBtns(
                                   FontAwesomeIcons.youtube,
                                   const Color(0xfff60002),
-                                  () => _launchUrl(
+                                  () => launchUrl(
                                       "https://www.youtube.com/channel/UC4lFeTaXLEhOeharO9-WS6w/featured")),
                             ],
                           ),
@@ -744,7 +744,7 @@ class _AppBodyState extends State<AppBody> {
                                 backgroundColor: const Color(0xffebebeb)),
                             onPressed: () {
                               if (_dropvalue != "B.Tech") {
-                                _launchUrl("");
+                                launchUrl("");
                               } else {
                                 setState(() {
                                   _isClicked = true;
@@ -876,7 +876,7 @@ Widget styledPopup(String hint, Map<String, VoidCallback> data) {
   );
 }
 
-Future<void> _launchUrl(String url) async {
+Future<void> launchUrl(String url) async {
   await launchUrlString(url);
 }
 
