@@ -60,105 +60,138 @@ Map<String, int> _eachResult = {
   "BBA": 19,
 };
 
+double screenWidth = 0;
+double screenHeight = 0;
+
 class _AppBodyState extends State<AppBody> {
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
+    screenWidth = MediaQuery.of(context).size.width;
+    screenHeight = MediaQuery.of(context).size.height;
     return SingleChildScrollView(
       child: Column(
         children: [
           Container(
             color: Colors.white,
-            width: double.infinity,
+            width: screenWidth,
             height: 90.0,
             child: Row(
+              mainAxisSize: MainAxisSize.max,
               children: [
                 const SizedBox(width: 10),
                 SizedBox(
                   height: 175.0,
-                  width: 175.0,
+                  width: screenWidth * 0.1,
                   child: Image.asset("assets/images/logo.png"),
                 ),
                 styledTButton(
-                    "Home", () => _launchUrl("https://ktu.edu.in/home")),
-                styledPopup("University", {
-                  "About us": () =>
-                      _launchUrl("https://ktu.edu.in/university/about"),
-                  "Values, Vision & Mission": () => _launchUrl(
-                      "https://ktu.edu.in/university/visionandmission"),
-                  "Acts and Statutes": () =>
-                      _launchUrl("https://ktu.edu.in/university/statutes"),
-                  "Meeting Minutes": () => _launchUrl(
-                      "https://ktu.edu.in/university/meetingminutes"),
-                }),
-                styledPopup("People", {
-                  "Board of Governors": () => _launchUrl(
-                      "https://ktu.edu.in/administration/boardofgovernors"),
-                  "Syndicate": () =>
-                      _launchUrl("https://ktu.edu.in/administration/syndicate"),
-                  "Authorities": () => _launchUrl(
-                      "https://ktu.edu.in/administration/Authorities"),
-                  "Statutory Officers": () => _launchUrl(
-                      "https://ktu.edu.in/administration/StatutoryOfficers"),
-                }),
-                styledPopup("Affiliation", {
-                  "Affiliated Instituitions": () => _launchUrl(
-                      "https://ktu.edu.in/affiliation/affiliatedInstitutes"),
-                  "NBA Accredited Institutions": () => _launchUrl(
-                      "https://ktu.edu.in/affiliation/affiliationNBAAccreditedInstitutes"),
-                  "Norms and Rules": () => _launchUrl(
-                      "https://ktu.edu.in/affiliation/norms-and-rules"),
-                  "Notifications": () => _launchUrl(
-                      "https://ktu.edu.in/affiliation/affiliationNotification"),
-                }),
-                styledPopup("Academics", {
-                  "Academic Calender": () => _launchUrl(
-                      "https://ktu.edu.in/academics/academic_calendar"),
-                  "Regulation & Syllabus": () =>
-                      _launchUrl("https://ktu.edu.in/academics/scheme"),
-                  "MOOC Courses": () =>
-                      _launchUrl("https://ktu.edu.in/academics/mooccources"),
-                  "CGPC": () => _launchUrl("https://ktu.edu.in/academics/cgpc"),
-                  "Norms And Rules": () => _launchUrl(
-                      "https://ktu.edu.in/academics/norms-and-rules"),
-                  "Notification": () =>
-                      _launchUrl("https://ktu.edu.in/academics/notification"),
-                }),
-                styledPopup("Examination", {
-                  "Timetable": () =>
-                      _launchUrl("https://ktu.edu.in/exam/Timetable"),
-                  "Result": () => _launchUrl(""),
-                  "Norms and Rules": () =>
-                      _launchUrl("https://ktu.edu.in/exam/norms-and-rules"),
-                  "Notification": () =>
-                      _launchUrl("https://ktu.edu.in/exam/Notification")
-                }),
-                styledPopup("Research", {
-                  "Plcaes of Reseacrh": () => _launchUrl(
-                      "https://ktu.edu.in/research/PlaceOfResearchList"),
-                  "Registered Reasearch Supervisors": () => _launchUrl(
-                      "https://ktu.edu.in/research/placeofresearchs"),
-                  "Registered Reseacrh Scholars": () => _launchUrl(
-                      "https://ktu.edu.in/research/placeofresearchs"),
-                  "Norms And Rules": () =>
-                      _launchUrl("https://ktu.edu.in/research/norms-and-rules"),
-                  "Notification": () =>
-                      _launchUrl("https://ktu.edu.in/research/Notification"),
-                }),
-                styledPopup("IQAC", {
-                  "About": () => _launchUrl("https://ktu.edu.in/iqac/IQACList"),
-                  "HRDC Centers": () =>
-                      _launchUrl("https://ktu.edu.in/iqac/hrdccenters")
-                }),
-                styledPopup("Legal", {
-                  "RTI": () =>
-                      _launchUrl("https://ktu.edu.in/miscellaneous/RTI")
-                }),
+                  "Home",
+                  () => _launchUrl("https://ktu.edu.in/home"),
+                ),
+                styledPopup(
+                  "University",
+                  {
+                    "About us": () =>
+                        _launchUrl("https://ktu.edu.in/university/about"),
+                    "Values, Vision & Mission": () => _launchUrl(
+                        "https://ktu.edu.in/university/visionandmission"),
+                    "Acts and Statutes": () =>
+                        _launchUrl("https://ktu.edu.in/university/statutes"),
+                    "Meeting Minutes": () => _launchUrl(
+                        "https://ktu.edu.in/university/meetingminutes"),
+                  },
+                ),
+                styledPopup(
+                  "People",
+                  {
+                    "Board of Governors": () => _launchUrl(
+                        "https://ktu.edu.in/administration/boardofgovernors"),
+                    "Syndicate": () => _launchUrl(
+                        "https://ktu.edu.in/administration/syndicate"),
+                    "Authorities": () => _launchUrl(
+                        "https://ktu.edu.in/administration/Authorities"),
+                    "Statutory Officers": () => _launchUrl(
+                        "https://ktu.edu.in/administration/StatutoryOfficers"),
+                  },
+                ),
+                styledPopup(
+                  "Affiliation",
+                  {
+                    "Affiliated Instituitions": () => _launchUrl(
+                        "https://ktu.edu.in/affiliation/affiliatedInstitutes"),
+                    "NBA Accredited Institutions": () => _launchUrl(
+                        "https://ktu.edu.in/affiliation/affiliationNBAAccreditedInstitutes"),
+                    "Norms and Rules": () => _launchUrl(
+                        "https://ktu.edu.in/affiliation/norms-and-rules"),
+                    "Notifications": () => _launchUrl(
+                        "https://ktu.edu.in/affiliation/affiliationNotification"),
+                  },
+                ),
+                styledPopup(
+                  "Academics",
+                  {
+                    "Academic Calender": () => _launchUrl(
+                        "https://ktu.edu.in/academics/academic_calendar"),
+                    "Regulation & Syllabus": () =>
+                        _launchUrl("https://ktu.edu.in/academics/scheme"),
+                    "MOOC Courses": () =>
+                        _launchUrl("https://ktu.edu.in/academics/mooccources"),
+                    "CGPC": () =>
+                        _launchUrl("https://ktu.edu.in/academics/cgpc"),
+                    "Norms And Rules": () => _launchUrl(
+                        "https://ktu.edu.in/academics/norms-and-rules"),
+                    "Notification": () =>
+                        _launchUrl("https://ktu.edu.in/academics/notification"),
+                  },
+                ),
+                styledPopup(
+                  "Examination",
+                  {
+                    "Timetable": () =>
+                        _launchUrl("https://ktu.edu.in/exam/Timetable"),
+                    "Result": () => _launchUrl(""),
+                    "Norms and Rules": () =>
+                        _launchUrl("https://ktu.edu.in/exam/norms-and-rules"),
+                    "Notification": () =>
+                        _launchUrl("https://ktu.edu.in/exam/Notification")
+                  },
+                ),
+                styledPopup(
+                  "Research",
+                  {
+                    "Plcaes of Reseacrh": () => _launchUrl(
+                        "https://ktu.edu.in/research/PlaceOfResearchList"),
+                    "Registered Reasearch Supervisors": () => _launchUrl(
+                        "https://ktu.edu.in/research/placeofresearchs"),
+                    "Registered Reseacrh Scholars": () => _launchUrl(
+                        "https://ktu.edu.in/research/placeofresearchs"),
+                    "Norms And Rules": () => _launchUrl(
+                        "https://ktu.edu.in/research/norms-and-rules"),
+                    "Notification": () =>
+                        _launchUrl("https://ktu.edu.in/research/Notification"),
+                  },
+                ),
+                styledPopup(
+                  "IQAC",
+                  {
+                    "About": () =>
+                        _launchUrl("https://ktu.edu.in/iqac/IQACList"),
+                    "HRDC Centers": () =>
+                        _launchUrl("https://ktu.edu.in/iqac/hrdccenters")
+                  },
+                ),
+                styledPopup(
+                  "Legal",
+                  {
+                    "RTI": () =>
+                        _launchUrl("https://ktu.edu.in/miscellaneous/RTI")
+                  },
+                ),
                 styledTButton(
-                    "Jobs/Careers",
-                    () => _launchUrl(
-                        "https://ktu.edu.in/job&career/jobnotification")),
+                  "Jobs/Careers",
+                  () => _launchUrl(
+                      "https://ktu.edu.in/job&career/jobnotification"),
+                ),
               ],
             ),
           ),
@@ -269,7 +302,7 @@ class _AppBodyState extends State<AppBody> {
                                 _heading,
                                 style: _heading == "Examination Result"
                                     ? const TextStyle(
-                                        fontSize: 20.0,
+                                        fontSize: 20,
                                         fontWeight: FontWeight.bold)
                                     : const TextStyle(
                                         color: Color(0xff8b0051),
@@ -361,11 +394,11 @@ class _AppBodyState extends State<AppBody> {
                             ? const EdgeInsets.only(top: 20)
                             : const EdgeInsets.all(0),
                         child: SizedBox(
-                          width: _isClicked ? 1130 : 1330,
+                          width: _isClicked ? 1130 : screenWidth * 0.7,
                           height:
                               _dropvalue == "--SELECT--" || _isClicked == true
                                   ? 200
-                                  : 750,
+                                  : screenHeight * 0.8,
                           child: _isClicked
                               ? Card(
                                   elevation: 7,
@@ -622,34 +655,6 @@ class _AppBodyState extends State<AppBody> {
     );
   }
 
-  DropdownMenuEntry<String> customDropDown(dynamic value, String label) {
-    return DropdownMenuEntry(
-      style: ButtonStyle(
-          foregroundColor: WidgetStateProperty.resolveWith<Color?>((states) {
-            if (states.contains(WidgetState.hovered)) {
-              return Colors.white;
-            }
-            return Colors.black;
-          }),
-          overlayColor: const WidgetStatePropertyAll(Color(0xff005faf))),
-      value: value,
-      label: label,
-    );
-  }
-
-  Widget iconBtns(IconData icon, Color color, VoidCallback onPressed) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 6),
-      child: IconButton.outlined(
-          iconSize: 16,
-          padding: const EdgeInsets.all(15),
-          hoverColor: color,
-          color: Colors.white,
-          onPressed: onPressed,
-          icon: Icon(icon)),
-    );
-  }
-
   Widget resultField() {
     if (_dropvalue == "--SELECT--" ||
         _eachResult[_dropvalue]! > 14 ||
@@ -766,79 +771,109 @@ class _AppBodyState extends State<AppBody> {
       );
     }
   }
+}
 
-  Widget styledListTile(String text, VoidCallback onPressed,
-      {bool selected = false,
-      Color selectedTileColor = Colors.transparent,
-      bool trail = false}) {
-    return ListTile(
-      selected: selected,
-      selectedTileColor: selectedTileColor,
-      minTileHeight: 1,
-      horizontalTitleGap: 12,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-      selectedColor: Colors.white,
-      hoverColor: const Color(0xff6d52b1),
-      onTap: onPressed,
-      title: Text(
-        text,
-        style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-      ),
-      trailing: trail
-          ? const Icon(
-              FontAwesomeIcons.chevronRight,
-              size: 13,
-              color: Colors.black,
-            )
-          : const SizedBox.shrink(),
-    );
-  }
+DropdownMenuEntry<String> customDropDown(dynamic value, String label) {
+  return DropdownMenuEntry(
+    style: ButtonStyle(
+        foregroundColor: WidgetStateProperty.resolveWith<Color?>((states) {
+          if (states.contains(WidgetState.hovered)) {
+            return Colors.white;
+          }
+          return Colors.black;
+        }),
+        overlayColor: const WidgetStatePropertyAll(Color(0xff005faf))),
+    value: value,
+    label: label,
+  );
+}
 
-  Widget styledTButton(String text, VoidCallback onPressed) {
-    return TextButton(
-        onPressed: onPressed,
-        child: Text(
-          text,
-          style: const TextStyle(
-              color: Colors.black, fontSize: 15, fontWeight: FontWeight.w600),
-        ));
-  }
-
-  Widget styledPopup(String hint, Map<String, VoidCallback> data) {
-    return Semantics(
-      child: PopupMenuButton(
-        tooltip: "",
+Widget iconBtns(IconData icon, Color color, VoidCallback onPressed) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 6),
+    child: IconButton.outlined(
+        iconSize: 16,
+        padding: const EdgeInsets.all(15),
+        hoverColor: color,
         color: Colors.white,
-        position: PopupMenuPosition.under,
-        icon: Row(
-          children: [
-            Text(
-              hint,
-              style: const TextStyle(
-                fontWeight: FontWeight.w600,
-                color: Colors.black,
-                fontSize: 15,
-              ),
+        onPressed: onPressed,
+        icon: Icon(icon)),
+  );
+}
+
+Widget styledListTile(String text, VoidCallback onPressed,
+    {bool selected = false,
+    Color selectedTileColor = Colors.transparent,
+    bool trail = false}) {
+  return ListTile(
+    selected: selected,
+    selectedTileColor: selectedTileColor,
+    minTileHeight: 1,
+    horizontalTitleGap: 12,
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+    selectedColor: Colors.white,
+    hoverColor: const Color(0xff6d52b1),
+    onTap: onPressed,
+    title: Text(
+      text,
+      style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+    ),
+    trailing: trail
+        ? const Icon(
+            FontAwesomeIcons.chevronRight,
+            size: 13,
+            color: Colors.black,
+          )
+        : const SizedBox.shrink(),
+  );
+}
+
+Widget styledTButton(String text, VoidCallback onPressed) {
+  return TextButton(
+      onPressed: onPressed,
+      child: Text(
+        text,
+        style: TextStyle(
+            color: Colors.black,
+            fontSize: screenWidth * 0.0085,
+            fontWeight: FontWeight.w600),
+      ));
+}
+
+Widget styledPopup(String hint, Map<String, VoidCallback> data) {
+  return Semantics(
+    child: PopupMenuButton(
+      tooltip: "",
+      color: Colors.white,
+      position: PopupMenuPosition.under,
+      icon: Row(
+        children: [
+          Text(
+            hint,
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              color: Colors.black,
+              fontSize: screenWidth * 0.0085,
             ),
-            const Icon(
-              Icons.arrow_drop_down,
-              size: 20.0,
-            ),
-          ],
-        ),
-        itemBuilder: (context) {
-          return data.keys.toList().map((String each) {
-            return PopupMenuItem(
-              height: 35,
-              value: each,
-              onTap: data[each],
-              child: Text(each),
-            );
-          }).toList();
-        },
+          ),
+          const Icon(
+            Icons.arrow_drop_down,
+            size: 20.0,
+          ),
+        ],
       ),
-    );
-  }
+      itemBuilder: (context) {
+        return data.keys.toList().map((String each) {
+          return PopupMenuItem(
+            height: 35,
+            value: each,
+            onTap: data[each],
+            child: Text(each),
+          );
+        }).toList();
+      },
+    ),
+  );
 }
 
 Future<void> _launchUrl(String url) async {
@@ -846,7 +881,7 @@ Future<void> _launchUrl(String url) async {
 }
 
 Future<List<dynamic>> publishedResult(int index) async {
-  var url = Uri.parse("http://127.0.0.1:8000");
+  var url = Uri.parse("http://127.0.0.1:8000/");
   Map<String, String> headers = {"Content-Type": "application/json"};
   Map<String, String> data = {"index": "$index"};
 
