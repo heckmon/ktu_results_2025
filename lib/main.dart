@@ -10,7 +10,6 @@ Future<void> main() async {
   runApp(const Base());
 }
 
-bool filter = false;
 ColorFilter mat = const ColorFilter.matrix([
   1,
   0,
@@ -47,6 +46,7 @@ class _BaseState extends State<Base> {
       mat = filter;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -61,7 +61,7 @@ class _BaseState extends State<Base> {
           child: Scaffold(
               appBar: PreferredSize(
                   preferredSize: Size.fromHeight(screenWidth > 850 ? 52.5 : 93),
-                  child: Appbar(filter:updateColorFilter)),
+                  child: Appbar(filter: updateColorFilter)),
               body: screenWidth > 850 ? const AppBody() : const MobileBody()),
         ));
   }
