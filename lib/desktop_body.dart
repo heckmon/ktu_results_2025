@@ -21,10 +21,10 @@ class AppBody extends StatefulWidget {
   State<AppBody> createState() => _AppBodyState();
 }
 
-String _dropvalue = "--SELECT--";
-bool _isClicked = false;
-String _heading = "Examination Result";
-List<String> _data = [
+String dropvalue = "--SELECT--";
+bool isClicked = false;
+String heading = "Examination Result";
+List<String> data = [
   "B.Tech S8 (S) Exam Aug 2024 (2019 Scheme) (S8 Result)",
   "B.Tech S8 (PT) (S) Exam August 2024 (2019 Scheme) (S8 Result",
   "B.Tech S3 (S, FE) Exam June 2024 (2019 Scheme) (S3 Result)",
@@ -37,7 +37,7 @@ List<String> _data = [
   "B.Tech S5 (S, FE) Exam June 2024 (2015 Scheme) (S5 Result)"
 ];
 
-Map<String, int> _eachResult = {
+Map<String, int> eachResult = {
   "--SELECT--": 0,
   "B.Tech": 1,
   "M.Tech": 2,
@@ -299,8 +299,8 @@ class _AppBodyState extends State<AppBody> {
                             Padding(
                               padding: const EdgeInsets.only(left: 12.0),
                               child: Text(
-                                _heading,
-                                style: _heading == "Examination Result"
+                                heading,
+                                style: heading == "Examination Result"
                                     ? const TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold)
@@ -316,7 +316,7 @@ class _AppBodyState extends State<AppBody> {
                               style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 15,
-                                  color: Color(0xff222222)),
+                                  color: Color(0xff364a63)),
                             ),
                             Padding(
                               padding: const EdgeInsets.symmetric(
@@ -324,7 +324,7 @@ class _AppBodyState extends State<AppBody> {
                               child: DropdownMenu<String>(
                                 onSelected: (String? val) {
                                   setState(() {
-                                    _dropvalue = val ?? "--SELECT--";
+                                    dropvalue = val ?? "--SELECT--";
                                   });
                                 },
                                 enableSearch: false,
@@ -390,16 +390,15 @@ class _AppBodyState extends State<AppBody> {
                         ),
                       ),
                       Padding(
-                        padding: _isClicked
+                        padding: isClicked
                             ? const EdgeInsets.only(top: 20)
                             : const EdgeInsets.all(0),
                         child: SizedBox(
-                          width: _isClicked ? 1130 : screenWidth * 0.7,
-                          height:
-                              _dropvalue == "--SELECT--" || _isClicked == true
-                                  ? 200
-                                  : screenHeight * 0.8,
-                          child: _isClicked
+                          width: isClicked ? 1130 : screenWidth * 0.7,
+                          height: dropvalue == "--SELECT--" || isClicked == true
+                              ? 200
+                              : screenHeight * 0.8,
+                          child: isClicked
                               ? Card(
                                   elevation: 7,
                                   color: Colors.white,
@@ -568,12 +567,14 @@ class _AppBodyState extends State<AppBody> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Container(
-                                            padding: const EdgeInsets.all(5),
-                                            height: 30,
-                                            child: const Text("Exam",
-                                                style: TextStyle(
-                                                    fontWeight:
-                                                        FontWeight.bold))),
+                                          padding: const EdgeInsets.all(5),
+                                          height: 30,
+                                          child: const Text(
+                                            "Exam",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
                                         const Divider(),
                                         resultField(),
                                       ]),
@@ -590,7 +591,7 @@ class _AppBodyState extends State<AppBody> {
             children: [
               Container(
                 color: const Color(0xff1d2733),
-                width: double.infinity,
+                width: screenWidth,
                 height: 200,
               ),
               Column(
@@ -656,9 +657,9 @@ class _AppBodyState extends State<AppBody> {
   }
 
   Widget resultField() {
-    if (_dropvalue == "--SELECT--" ||
-        _eachResult[_dropvalue]! > 14 ||
-        _eachResult[_dropvalue] == 8) {
+    if (dropvalue == "--SELECT--" ||
+        eachResult[dropvalue]! > 14 ||
+        eachResult[dropvalue] == 8) {
       return const Center(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20),
@@ -682,7 +683,7 @@ class _AppBodyState extends State<AppBody> {
     } else {
       return Expanded(
         child: FutureBuilder<List<dynamic>>(
-            future: publishedResult(_eachResult[_dropvalue] ?? 2),
+            future: publishedResult(eachResult[dropvalue] ?? 2),
             builder: (context, snapshot) {
               return ListView.separated(
                 itemCount: 10,
@@ -702,9 +703,9 @@ class _AppBodyState extends State<AppBody> {
                                   size: 16, color: Colors.white)),
                         ),
                       ),
-                      title: _dropvalue == "B.Tech"
+                      title: dropvalue == "B.Tech"
                           ? Text(
-                              _data[index],
+                              data[index],
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Color(0xff8b0051),
@@ -717,7 +718,7 @@ class _AppBodyState extends State<AppBody> {
                                 color: Color(0xff8b0051),
                               ),
                             ),
-                      subtitle: _dropvalue == "B.Tech"
+                      subtitle: dropvalue == "B.Tech"
                           ? Text(
                               "Published On: ${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}",
                               style: const TextStyle(
@@ -743,12 +744,12 @@ class _AppBodyState extends State<AppBody> {
                                     borderRadius: BorderRadius.circular(4)),
                                 backgroundColor: const Color(0xffebebeb)),
                             onPressed: () {
-                              if (_dropvalue != "B.Tech") {
+                              if (dropvalue != "B.Tech") {
                                 launchUrl("");
                               } else {
                                 setState(() {
-                                  _isClicked = true;
-                                  _heading = "Exam:  ${_data[index]}";
+                                  isClicked = true;
+                                  heading = "Exam:  ${data[index]}";
                                 });
                               }
                             },
