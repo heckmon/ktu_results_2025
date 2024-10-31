@@ -65,16 +65,8 @@ class _BaseState extends State<Base> {
                 preferredSize: Size.fromHeight(
                     screenWidth > 850 ? 53 : screenHeight * 0.15),
                 child: Appbar(filter: updateColorFilter)),
-            body: isDesktopViewEnabled(context)
-                ? const AppBody()
-                : const MobileBody()),
+            body: screenWidth > 700 ? const AppBody() : const MobileBody()),
       ),
     );
   }
-}
-
-bool isDesktopViewEnabled(BuildContext context) {
-  double screenWidth = MediaQuery.of(context).size.width;
-  double devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
-  return (screenWidth / devicePixelRatio) > 850;
 }
