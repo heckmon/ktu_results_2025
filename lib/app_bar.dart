@@ -176,7 +176,6 @@ class _AppbarState extends State<Appbar> {
             flexibleSpace: Column(
               children: [
                 Row(children: [
-                  const SizedBox(width: 25.0),
                   styledTextButton(
                       "Events", FontAwesomeIcons.calendarDays, isNarrowScreen,
                       () async {
@@ -209,9 +208,6 @@ class _AppbarState extends State<Appbar> {
                 ]),
                 Row(
                   children: [
-                    const SizedBox(
-                      width: 25,
-                    ),
                     TextButton(
                         onPressed: () async {
                           await launchUrl(Uri.parse("https://etis-2025.org/"));
@@ -304,7 +300,7 @@ class _AppbarState extends State<Appbar> {
                       padding: const EdgeInsets.symmetric(horizontal: 16.5),
                       child: Container(
                         alignment: Alignment.center,
-                        width: 80,
+                        width: screenWidth * 0.15,
                         color: const Color(0xff0071d1),
                         child: DropdownButton(
                             underline: const Placeholder(

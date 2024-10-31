@@ -71,6 +71,7 @@ class _MobileBodyState extends State<MobileBody> {
           ),
           const SizedBox(height: 25),
           Container(
+            width: screenWidth,
             decoration: const BoxDecoration(
               color: Colors.white,
               boxShadow: [
@@ -103,67 +104,71 @@ class _MobileBodyState extends State<MobileBody> {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 12, horizontal: 22.0),
-                      child: DropdownMenu<String>(
-                        onSelected: (String? val) {
-                          setState(() {
-                            dropvalue = val ?? "--SELECT--";
-                          });
-                        },
-                        enableSearch: false,
-                        trailingIcon: const Icon(
-                          FontAwesomeIcons.chevronDown,
-                          size: 12,
+                    SizedBox(
+                      width: screenWidth * 0.76,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 12, horizontal: 15),
+                        child: DropdownMenu<String>(
+                          onSelected: (String? val) {
+                            setState(() {
+                              dropvalue = val ?? "--SELECT--";
+                            });
+                          },
+                          enableSearch: false,
+                          trailingIcon: const Icon(
+                            FontAwesomeIcons.chevronDown,
+                            size: 12,
+                          ),
+                          selectedTrailingIcon: const Icon(
+                            FontAwesomeIcons.chevronUp,
+                            size: 12,
+                          ),
+                          initialSelection: "--SELECT--",
+                          inputDecorationTheme: const InputDecorationTheme(
+                            contentPadding:
+                                EdgeInsets.only(bottom: 5.0, left: 8.0),
+                            hintStyle:
+                                TextStyle(color: Colors.black, fontSize: 13.8),
+                            border: OutlineInputBorder(),
+                            constraints: BoxConstraints(maxHeight: 30),
+                            isDense: true,
+                          ),
+                          menuHeight: 350,
+                          menuStyle: const MenuStyle(
+                              visualDensity: VisualDensity(vertical: -4),
+                              shadowColor: WidgetStatePropertyAll(Colors.black),
+                              backgroundColor:
+                                  WidgetStatePropertyAll(Colors.white)),
+                          dropdownMenuEntries: <DropdownMenuEntry<String>>[
+                            const DropdownMenuEntry(
+                                value: "--SELECT--",
+                                label: "--SELECT--",
+                                enabled: false),
+                            customDropDown("B.Tech", "B.Tech"),
+                            customDropDown("M.Tech", "M.Tech"),
+                            customDropDown("MBA", "MBA"),
+                            customDropDown("MCA", "MCA"),
+                            customDropDown("B.Arch", "B.Arch"),
+                            customDropDown("M.Arch", "M.Arch"),
+                            customDropDown("Hotel",
+                                "Hotel Management and Catering Technology"),
+                            customDropDown("MHM", "MHM"),
+                            customDropDown("B.Plan", "B.Planning"),
+                            customDropDown("MCA2", "MCA(Second Year Direct)"),
+                            customDropDown(
+                                "MCA2deg", "MCA Dual degree(INTEGRATED)"),
+                            customDropDown("PhD", "PhD"),
+                            customDropDown("B.Des", "B.Des"),
+                            customDropDown("MCA2Year", "MCA TWO YEARS"),
+                            customDropDown("B.Voc", "B.Voc"),
+                            customDropDown("MBAINT", "MBA INTEGRATED"),
+                            customDropDown(
+                                "MBASPEC", "MBA WITH SPECIALIZATION"),
+                            customDropDown("BCA", "BCA"),
+                            customDropDown("BBA", "BBA"),
+                          ],
                         ),
-                        selectedTrailingIcon: const Icon(
-                          FontAwesomeIcons.chevronUp,
-                          size: 12,
-                        ),
-                        initialSelection: "--SELECT--",
-                        inputDecorationTheme: const InputDecorationTheme(
-                          contentPadding:
-                              EdgeInsets.only(bottom: 5.0, left: 8.0),
-                          hintStyle:
-                              TextStyle(color: Colors.black, fontSize: 13.8),
-                          border: OutlineInputBorder(),
-                          constraints: BoxConstraints(maxHeight: 30),
-                          isDense: true,
-                        ),
-                        menuHeight: 350,
-                        menuStyle: const MenuStyle(
-                            visualDensity: VisualDensity(vertical: -4),
-                            shadowColor: WidgetStatePropertyAll(Colors.black),
-                            backgroundColor:
-                                WidgetStatePropertyAll(Colors.white)),
-                        dropdownMenuEntries: <DropdownMenuEntry<String>>[
-                          const DropdownMenuEntry(
-                              value: "--SELECT--",
-                              label: "--SELECT--",
-                              enabled: false),
-                          customDropDown("B.Tech", "B.Tech"),
-                          customDropDown("M.Tech", "M.Tech"),
-                          customDropDown("MBA", "MBA"),
-                          customDropDown("MCA", "MCA"),
-                          customDropDown("B.Arch", "B.Arch"),
-                          customDropDown("M.Arch", "M.Arch"),
-                          customDropDown("Hotel",
-                              "Hotel Management and Catering Technology"),
-                          customDropDown("MHM", "MHM"),
-                          customDropDown("B.Plan", "B.Planning"),
-                          customDropDown("MCA2", "MCA(Second Year Direct)"),
-                          customDropDown(
-                              "MCA2deg", "MCA Dual degree(INTEGRATED)"),
-                          customDropDown("PhD", "PhD"),
-                          customDropDown("B.Des", "B.Des"),
-                          customDropDown("MCA2Year", "MCA TWO YEARS"),
-                          customDropDown("B.Voc", "B.Voc"),
-                          customDropDown("MBAINT", "MBA INTEGRATED"),
-                          customDropDown("MBASPEC", "MBA WITH SPECIALIZATION"),
-                          customDropDown("BCA", "BCA"),
-                          customDropDown("BBA", "BBA"),
-                        ],
                       ),
                     )
                   ],

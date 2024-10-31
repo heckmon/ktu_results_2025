@@ -49,6 +49,7 @@ class _BaseState extends State<Base> {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
     return MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -60,7 +61,9 @@ class _BaseState extends State<Base> {
           colorFilter: mat,
           child: Scaffold(
               appBar: PreferredSize(
-                  preferredSize: Size.fromHeight(screenWidth > 850 ? 52.5 : 93),
+                  preferredSize: Size.fromHeight(screenWidth > 850
+                      ? screenHeight * 0.07
+                      : screenHeight * 0.15),
                   child: Appbar(filter: updateColorFilter)),
               body: screenWidth > 850 ? const AppBody() : const MobileBody()),
         ));
