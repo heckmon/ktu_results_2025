@@ -22,7 +22,7 @@ class _AppbarState extends State<Appbar> {
   Widget build(BuildContext context) {
     screenWidth = MediaQuery.of(context).size.width;
     screenHeight = MediaQuery.of(context).size.height;
-    bool isNarrowScreen = screenWidth < 900 ? true : false;
+    bool isNarrowScreen = screenWidth < 965 ? true : false;
     return screenWidth > 850
         ? AppBar(
             flexibleSpace: Row(

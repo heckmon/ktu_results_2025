@@ -30,7 +30,7 @@ class _MobileBodyState extends State<MobileBody> {
                 const Expanded(child: SizedBox()),
                 IconButton(
                     onPressed: () {},
-                    icon: Icon(FontAwesomeIcons.bars, color: Colors.grey[600]))
+                    icon: Icon(FontAwesomeIcons.bars, color: Colors.grey[600]),)
               ],
             ),
           ),
