@@ -61,9 +61,8 @@ class _BaseState extends State<Base> {
           colorFilter: mat,
           child: Scaffold(
               appBar: PreferredSize(
-                  preferredSize: Size.fromHeight(screenWidth > 850
-                      ? screenHeight * 0.055
-                      : screenHeight * 0.15),
+                  preferredSize: Size.fromHeight(
+                      screenWidth > 850 ? 53 : screenHeight * 0.15),
                   child: Appbar(filter: updateColorFilter)),
               body: screenWidth > 850 ? const AppBody() : const MobileBody()),
         ));

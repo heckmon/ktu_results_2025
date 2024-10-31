@@ -309,7 +309,9 @@ class _AppbarState extends State<Appbar> {
                             iconSize: 12,
                             iconEnabledColor: Colors.white,
                             style: const TextStyle(
-                                color: Colors.white, fontSize: 12.75),
+                              color: Colors.white,
+                              fontSize: 12.75,
+                            ),
                             items: const [
                               DropdownMenuItem(child: Text("English"))
                             ],

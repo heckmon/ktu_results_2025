@@ -76,7 +76,7 @@ class _AppBodyState extends State<AppBody> {
           Container(
             color: Colors.white,
             width: screenWidth,
-            child: screenWidth > 1075
+            child: screenWidth > 1155
                 ? Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -241,7 +241,7 @@ class _AppBodyState extends State<AppBody> {
                         ],
                       ),
                       sideBarStat
-                          ? Row(
+                          ? Wrap(
                               children: [
                                 styledTButton(
                                   "Home",
@@ -769,14 +769,13 @@ class _AppBodyState extends State<AppBody> {
                     child: Row(
                       children: [
                         SizedBox(
-                          width: 220,
+                          width: screenWidth * 0.2,
                           height: 80,
                           child: Image.asset("assets/images/logo_tr.png"),
                         ),
                         const Expanded(child: SizedBox()),
                         SizedBox(
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               iconBtns(
                                   FontAwesomeIcons.facebook,
