@@ -1,5 +1,5 @@
 name: ktu_results
-description: "A new Flutter project."
+description: "APJ Abdul Kalam Technological University"
 publish_to: 'none'
 
 version: 1.0.0+1
@@ -14,7 +14,6 @@ dependencies:
   font_awesome_flutter: ^10.7.0
   google_fonts: ^6.2.1
   http: ^1.2.2
-  responsive_framework: ^1.5.1
   url_launcher: ^6.3.0
 
 dev_dependencies:

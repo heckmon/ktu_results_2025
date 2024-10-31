@@ -52,20 +52,29 @@ class _BaseState extends State<Base> {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
     return MaterialApp(
-        title: "APJ Abdul Kalam Technological University",
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          scaffoldBackgroundColor: Colors.white,
-          textTheme: GoogleFonts.latoTextTheme(),
-        ),
-        home: ColorFiltered(
-          colorFilter: mat,
-          child: Scaffold(
-              appBar: PreferredSize(
-                  preferredSize: Size.fromHeight(
-                      screenWidth > 850 ? 53 : screenHeight * 0.15),
-                  child: Appbar(filter: updateColorFilter)),
-              body: screenWidth > 850 ? const AppBody() : const MobileBody()),
-        ));
+      title: "APJ Abdul Kalam Technological University",
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        scaffoldBackgroundColor: Colors.white,
+        textTheme: GoogleFonts.latoTextTheme(),
+      ),
+      home: ColorFiltered(
+        colorFilter: mat,
+        child: Scaffold(
+            appBar: PreferredSize(
+                preferredSize: Size.fromHeight(
+                    screenWidth > 850 ? 53 : screenHeight * 0.15),
+                child: Appbar(filter: updateColorFilter)),
+            body: isDesktopViewEnabled(context)
+                ? const AppBody()
+                : const MobileBody()),
+      ),
+    );
   }
+}
+
+bool isDesktopViewEnabled(BuildContext context) {
+  double screenWidth = MediaQuery.of(context).size.width;
+  double devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
+  return (screenWidth / devicePixelRatio) > 850;
 }
