@@ -52,6 +52,7 @@ class _BaseState extends State<Base> {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
     return MaterialApp(
+        title: "APJ Abdul Kalam Technological University",
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           scaffoldBackgroundColor: Colors.white,
