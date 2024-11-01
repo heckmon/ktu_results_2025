@@ -400,8 +400,8 @@ class _AppBodyState extends State<AppBody> {
               ],
             ),
             SizedBox(
-              width: double.infinity,
-              height: screenHeight * 0.925,
+              width: screenWidth,
+              height: screenHeight * 0.7,
               child: Row(
                 children: [
                   Flexible(
@@ -571,7 +571,7 @@ class _AppBodyState extends State<AppBody> {
                             height:
                                 dropvalue == "--SELECT--" || isClicked == true
                                     ? 200
-                                    : screenHeight * 0.8,
+                                    : screenHeight * 0.6407,
                             child: isClicked
                                 ? Card(
                                     elevation: 7,
@@ -861,7 +861,8 @@ class _AppBodyState extends State<AppBody> {
         ),
       );
     } else {
-      return Expanded(
+      return SizedBox(
+        height: screenHeight * 0.525,
         child: FutureBuilder<List<dynamic>>(
             future: publishedResult(eachResult[dropvalue] ?? 2),
             builder: (context, snapshot) {
@@ -939,10 +940,25 @@ class _AppBodyState extends State<AppBody> {
                   }
                   return RefreshIndicator(
                     onRefresh: () async {},
-                    child: Container(
-                      width: 900,
-                      height: 50,
-                      color: const Color.fromARGB(255, 202, 200, 200),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 50),
+                          child: Container(
+                            width: screenWidth * 0.5,
+                            height: 45,
+                            color: const Color.fromARGB(255, 202, 200, 200),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 50),
+                          child: Container(
+                            width: screenWidth * 0.1,
+                            height: 45,
+                            color: const Color.fromARGB(255, 202, 200, 200),
+                          ),
+                        ),
+                      ],
                     ),
                   );
                 },
