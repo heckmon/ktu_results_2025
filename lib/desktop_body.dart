@@ -62,7 +62,6 @@ Map<String, int> eachResult = {
 
 double screenWidth = 0;
 double screenHeight = 0;
-
 bool sideBarStat = false;
 
 class _AppBodyState extends State<AppBody> {
@@ -70,754 +69,765 @@ class _AppBodyState extends State<AppBody> {
   Widget build(BuildContext context) {
     screenWidth = MediaQuery.of(context).size.width;
     screenHeight = MediaQuery.of(context).size.height;
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          Container(
-            color: Colors.white,
-            width: screenWidth,
-            child: screenWidth > 1155
-                ? Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      const SizedBox(width: 10),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 18),
-                        child: SizedBox(
-                          width: 200,
-                          child: Image.asset("assets/images/logo.png"),
-                        ),
-                      ),
-                      styledTButton(
-                        "Home",
-                        () => launchUrl("https://ktu.edu.in/home"),
-                      ),
-                      styledPopup(
-                        "University",
-                        {
-                          "About us": () =>
-                              launchUrl("https://ktu.edu.in/university/about"),
-                          "Values, Vision & Mission": () => launchUrl(
-                              "https://ktu.edu.in/university/visionandmission"),
-                          "Acts and Statutes": () => launchUrl(
-                              "https://ktu.edu.in/university/statutes"),
-                          "Meeting Minutes": () => launchUrl(
-                              "https://ktu.edu.in/university/meetingminutes"),
-                        },
-                      ),
-                      styledPopup(
-                        "People",
-                        {
-                          "Board of Governors": () => launchUrl(
-                              "https://ktu.edu.in/administration/boardofgovernors"),
-                          "Syndicate": () => launchUrl(
-                              "https://ktu.edu.in/administration/syndicate"),
-                          "Authorities": () => launchUrl(
-                              "https://ktu.edu.in/administration/Authorities"),
-                          "Statutory Officers": () => launchUrl(
-                              "https://ktu.edu.in/administration/StatutoryOfficers"),
-                        },
-                      ),
-                      styledPopup(
-                        "Affiliation",
-                        {
-                          "Affiliated Instituitions": () => launchUrl(
-                              "https://ktu.edu.in/affiliation/affiliatedInstitutes"),
-                          "NBA Accredited Institutions": () => launchUrl(
-                              "https://ktu.edu.in/affiliation/affiliationNBAAccreditedInstitutes"),
-                          "Norms and Rules": () => launchUrl(
-                              "https://ktu.edu.in/affiliation/norms-and-rules"),
-                          "Notifications": () => launchUrl(
-                              "https://ktu.edu.in/affiliation/affiliationNotification"),
-                        },
-                      ),
-                      styledPopup(
-                        "Academics",
-                        {
-                          "Academic Calender": () => launchUrl(
-                              "https://ktu.edu.in/academics/academic_calendar"),
-                          "Regulation & Syllabus": () =>
-                              launchUrl("https://ktu.edu.in/academics/scheme"),
-                          "MOOC Courses": () => launchUrl(
-                              "https://ktu.edu.in/academics/mooccources"),
-                          "CGPC": () =>
-                              launchUrl("https://ktu.edu.in/academics/cgpc"),
-                          "Norms And Rules": () => launchUrl(
-                              "https://ktu.edu.in/academics/norms-and-rules"),
-                          "Notification": () => launchUrl(
-                              "https://ktu.edu.in/academics/notification"),
-                        },
-                      ),
-                      styledPopup(
-                        "Examination",
-                        {
-                          "Timetable": () =>
-                              launchUrl("https://ktu.edu.in/exam/Timetable"),
-                          "Result": () => launchUrl(""),
-                          "Norms and Rules": () => launchUrl(
-                              "https://ktu.edu.in/exam/norms-and-rules"),
-                          "Notification": () =>
-                              launchUrl("https://ktu.edu.in/exam/Notification")
-                        },
-                      ),
-                      styledPopup(
-                        "Research",
-                        {
-                          "Plcaes of Reseacrh": () => launchUrl(
-                              "https://ktu.edu.in/research/PlaceOfResearchList"),
-                          "Registered Reasearch Supervisors": () => launchUrl(
-                              "https://ktu.edu.in/research/placeofresearchs"),
-                          "Registered Reseacrh Scholars": () => launchUrl(
-                              "https://ktu.edu.in/research/placeofresearchs"),
-                          "Norms And Rules": () => launchUrl(
-                              "https://ktu.edu.in/research/norms-and-rules"),
-                          "Notification": () => launchUrl(
-                              "https://ktu.edu.in/research/Notification"),
-                        },
-                      ),
-                      styledPopup(
-                        "IQAC",
-                        {
-                          "About": () =>
-                              launchUrl("https://ktu.edu.in/iqac/IQACList"),
-                          "HRDC Centers": () =>
-                              launchUrl("https://ktu.edu.in/iqac/hrdccenters")
-                        },
-                      ),
-                      styledPopup(
-                        "Legal",
-                        {
-                          "RTI": () =>
-                              launchUrl("https://ktu.edu.in/miscellaneous/RTI")
-                        },
-                      ),
-                      styledTButton(
-                        "Jobs/Careers",
-                        () => launchUrl(
-                            "https://ktu.edu.in/job&career/jobnotification"),
-                      ),
-                    ],
-                  )
-                : Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          SizedBox(
-                            width: 175,
-                            height: screenHeight * 0.1,
+    return SafeArea(
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              color: Colors.white,
+              width: screenWidth,
+              child: screenWidth > 1155
+                  ? Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        const SizedBox(width: 10),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 18),
+                          child: SizedBox(
+                            width: 200,
                             child: Image.asset("assets/images/logo.png"),
                           ),
-                          const Expanded(child: SizedBox()),
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: Padding(
-                              padding: const EdgeInsets.only(right: 10),
-                              child: IconButton.outlined(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 14),
-                                visualDensity: VisualDensity.standard,
-                                style: ButtonStyle(
-                                  shape: WidgetStatePropertyAll(
-                                    RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(4.5),
-                                    ),
-                                  ),
-                                ),
-                                onPressed: () {
-                                  setState(() {
-                                    sideBarStat = !sideBarStat;
-                                  });
-                                },
-                                icon: Icon(
-                                  FontAwesomeIcons.bars,
-                                  color: Colors.grey[600],
-                                  size: 30,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      sideBarStat
-                          ? Wrap(
-                              children: [
-                                styledTButton(
-                                  "Home",
-                                  () => launchUrl("https://ktu.edu.in/home"),
-                                ),
-                                styledPopup(
-                                  "University",
-                                  {
-                                    "About us": () => launchUrl(
-                                        "https://ktu.edu.in/university/about"),
-                                    "Values, Vision & Mission": () => launchUrl(
-                                        "https://ktu.edu.in/university/visionandmission"),
-                                    "Acts and Statutes": () => launchUrl(
-                                        "https://ktu.edu.in/university/statutes"),
-                                    "Meeting Minutes": () => launchUrl(
-                                        "https://ktu.edu.in/university/meetingminutes"),
-                                  },
-                                ),
-                                styledPopup(
-                                  "People",
-                                  {
-                                    "Board of Governors": () => launchUrl(
-                                        "https://ktu.edu.in/administration/boardofgovernors"),
-                                    "Syndicate": () => launchUrl(
-                                        "https://ktu.edu.in/administration/syndicate"),
-                                    "Authorities": () => launchUrl(
-                                        "https://ktu.edu.in/administration/Authorities"),
-                                    "Statutory Officers": () => launchUrl(
-                                        "https://ktu.edu.in/administration/StatutoryOfficers"),
-                                  },
-                                ),
-                                styledPopup(
-                                  "Affiliation",
-                                  {
-                                    "Affiliated Instituitions": () => launchUrl(
-                                        "https://ktu.edu.in/affiliation/affiliatedInstitutes"),
-                                    "NBA Accredited Institutions": () => launchUrl(
-                                        "https://ktu.edu.in/affiliation/affiliationNBAAccreditedInstitutes"),
-                                    "Norms and Rules": () => launchUrl(
-                                        "https://ktu.edu.in/affiliation/norms-and-rules"),
-                                    "Notifications": () => launchUrl(
-                                        "https://ktu.edu.in/affiliation/affiliationNotification"),
-                                  },
-                                ),
-                                styledPopup(
-                                  "Academics",
-                                  {
-                                    "Academic Calender": () => launchUrl(
-                                        "https://ktu.edu.in/academics/academic_calendar"),
-                                    "Regulation & Syllabus": () => launchUrl(
-                                        "https://ktu.edu.in/academics/scheme"),
-                                    "MOOC Courses": () => launchUrl(
-                                        "https://ktu.edu.in/academics/mooccources"),
-                                    "CGPC": () => launchUrl(
-                                        "https://ktu.edu.in/academics/cgpc"),
-                                    "Norms And Rules": () => launchUrl(
-                                        "https://ktu.edu.in/academics/norms-and-rules"),
-                                    "Notification": () => launchUrl(
-                                        "https://ktu.edu.in/academics/notification"),
-                                  },
-                                ),
-                                styledPopup(
-                                  "Examination",
-                                  {
-                                    "Timetable": () => launchUrl(
-                                        "https://ktu.edu.in/exam/Timetable"),
-                                    "Result": () => launchUrl(""),
-                                    "Norms and Rules": () => launchUrl(
-                                        "https://ktu.edu.in/exam/norms-and-rules"),
-                                    "Notification": () => launchUrl(
-                                        "https://ktu.edu.in/exam/Notification")
-                                  },
-                                ),
-                                styledPopup(
-                                  "Research",
-                                  {
-                                    "Plcaes of Reseacrh": () => launchUrl(
-                                        "https://ktu.edu.in/research/PlaceOfResearchList"),
-                                    "Registered Reasearch Supervisors": () =>
-                                        launchUrl(
-                                            "https://ktu.edu.in/research/placeofresearchs"),
-                                    "Registered Reseacrh Scholars": () => launchUrl(
-                                        "https://ktu.edu.in/research/placeofresearchs"),
-                                    "Norms And Rules": () => launchUrl(
-                                        "https://ktu.edu.in/research/norms-and-rules"),
-                                    "Notification": () => launchUrl(
-                                        "https://ktu.edu.in/research/Notification"),
-                                  },
-                                ),
-                                styledPopup(
-                                  "IQAC",
-                                  {
-                                    "About": () => launchUrl(
-                                        "https://ktu.edu.in/iqac/IQACList"),
-                                    "HRDC Centers": () => launchUrl(
-                                        "https://ktu.edu.in/iqac/hrdccenters")
-                                  },
-                                ),
-                                styledPopup(
-                                  "Legal",
-                                  {
-                                    "RTI": () => launchUrl(
-                                        "https://ktu.edu.in/miscellaneous/RTI")
-                                  },
-                                ),
-                                styledTButton(
-                                  "Jobs/Careers",
-                                  () => launchUrl(
-                                      "https://ktu.edu.in/job&career/jobnotification"),
-                                ),
-                              ],
-                            )
-                          : const SizedBox(height: 0, width: 0),
-                    ],
-                  ),
-          ),
-          Stack(
-            children: [
-              Image.asset("assets/images/banner.jpg",
-                  width: double.infinity, fit: BoxFit.cover),
-              Column(
-                children: [
-                  SizedBox(
-                    height: screenHeight * 0.08,
-                  ),
-                  Row(
-                    children: [
-                      SizedBox(
-                        width: screenWidth * 0.17,
-                      ),
-                      const Text(
-                        "Exam",
-                        style: TextStyle(color: Colors.white, fontSize: 28),
-                      ),
-                      const SizedBox(width: 8),
-                      const Icon(
-                        FontAwesomeIcons.chevronRight,
-                        color: Colors.white,
-                        size: 12,
-                      ),
-                      const SizedBox(width: 8),
-                      const Text(
-                        "Result",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 36,
                         ),
-                      )
-                    ],
-                  ),
-                ],
-              ),
-            ],
-          ),
-          SizedBox(
-            width: double.infinity,
-            height: screenHeight - 50,
-            child: Row(
-              children: [
-                Flexible(
-                  flex: 1,
-                  child: Column(
-                    children: [
-                      Padding(
-                          padding:
-                              const EdgeInsets.only(top: 14, right: 5, left: 5),
-                          child: styledListTile(
-                              "Timetable",
-                              trail: true,
-                              () => launchUrl(
-                                  "https://ktu.edu.in/exam/timetable"))),
-                      const Divider(height: 0, indent: 12, endIndent: 12),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                        child: Column(
+                        styledTButton(
+                          "Home",
+                          () => launchUrl("https://ktu.edu.in/home"),
+                        ),
+                        styledPopup(
+                          "University",
+                          {
+                            "About us": () => launchUrl(
+                                "https://ktu.edu.in/university/about"),
+                            "Values, Vision & Mission": () => launchUrl(
+                                "https://ktu.edu.in/university/visionandmission"),
+                            "Acts and Statutes": () => launchUrl(
+                                "https://ktu.edu.in/university/statutes"),
+                            "Meeting Minutes": () => launchUrl(
+                                "https://ktu.edu.in/university/meetingminutes"),
+                          },
+                        ),
+                        styledPopup(
+                          "People",
+                          {
+                            "Board of Governors": () => launchUrl(
+                                "https://ktu.edu.in/administration/boardofgovernors"),
+                            "Syndicate": () => launchUrl(
+                                "https://ktu.edu.in/administration/syndicate"),
+                            "Authorities": () => launchUrl(
+                                "https://ktu.edu.in/administration/Authorities"),
+                            "Statutory Officers": () => launchUrl(
+                                "https://ktu.edu.in/administration/StatutoryOfficers"),
+                          },
+                        ),
+                        styledPopup(
+                          "Affiliation",
+                          {
+                            "Affiliated Instituitions": () => launchUrl(
+                                "https://ktu.edu.in/affiliation/affiliatedInstitutes"),
+                            "NBA Accredited Institutions": () => launchUrl(
+                                "https://ktu.edu.in/affiliation/affiliationNBAAccreditedInstitutes"),
+                            "Norms and Rules": () => launchUrl(
+                                "https://ktu.edu.in/affiliation/norms-and-rules"),
+                            "Notifications": () => launchUrl(
+                                "https://ktu.edu.in/affiliation/affiliationNotification"),
+                          },
+                        ),
+                        styledPopup(
+                          "Academics",
+                          {
+                            "Academic Calender": () => launchUrl(
+                                "https://ktu.edu.in/academics/academic_calendar"),
+                            "Regulation & Syllabus": () => launchUrl(
+                                "https://ktu.edu.in/academics/scheme"),
+                            "MOOC Courses": () => launchUrl(
+                                "https://ktu.edu.in/academics/mooccources"),
+                            "CGPC": () =>
+                                launchUrl("https://ktu.edu.in/academics/cgpc"),
+                            "Norms And Rules": () => launchUrl(
+                                "https://ktu.edu.in/academics/norms-and-rules"),
+                            "Notification": () => launchUrl(
+                                "https://ktu.edu.in/academics/notification"),
+                          },
+                        ),
+                        styledPopup(
+                          "Examination",
+                          {
+                            "Timetable": () =>
+                                launchUrl("https://ktu.edu.in/exam/Timetable"),
+                            "Result": () => launchUrl(""),
+                            "Norms and Rules": () => launchUrl(
+                                "https://ktu.edu.in/exam/norms-and-rules"),
+                            "Notification": () => launchUrl(
+                                "https://ktu.edu.in/exam/Notification")
+                          },
+                        ),
+                        styledPopup(
+                          "Research",
+                          {
+                            "Plcaes of Reseacrh": () => launchUrl(
+                                "https://ktu.edu.in/research/PlaceOfResearchList"),
+                            "Registered Reasearch Supervisors": () => launchUrl(
+                                "https://ktu.edu.in/research/placeofresearchs"),
+                            "Registered Reseacrh Scholars": () => launchUrl(
+                                "https://ktu.edu.in/research/placeofresearchs"),
+                            "Norms And Rules": () => launchUrl(
+                                "https://ktu.edu.in/research/norms-and-rules"),
+                            "Notification": () => launchUrl(
+                                "https://ktu.edu.in/research/Notification"),
+                          },
+                        ),
+                        styledPopup(
+                          "IQAC",
+                          {
+                            "About": () =>
+                                launchUrl("https://ktu.edu.in/iqac/IQACList"),
+                            "HRDC Centers": () =>
+                                launchUrl("https://ktu.edu.in/iqac/hrdccenters")
+                          },
+                        ),
+                        styledPopup(
+                          "Legal",
+                          {
+                            "RTI": () => launchUrl(
+                                "https://ktu.edu.in/miscellaneous/RTI")
+                          },
+                        ),
+                        styledTButton(
+                          "Jobs/Careers",
+                          () => launchUrl(
+                              "https://ktu.edu.in/job&career/jobnotification"),
+                        ),
+                      ],
+                    )
+                  : Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
                           children: [
-                            styledListTile(
-                                "Result",
-                                selected: true,
-                                selectedTileColor: const Color(0xff6d52b1),
-                                () {}),
-                            const Divider(height: 0, indent: 4, endIndent: 4),
-                            styledListTile(
-                                "Norms And Rules",
-                                () => launchUrl(
-                                    "https://ktu.edu.in/exam/norms-and-rules")),
-                            const Divider(height: 0, indent: 4, endIndent: 4),
-                            styledListTile(
-                                "Notification",
-                                () => launchUrl(
-                                    "https://ktu.edu.in/exam/notification")),
-                            const Divider(height: 0, indent: 4, endIndent: 4),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const VerticalDivider(width: 3.5),
-                Flexible(
-                  flex: 3,
-                  child: Column(
-                    children: [
-                      const SizedBox(height: 2.5),
-                      Container(
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey,
-                              blurRadius: 10,
-                              offset: Offset(0, 1),
-                            )
-                          ],
-                        ),
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 12.0),
-                              child: Text(
-                                heading,
-                                style: heading == "Examination Result"
-                                    ? const TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold)
-                                    : const TextStyle(
-                                        color: Color(0xff8b0051),
-                                        fontSize: 15.0,
-                                        fontWeight: FontWeight.bold),
-                              ),
+                            SizedBox(
+                              width: 175,
+                              height: screenHeight * 0.1,
+                              child: Image.asset("assets/images/logo.png"),
                             ),
                             const Expanded(child: SizedBox()),
-                            const Text(
-                              "Program",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 15,
-                                  color: Color(0xff364a63)),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 12, horizontal: 22.0),
-                              child: SizedBox(
-                                width: screenWidth * 0.2,
-                                child: DropdownMenu<String>(
-                                  onSelected: (String? val) {
+                            Align(
+                              alignment: Alignment.centerRight,
+                              child: Padding(
+                                padding: const EdgeInsets.only(right: 10),
+                                child: IconButton.outlined(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 14),
+                                  visualDensity: VisualDensity.standard,
+                                  style: ButtonStyle(
+                                    shape: WidgetStatePropertyAll(
+                                      RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(4.5),
+                                      ),
+                                    ),
+                                  ),
+                                  onPressed: () {
                                     setState(() {
-                                      dropvalue = val ?? "--SELECT--";
+                                      sideBarStat = !sideBarStat;
                                     });
                                   },
-                                  enableSearch: false,
-                                  trailingIcon: const Icon(
-                                    FontAwesomeIcons.chevronDown,
-                                    size: 12,
+                                  icon: Icon(
+                                    FontAwesomeIcons.bars,
+                                    color: Colors.grey[600],
+                                    size: 30,
                                   ),
-                                  selectedTrailingIcon: const Icon(
-                                    FontAwesomeIcons.chevronUp,
-                                    size: 12,
-                                  ),
-                                  initialSelection: "--SELECT--",
-                                  inputDecorationTheme:
-                                      const InputDecorationTheme(
-                                    contentPadding:
-                                        EdgeInsets.only(bottom: 5.0, left: 8.0),
-                                    hintStyle: TextStyle(
-                                        color: Colors.black, fontSize: 13.8),
-                                    border: OutlineInputBorder(),
-                                    constraints: BoxConstraints(maxHeight: 30),
-                                    isDense: true,
-                                  ),
-                                  menuHeight: 350,
-                                  menuStyle: const MenuStyle(
-                                      visualDensity:
-                                          VisualDensity(vertical: -4),
-                                      shadowColor:
-                                          WidgetStatePropertyAll(Colors.black),
-                                      backgroundColor:
-                                          WidgetStatePropertyAll(Colors.white)),
-                                  dropdownMenuEntries: <DropdownMenuEntry<
-                                      String>>[
-                                    const DropdownMenuEntry(
-                                        value: "--SELECT--",
-                                        label: "--SELECT--",
-                                        enabled: false),
-                                    customDropDown("B.Tech", "B.Tech"),
-                                    customDropDown("M.Tech", "M.Tech"),
-                                    customDropDown("MBA", "MBA"),
-                                    customDropDown("MCA", "MCA"),
-                                    customDropDown("B.Arch", "B.Arch"),
-                                    customDropDown("M.Arch", "M.Arch"),
-                                    customDropDown("Hotel",
-                                        "Hotel Management and Catering Technology"),
-                                    customDropDown("MHM", "MHM"),
-                                    customDropDown("B.Plan", "B.Planning"),
-                                    customDropDown(
-                                        "MCA2", "MCA(Second Year Direct)"),
-                                    customDropDown("MCA2deg",
-                                        "MCA Dual degree(INTEGRATED)"),
-                                    customDropDown("PhD", "PhD"),
-                                    customDropDown("B.Des", "B.Des"),
-                                    customDropDown("MCA2Year", "MCA TWO YEARS"),
-                                    customDropDown("B.Voc", "B.Voc"),
-                                    customDropDown("MBAINT", "MBA INTEGRATED"),
-                                    customDropDown(
-                                        "MBASPEC", "MBA WITH SPECIALIZATION"),
-                                    customDropDown("BCA", "BCA"),
-                                    customDropDown("BBA", "BBA"),
-                                  ],
                                 ),
                               ),
-                            )
+                            ),
                           ],
                         ),
-                      ),
-                      Padding(
-                        padding: isClicked
-                            ? const EdgeInsets.only(top: 20)
-                            : const EdgeInsets.all(0),
-                        child: SizedBox(
-                          width: isClicked ? 1130 : screenWidth * 0.7,
-                          height: dropvalue == "--SELECT--" || isClicked == true
-                              ? 200
-                              : screenHeight * 0.8,
-                          child: isClicked
-                              ? Card(
-                                  elevation: 7,
-                                  color: Colors.white,
-                                  child: Column(
-                                    children: [
-                                      const Row(
-                                        children: [
-                                          Flexible(
-                                              flex: 1,
-                                              child: Padding(
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 14.0,
-                                                    vertical: 10.0),
-                                                child: Column(
-                                                  children: [
-                                                    Align(
-                                                      alignment:
-                                                          Alignment.topLeft,
-                                                      child: Text(
-                                                        "Register Number",
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontSize: 16),
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                      padding: EdgeInsets.only(
-                                                          top: 8.0),
-                                                      child: TextField(
-                                                        decoration:
-                                                            InputDecoration(
-                                                                enabledBorder:
-                                                                    OutlineInputBorder(
-                                                                  borderSide:
-                                                                      BorderSide(
-                                                                    color: Color(
-                                                                        0xffbbbfc1),
-                                                                    width: 1,
-                                                                  ),
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .all(
-                                                                    Radius
-                                                                        .circular(
-                                                                            5.5),
-                                                                  ),
-                                                                ),
-                                                                label: Text(
-                                                                  "Enter Register Number",
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          18,
-                                                                      color: Color(
-                                                                          0xffbbbfc1)),
-                                                                )),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              )),
-                                          Flexible(
-                                              flex: 1,
-                                              child: Padding(
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 14.0,
-                                                    vertical: 10.0),
-                                                child: Column(
-                                                  children: [
-                                                    Align(
-                                                      alignment:
-                                                          Alignment.topLeft,
-                                                      child: Text(
-                                                        "Date Of Birth",
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontSize: 16),
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                      padding: EdgeInsets.only(
-                                                          top: 8.0),
-                                                      child: TextField(
-                                                        readOnly: true,
-                                                        decoration:
-                                                            InputDecoration(
-                                                                enabledBorder:
-                                                                    OutlineInputBorder(
-                                                                        borderSide:
-                                                                            BorderSide(
-                                                                          color:
-                                                                              Color(0xffbbbfc1),
-                                                                          width:
-                                                                              1,
-                                                                        ),
-                                                                        borderRadius:
-                                                                            BorderRadius.all(Radius.circular(
-                                                                                5.5))),
-                                                                hintText:
-                                                                    "mm/dd/yyyy",
-                                                                hintStyle: TextStyle(
-                                                                    color: Colors
-                                                                        .black,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400),
-                                                                suffixIcon:
-                                                                    Icon(
-                                                                  FontAwesomeIcons
-                                                                      .calendar,
-                                                                  size: 12.0,
-                                                                )),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ))
-                                        ],
-                                      ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 13),
-                                        child: Align(
-                                          alignment: Alignment.bottomRight,
-                                          child: SizedBox(
-                                            width: 143,
-                                            height: 40,
-                                            child: ElevatedButton(
-                                              style: ElevatedButton.styleFrom(
-                                                foregroundColor: Colors.white,
-                                                backgroundColor:
-                                                    const Color(0xff6d52b1),
-                                                shape:
-                                                    const RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                    Radius.circular(5),
-                                                  ),
-                                                ),
-                                              ),
-                                              onPressed: () {},
-                                              child: const Text(
-                                                "View Results",
-                                                style:
-                                                    TextStyle(fontSize: 16.5),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      )
-                                    ],
+                        sideBarStat
+                            ? Wrap(
+                                children: [
+                                  styledTButton(
+                                    "Home",
+                                    () => launchUrl("https://ktu.edu.in/home"),
                                   ),
-                                )
-                              : Card(
-                                  surfaceTintColor: Colors.grey[400],
-                                  color: Colors.white,
-                                  elevation: 7,
-                                  shadowColor: Colors.black,
-                                  shape: const BeveledRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(3))),
-                                  margin: const EdgeInsets.all(30),
-                                  child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          padding: const EdgeInsets.all(5),
-                                          height: 30,
-                                          child: const Text(
-                                            "Exam",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        const Divider(),
-                                        resultField(),
-                                      ]),
-                                ),
-                        ),
-                      )
-                    ],
-                  ),
-                )
-              ],
+                                  styledPopup(
+                                    "University",
+                                    {
+                                      "About us": () => launchUrl(
+                                          "https://ktu.edu.in/university/about"),
+                                      "Values, Vision & Mission": () => launchUrl(
+                                          "https://ktu.edu.in/university/visionandmission"),
+                                      "Acts and Statutes": () => launchUrl(
+                                          "https://ktu.edu.in/university/statutes"),
+                                      "Meeting Minutes": () => launchUrl(
+                                          "https://ktu.edu.in/university/meetingminutes"),
+                                    },
+                                  ),
+                                  styledPopup(
+                                    "People",
+                                    {
+                                      "Board of Governors": () => launchUrl(
+                                          "https://ktu.edu.in/administration/boardofgovernors"),
+                                      "Syndicate": () => launchUrl(
+                                          "https://ktu.edu.in/administration/syndicate"),
+                                      "Authorities": () => launchUrl(
+                                          "https://ktu.edu.in/administration/Authorities"),
+                                      "Statutory Officers": () => launchUrl(
+                                          "https://ktu.edu.in/administration/StatutoryOfficers"),
+                                    },
+                                  ),
+                                  styledPopup(
+                                    "Affiliation",
+                                    {
+                                      "Affiliated Instituitions": () => launchUrl(
+                                          "https://ktu.edu.in/affiliation/affiliatedInstitutes"),
+                                      "NBA Accredited Institutions": () =>
+                                          launchUrl(
+                                              "https://ktu.edu.in/affiliation/affiliationNBAAccreditedInstitutes"),
+                                      "Norms and Rules": () => launchUrl(
+                                          "https://ktu.edu.in/affiliation/norms-and-rules"),
+                                      "Notifications": () => launchUrl(
+                                          "https://ktu.edu.in/affiliation/affiliationNotification"),
+                                    },
+                                  ),
+                                  styledPopup(
+                                    "Academics",
+                                    {
+                                      "Academic Calender": () => launchUrl(
+                                          "https://ktu.edu.in/academics/academic_calendar"),
+                                      "Regulation & Syllabus": () => launchUrl(
+                                          "https://ktu.edu.in/academics/scheme"),
+                                      "MOOC Courses": () => launchUrl(
+                                          "https://ktu.edu.in/academics/mooccources"),
+                                      "CGPC": () => launchUrl(
+                                          "https://ktu.edu.in/academics/cgpc"),
+                                      "Norms And Rules": () => launchUrl(
+                                          "https://ktu.edu.in/academics/norms-and-rules"),
+                                      "Notification": () => launchUrl(
+                                          "https://ktu.edu.in/academics/notification"),
+                                    },
+                                  ),
+                                  styledPopup(
+                                    "Examination",
+                                    {
+                                      "Timetable": () => launchUrl(
+                                          "https://ktu.edu.in/exam/Timetable"),
+                                      "Result": () => launchUrl(""),
+                                      "Norms and Rules": () => launchUrl(
+                                          "https://ktu.edu.in/exam/norms-and-rules"),
+                                      "Notification": () => launchUrl(
+                                          "https://ktu.edu.in/exam/Notification")
+                                    },
+                                  ),
+                                  styledPopup(
+                                    "Research",
+                                    {
+                                      "Plcaes of Reseacrh": () => launchUrl(
+                                          "https://ktu.edu.in/research/PlaceOfResearchList"),
+                                      "Registered Reasearch Supervisors": () =>
+                                          launchUrl(
+                                              "https://ktu.edu.in/research/placeofresearchs"),
+                                      "Registered Reseacrh Scholars": () =>
+                                          launchUrl(
+                                              "https://ktu.edu.in/research/placeofresearchs"),
+                                      "Norms And Rules": () => launchUrl(
+                                          "https://ktu.edu.in/research/norms-and-rules"),
+                                      "Notification": () => launchUrl(
+                                          "https://ktu.edu.in/research/Notification"),
+                                    },
+                                  ),
+                                  styledPopup(
+                                    "IQAC",
+                                    {
+                                      "About": () => launchUrl(
+                                          "https://ktu.edu.in/iqac/IQACList"),
+                                      "HRDC Centers": () => launchUrl(
+                                          "https://ktu.edu.in/iqac/hrdccenters")
+                                    },
+                                  ),
+                                  styledPopup(
+                                    "Legal",
+                                    {
+                                      "RTI": () => launchUrl(
+                                          "https://ktu.edu.in/miscellaneous/RTI")
+                                    },
+                                  ),
+                                  styledTButton(
+                                    "Jobs/Careers",
+                                    () => launchUrl(
+                                        "https://ktu.edu.in/job&career/jobnotification"),
+                                  ),
+                                ],
+                              )
+                            : const SizedBox(height: 0, width: 0),
+                      ],
+                    ),
             ),
-          ),
-          Stack(
-            children: [
-              Container(
-                color: const Color(0xff1d2733),
-                width: screenWidth,
-                height: 200,
-              ),
-              Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 205, vertical: 25),
-                    child: Row(
+            Stack(
+              children: [
+                Image.asset("assets/images/banner.jpg",
+                    width: double.infinity, fit: BoxFit.cover),
+                Column(
+                  children: [
+                    SizedBox(
+                      height: screenHeight * 0.08,
+                    ),
+                    Row(
                       children: [
                         SizedBox(
-                          width: screenWidth * 0.2,
-                          height: 80,
-                          child: Image.asset("assets/images/logo_tr.png"),
+                          width: screenWidth * 0.17,
                         ),
-                        const Expanded(child: SizedBox()),
-                        SizedBox(
-                          child: Row(
-                            children: [
-                              iconBtns(
-                                  FontAwesomeIcons.facebook,
-                                  const Color(0xff395498),
-                                  () => launchUrl(
-                                      "https://m.facebook.com/apjaktuofficial/")),
-                              iconBtns(
-                                  FontAwesomeIcons.linkedin,
-                                  const Color(0xff0270ad),
-                                  () => launchUrl(
-                                      "https://in.linkedin.com/school/apj-abdul-kalam-technological-university/")),
-                              iconBtns(
-                                  FontAwesomeIcons.instagram,
-                                  const Color(0xffea4c56),
-                                  () => launchUrl(
-                                      "https://instagram.com/keralatechnologicaluniversity/")),
-                              iconBtns(
-                                  FontAwesomeIcons.twitter,
-                                  const Color(0xff029eec),
-                                  () => launchUrl(
-                                      "https://twitter.com/apjaktuofficial")),
-                              iconBtns(
-                                  FontAwesomeIcons.youtube,
-                                  const Color(0xfff60002),
-                                  () => launchUrl(
-                                      "https://www.youtube.com/channel/UC4lFeTaXLEhOeharO9-WS6w/featured")),
-                            ],
+                        const Text(
+                          "Exam",
+                          style: TextStyle(color: Colors.white, fontSize: 28),
+                        ),
+                        const SizedBox(width: 8),
+                        const Icon(
+                          FontAwesomeIcons.chevronRight,
+                          color: Colors.white,
+                          size: 12,
+                        ),
+                        const SizedBox(width: 8),
+                        const Text(
+                          "Result",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 36,
                           ),
                         )
                       ],
                     ),
+                  ],
+                ),
+              ],
+            ),
+            SizedBox(
+              width: double.infinity,
+              height: screenHeight * 0.925,
+              child: Row(
+                children: [
+                  Flexible(
+                    flex: 1,
+                    child: Column(
+                      children: [
+                        Padding(
+                            padding: const EdgeInsets.only(
+                                top: 14, right: 5, left: 5),
+                            child: styledListTile(
+                                "Timetable",
+                                trail: true,
+                                () => launchUrl(
+                                    "https://ktu.edu.in/exam/timetable"))),
+                        const Divider(height: 0, indent: 12, endIndent: 12),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                          child: Column(
+                            children: [
+                              styledListTile(
+                                  "Result",
+                                  selected: true,
+                                  selectedTileColor: const Color(0xff6d52b1),
+                                  () {}),
+                              const Divider(height: 0, indent: 4, endIndent: 4),
+                              styledListTile(
+                                  "Norms And Rules",
+                                  () => launchUrl(
+                                      "https://ktu.edu.in/exam/norms-and-rules")),
+                              const Divider(height: 0, indent: 4, endIndent: 4),
+                              styledListTile(
+                                  "Notification",
+                                  () => launchUrl(
+                                      "https://ktu.edu.in/exam/notification")),
+                              const Divider(height: 0, indent: 4, endIndent: 4),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                  const Divider(thickness: 0.3),
-                  const Text(
-                    "Copyright@ APJ Abdul Kalam Technological University 2021",
-                    style: TextStyle(color: Color(0xff898b8d)),
+                  const VerticalDivider(width: 3.5),
+                  Flexible(
+                    flex: 3,
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 2.5),
+                        Container(
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey,
+                                blurRadius: 10,
+                                offset: Offset(0, 1),
+                              )
+                            ],
+                          ),
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(left: 12.0),
+                                child: Text(
+                                  heading,
+                                  style: heading == "Examination Result"
+                                      ? const TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold)
+                                      : const TextStyle(
+                                          color: Color(0xff8b0051),
+                                          fontSize: 15.0,
+                                          fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              const Expanded(child: SizedBox()),
+                              const Text(
+                                "Program",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 15,
+                                    color: Color(0xff364a63)),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 12, horizontal: 22.0),
+                                child: SizedBox(
+                                  width: screenWidth * 0.2,
+                                  child: DropdownMenu<String>(
+                                    onSelected: (String? val) {
+                                      setState(() {
+                                        dropvalue = val ?? "--SELECT--";
+                                      });
+                                    },
+                                    enableSearch: false,
+                                    trailingIcon: const Icon(
+                                      FontAwesomeIcons.chevronDown,
+                                      size: 12,
+                                    ),
+                                    selectedTrailingIcon: const Icon(
+                                      FontAwesomeIcons.chevronUp,
+                                      size: 12,
+                                    ),
+                                    initialSelection: "--SELECT--",
+                                    inputDecorationTheme:
+                                        const InputDecorationTheme(
+                                      contentPadding: EdgeInsets.only(
+                                          bottom: 5.0, left: 8.0),
+                                      hintStyle: TextStyle(
+                                          color: Colors.black, fontSize: 13.8),
+                                      border: OutlineInputBorder(),
+                                      constraints:
+                                          BoxConstraints(maxHeight: 30),
+                                      isDense: true,
+                                    ),
+                                    menuHeight: 350,
+                                    menuStyle: const MenuStyle(
+                                        visualDensity:
+                                            VisualDensity(vertical: -4),
+                                        shadowColor: WidgetStatePropertyAll(
+                                            Colors.black),
+                                        backgroundColor: WidgetStatePropertyAll(
+                                            Colors.white)),
+                                    dropdownMenuEntries: <DropdownMenuEntry<
+                                        String>>[
+                                      const DropdownMenuEntry(
+                                          value: "--SELECT--",
+                                          label: "--SELECT--",
+                                          enabled: false),
+                                      customDropDown("B.Tech", "B.Tech"),
+                                      customDropDown("M.Tech", "M.Tech"),
+                                      customDropDown("MBA", "MBA"),
+                                      customDropDown("MCA", "MCA"),
+                                      customDropDown("B.Arch", "B.Arch"),
+                                      customDropDown("M.Arch", "M.Arch"),
+                                      customDropDown("Hotel",
+                                          "Hotel Management and Catering Technology"),
+                                      customDropDown("MHM", "MHM"),
+                                      customDropDown("B.Plan", "B.Planning"),
+                                      customDropDown(
+                                          "MCA2", "MCA(Second Year Direct)"),
+                                      customDropDown("MCA2deg",
+                                          "MCA Dual degree(INTEGRATED)"),
+                                      customDropDown("PhD", "PhD"),
+                                      customDropDown("B.Des", "B.Des"),
+                                      customDropDown(
+                                          "MCA2Year", "MCA TWO YEARS"),
+                                      customDropDown("B.Voc", "B.Voc"),
+                                      customDropDown(
+                                          "MBAINT", "MBA INTEGRATED"),
+                                      customDropDown(
+                                          "MBASPEC", "MBA WITH SPECIALIZATION"),
+                                      customDropDown("BCA", "BCA"),
+                                      customDropDown("BBA", "BBA"),
+                                    ],
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: isClicked
+                              ? const EdgeInsets.only(top: 20)
+                              : const EdgeInsets.all(0),
+                          child: SizedBox(
+                            width: isClicked ? 1130 : screenWidth * 0.7,
+                            height:
+                                dropvalue == "--SELECT--" || isClicked == true
+                                    ? 200
+                                    : screenHeight * 0.8,
+                            child: isClicked
+                                ? Card(
+                                    elevation: 7,
+                                    color: Colors.white,
+                                    child: Column(
+                                      children: [
+                                        const Row(
+                                          children: [
+                                            Flexible(
+                                                flex: 1,
+                                                child: Padding(
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: 14.0,
+                                                      vertical: 10.0),
+                                                  child: Column(
+                                                    children: [
+                                                      Align(
+                                                        alignment:
+                                                            Alignment.topLeft,
+                                                        child: Text(
+                                                          "Register Number",
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: 16),
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                top: 8.0),
+                                                        child: TextField(
+                                                          decoration:
+                                                              InputDecoration(
+                                                                  enabledBorder:
+                                                                      OutlineInputBorder(
+                                                                    borderSide:
+                                                                        BorderSide(
+                                                                      color: Color(
+                                                                          0xffbbbfc1),
+                                                                      width: 1,
+                                                                    ),
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .all(
+                                                                      Radius.circular(
+                                                                          5.5),
+                                                                    ),
+                                                                  ),
+                                                                  label: Text(
+                                                                    "Enter Register Number",
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            18,
+                                                                        color: Color(
+                                                                            0xffbbbfc1)),
+                                                                  )),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                )),
+                                            Flexible(
+                                                flex: 1,
+                                                child: Padding(
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: 14.0,
+                                                      vertical: 10.0),
+                                                  child: Column(
+                                                    children: [
+                                                      Align(
+                                                        alignment:
+                                                            Alignment.topLeft,
+                                                        child: Text(
+                                                          "Date Of Birth",
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: 16),
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                top: 8.0),
+                                                        child: TextField(
+                                                          readOnly: true,
+                                                          decoration:
+                                                              InputDecoration(
+                                                                  enabledBorder:
+                                                                      OutlineInputBorder(
+                                                                          borderSide:
+                                                                              BorderSide(
+                                                                            color:
+                                                                                Color(0xffbbbfc1),
+                                                                            width:
+                                                                                1,
+                                                                          ),
+                                                                          borderRadius: BorderRadius.all(Radius.circular(
+                                                                              5.5))),
+                                                                  hintText:
+                                                                      "mm/dd/yyyy",
+                                                                  hintStyle: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400),
+                                                                  suffixIcon:
+                                                                      Icon(
+                                                                    FontAwesomeIcons
+                                                                        .calendar,
+                                                                    size: 12.0,
+                                                                  )),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ))
+                                          ],
+                                        ),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(right: 13),
+                                          child: Align(
+                                            alignment: Alignment.bottomRight,
+                                            child: SizedBox(
+                                              width: 143,
+                                              height: 40,
+                                              child: ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                  foregroundColor: Colors.white,
+                                                  backgroundColor:
+                                                      const Color(0xff6d52b1),
+                                                  shape:
+                                                      const RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                      Radius.circular(5),
+                                                    ),
+                                                  ),
+                                                ),
+                                                onPressed: () {},
+                                                child: const Text(
+                                                  "View Results",
+                                                  style:
+                                                      TextStyle(fontSize: 16.5),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  )
+                                : Card(
+                                    surfaceTintColor: Colors.grey[400],
+                                    color: Colors.white,
+                                    elevation: 7,
+                                    shadowColor: Colors.black,
+                                    shape: const BeveledRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(3))),
+                                    margin: const EdgeInsets.all(30),
+                                    child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                            padding: const EdgeInsets.all(5),
+                                            height: 30,
+                                            child: const Text(
+                                              "Exam",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          const Divider(),
+                                          resultField(),
+                                        ]),
+                                  ),
+                          ),
+                        )
+                      ],
+                    ),
                   )
                 ],
-              )
-            ],
-          )
-        ],
+              ),
+            ),
+            Stack(
+              children: [
+                Container(
+                  color: const Color(0xff1d2733),
+                  width: screenWidth,
+                  height: 200,
+                ),
+                Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 205, vertical: 25),
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: screenWidth * 0.2,
+                            height: 80,
+                            child: Image.asset("assets/images/logo_tr.png"),
+                          ),
+                          const Expanded(child: SizedBox()),
+                          SizedBox(
+                            child: Row(
+                              children: [
+                                iconBtns(
+                                    FontAwesomeIcons.facebook,
+                                    const Color(0xff395498),
+                                    () => launchUrl(
+                                        "https://m.facebook.com/apjaktuofficial/")),
+                                iconBtns(
+                                    FontAwesomeIcons.linkedin,
+                                    const Color(0xff0270ad),
+                                    () => launchUrl(
+                                        "https://in.linkedin.com/school/apj-abdul-kalam-technological-university/")),
+                                iconBtns(
+                                    FontAwesomeIcons.instagram,
+                                    const Color(0xffea4c56),
+                                    () => launchUrl(
+                                        "https://instagram.com/keralatechnologicaluniversity/")),
+                                iconBtns(
+                                    FontAwesomeIcons.twitter,
+                                    const Color(0xff029eec),
+                                    () => launchUrl(
+                                        "https://twitter.com/apjaktuofficial")),
+                                iconBtns(
+                                    FontAwesomeIcons.youtube,
+                                    const Color(0xfff60002),
+                                    () => launchUrl(
+                                        "https://www.youtube.com/channel/UC4lFeTaXLEhOeharO9-WS6w/featured")),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    const Divider(thickness: 0.3),
+                    const Text(
+                      "Copyright@ APJ Abdul Kalam Technological University 2021",
+                      style: TextStyle(color: Color(0xff898b8d)),
+                    )
+                  ],
+                )
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
@@ -1050,9 +1060,15 @@ Future<void> launchUrl(String url) async {
 }
 
 Future<List<dynamic>> publishedResult(int index) async {
-  var url = Uri.parse("http://127.0.0.1:8000/");
-  Map<String, String> headers = {"Content-Type": "application/json"};
-  Map<String, String> data = {"index": "$index"};
+  var url = Uri.parse("https://api.ktu.edu.in/ktu-web-service/anon/result/");
+  Map<String, String> headers = {
+    "Content-Type": "application/json",
+    "Origin": "https://ktu.edu.in",
+    "Referer": "https://ktu.edu.in/",
+    "User-Agent":
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36",
+  };
+  Map<String, String> data = {"program": "$index"};
 
   var response = await http.post(url, headers: headers, body: jsonEncode(data));
   return jsonDecode(response.body);
