@@ -69,7 +69,9 @@ class _AppBodyState extends State<AppBody> {
   Widget build(BuildContext context) {
     screenWidth = MediaQuery.of(context).size.width;
     screenHeight = MediaQuery.of(context).size.height;
-    return SafeArea(
+    return SizedBox(
+      width: screenWidth,
+      height: screenHeight,
       child: SingleChildScrollView(
         child: Column(
           children: [
