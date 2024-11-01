@@ -403,7 +403,7 @@ class _AppBodyState extends State<AppBody> {
             ),
             SizedBox(
               width: screenWidth,
-              height: screenHeight * 0.7,
+              //height: screenHeight * 0.7,
               child: Row(
                 children: [
                   Flexible(
@@ -842,7 +842,6 @@ class _AppBodyState extends State<AppBody> {
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20),
           child: SizedBox(
-            width: double.infinity,
             height: 60.5,
             child: Card(
               elevation: 3,

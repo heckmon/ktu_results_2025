@@ -388,67 +388,70 @@ class _MobileBodyState extends State<MobileBody> {
                         ),
                 ),
               ),
-              Stack(
-                children: [
-                  Container(
-                    color: const Color(0xff1d2733),
-                    width: screenWidth,
-                    height: screenHeight * 0.3,
-                  ),
-                  Column(
-                    children: [
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 12.5, top: 25),
-                          child: SizedBox(
-                            width: 220,
-                            height: 80,
-                            child: Image.asset("assets/images/logo_tr.png"),
+              Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: Stack(
+                  children: [
+                    Container(
+                      color: const Color(0xff1d2733),
+                      width: screenWidth,
+                      height: screenHeight * 0.3,
+                    ),
+                    Column(
+                      children: [
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 12.5, top: 25),
+                            child: SizedBox(
+                              width: 220,
+                              height: 80,
+                              child: Image.asset("assets/images/logo_tr.png"),
+                            ),
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 30, bottom: 20),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            iconBtns(
-                                FontAwesomeIcons.facebook,
-                                const Color(0xff395498),
-                                () => launchUrl(
-                                    "https://m.facebook.com/apjaktuofficial/")),
-                            iconBtns(
-                                FontAwesomeIcons.linkedin,
-                                const Color(0xff0270ad),
-                                () => launchUrl(
-                                    "https://in.linkedin.com/school/apj-abdul-kalam-technological-university/")),
-                            iconBtns(
-                                FontAwesomeIcons.instagram,
-                                const Color(0xffea4c56),
-                                () => launchUrl(
-                                    "https://instagram.com/keralatechnologicaluniversity/")),
-                            iconBtns(
-                                FontAwesomeIcons.twitter,
-                                const Color(0xff029eec),
-                                () => launchUrl(
-                                    "https://twitter.com/apjaktuofficial")),
-                            iconBtns(
-                                FontAwesomeIcons.youtube,
-                                const Color(0xfff60002),
-                                () => launchUrl(
-                                    "https://www.youtube.com/channel/UC4lFeTaXLEhOeharO9-WS6w/featured")),
-                          ],
+                        Padding(
+                          padding: const EdgeInsets.only(top: 30, bottom: 20),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              iconBtns(
+                                  FontAwesomeIcons.facebook,
+                                  const Color(0xff395498),
+                                  () => launchUrl(
+                                      "https://m.facebook.com/apjaktuofficial/")),
+                              iconBtns(
+                                  FontAwesomeIcons.linkedin,
+                                  const Color(0xff0270ad),
+                                  () => launchUrl(
+                                      "https://in.linkedin.com/school/apj-abdul-kalam-technological-university/")),
+                              iconBtns(
+                                  FontAwesomeIcons.instagram,
+                                  const Color(0xffea4c56),
+                                  () => launchUrl(
+                                      "https://instagram.com/keralatechnologicaluniversity/")),
+                              iconBtns(
+                                  FontAwesomeIcons.twitter,
+                                  const Color(0xff029eec),
+                                  () => launchUrl(
+                                      "https://twitter.com/apjaktuofficial")),
+                              iconBtns(
+                                  FontAwesomeIcons.youtube,
+                                  const Color(0xfff60002),
+                                  () => launchUrl(
+                                      "https://www.youtube.com/channel/UC4lFeTaXLEhOeharO9-WS6w/featured")),
+                            ],
+                          ),
                         ),
-                      ),
-                      const Divider(thickness: 0.3),
-                      const Text(
-                        "Copyright@ APJ Abdul Kalam Technological University 2021",
-                        style: TextStyle(color: Color(0xff898b8d)),
-                      )
-                    ],
-                  )
-                ],
+                        const Divider(thickness: 0.3),
+                        const Text(
+                          "Copyright@ APJ Abdul Kalam Technological University 2021",
+                          style: TextStyle(color: Color(0xff898b8d)),
+                        )
+                      ],
+                    )
+                  ],
+                ),
               )
             ],
           ),
