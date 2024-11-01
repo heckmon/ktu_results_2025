@@ -403,451 +403,431 @@ class _AppBodyState extends State<AppBody> {
             ),
             SizedBox(
               width: screenWidth,
-              //height: screenHeight,
-              child: Column(
+              height: screenHeight * 0.85,
+              child: Row(
                 children: [
-                  Row(
-                    children: [
-                      Flexible(
-                        flex: 1,
-                        child: Column(
-                          children: [
-                            Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 14, right: 5, left: 5),
-                                child: styledListTile(
-                                    "Timetable",
-                                    trail: true,
-                                    () => launchUrl(
-                                        "https://ktu.edu.in/exam/timetable"))),
-                            const Divider(height: 0, indent: 12, endIndent: 12),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 5.0),
-                              child: Column(
-                                children: [
-                                  styledListTile(
-                                      "Result",
-                                      selected: true,
-                                      selectedTileColor:
-                                          const Color(0xff6d52b1),
-                                      () {}),
-                                  const Divider(
-                                      height: 0, indent: 4, endIndent: 4),
-                                  styledListTile(
-                                      "Norms And Rules",
-                                      () => launchUrl(
-                                          "https://ktu.edu.in/exam/norms-and-rules")),
-                                  const Divider(
-                                      height: 0, indent: 4, endIndent: 4),
-                                  styledListTile(
-                                      "Notification",
-                                      () => launchUrl(
-                                          "https://ktu.edu.in/exam/notification")),
-                                  const Divider(
-                                      height: 0, indent: 4, endIndent: 4),
-                                ],
-                              ),
-                            ),
-                          ],
+                  Flexible(
+                    flex: 1,
+                    child: Column(
+                      children: [
+                        Padding(
+                            padding: const EdgeInsets.only(
+                                top: 14, right: 5, left: 5),
+                            child: styledListTile(
+                                "Timetable",
+                                trail: true,
+                                () => launchUrl(
+                                    "https://ktu.edu.in/exam/timetable"))),
+                        const Divider(height: 0, indent: 12, endIndent: 12),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                          child: Column(
+                            children: [
+                              styledListTile(
+                                  "Result",
+                                  selected: true,
+                                  selectedTileColor: const Color(0xff6d52b1),
+                                  () {}),
+                              const Divider(height: 0, indent: 4, endIndent: 4),
+                              styledListTile(
+                                  "Norms And Rules",
+                                  () => launchUrl(
+                                      "https://ktu.edu.in/exam/norms-and-rules")),
+                              const Divider(height: 0, indent: 4, endIndent: 4),
+                              styledListTile(
+                                  "Notification",
+                                  () => launchUrl(
+                                      "https://ktu.edu.in/exam/notification")),
+                              const Divider(height: 0, indent: 4, endIndent: 4),
+                            ],
+                          ),
                         ),
-                      ),
-                      const VerticalDivider(width: 3.5),
-                      Flexible(
-                        flex: 3,
-                        child: Column(
-                          children: [
-                            const SizedBox(height: 2.5),
-                            Container(
-                              decoration: const BoxDecoration(
-                                color: Colors.white,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey,
-                                    blurRadius: 10,
-                                    offset: Offset(0, 1),
-                                  )
-                                ],
+                      ],
+                    ),
+                  ),
+                  const VerticalDivider(width: 3.5),
+                  Flexible(
+                    flex: 3,
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 2.5),
+                        Container(
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey,
+                                blurRadius: 10,
+                                offset: Offset(0, 1),
+                              )
+                            ],
+                          ),
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(left: 12.0),
+                                child: Text(
+                                  heading,
+                                  style: heading == "Examination Result"
+                                      ? const TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold)
+                                      : const TextStyle(
+                                          color: Color(0xff8b0051),
+                                          fontSize: 15.0,
+                                          fontWeight: FontWeight.bold),
+                                ),
                               ),
-                              child: Row(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 12.0),
-                                    child: Text(
-                                      heading,
-                                      style: heading == "Examination Result"
-                                          ? const TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold)
-                                          : const TextStyle(
-                                              color: Color(0xff8b0051),
-                                              fontSize: 15.0,
-                                              fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                  const Expanded(child: SizedBox()),
-                                  const Text(
-                                    "Program",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 15,
-                                        color: Color(0xff364a63)),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 12, horizontal: 22.0),
-                                    child: SizedBox(
-                                      width: screenWidth * 0.2,
-                                      child: DropdownMenu<String>(
-                                        onSelected: (String? val) {
-                                          setState(() {
-                                            dropvalue = val ?? "--SELECT--";
-                                          });
-                                        },
-                                        enableSearch: false,
-                                        trailingIcon: const Icon(
-                                          FontAwesomeIcons.chevronDown,
-                                          size: 12,
-                                        ),
-                                        selectedTrailingIcon: const Icon(
-                                          FontAwesomeIcons.chevronUp,
-                                          size: 12,
-                                        ),
-                                        initialSelection: "--SELECT--",
-                                        inputDecorationTheme:
-                                            const InputDecorationTheme(
-                                          contentPadding: EdgeInsets.only(
-                                              bottom: 5.0, left: 8.0),
-                                          hintStyle: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 13.8),
-                                          border: OutlineInputBorder(),
-                                          constraints:
-                                              BoxConstraints(maxHeight: 30),
-                                          isDense: true,
-                                        ),
-                                        menuHeight: 350,
-                                        menuStyle: const MenuStyle(
-                                            visualDensity:
-                                                VisualDensity(vertical: -4),
-                                            shadowColor: WidgetStatePropertyAll(
-                                                Colors.black),
-                                            backgroundColor:
-                                                WidgetStatePropertyAll(
-                                                    Colors.white)),
-                                        dropdownMenuEntries: <DropdownMenuEntry<
-                                            String>>[
-                                          const DropdownMenuEntry(
-                                              value: "--SELECT--",
-                                              label: "--SELECT--",
-                                              enabled: false),
-                                          customDropDown("B.Tech", "B.Tech"),
-                                          customDropDown("M.Tech", "M.Tech"),
-                                          customDropDown("MBA", "MBA"),
-                                          customDropDown("MCA", "MCA"),
-                                          customDropDown("B.Arch", "B.Arch"),
-                                          customDropDown("M.Arch", "M.Arch"),
-                                          customDropDown("Hotel",
-                                              "Hotel Management and Catering Technology"),
-                                          customDropDown("MHM", "MHM"),
-                                          customDropDown(
-                                              "B.Plan", "B.Planning"),
-                                          customDropDown("MCA2",
-                                              "MCA(Second Year Direct)"),
-                                          customDropDown("MCA2deg",
-                                              "MCA Dual degree(INTEGRATED)"),
-                                          customDropDown("PhD", "PhD"),
-                                          customDropDown("B.Des", "B.Des"),
-                                          customDropDown(
-                                              "MCA2Year", "MCA TWO YEARS"),
-                                          customDropDown("B.Voc", "B.Voc"),
-                                          customDropDown(
-                                              "MBAINT", "MBA INTEGRATED"),
-                                          customDropDown("MBASPEC",
-                                              "MBA WITH SPECIALIZATION"),
-                                          customDropDown("BCA", "BCA"),
-                                          customDropDown("BBA", "BBA"),
-                                        ],
-                                      ),
-                                    ),
-                                  )
-                                ],
+                              const Expanded(child: SizedBox()),
+                              const Text(
+                                "Program",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 15,
+                                    color: Color(0xff364a63)),
                               ),
-                            ),
-                            Padding(
-                              padding: isClicked
-                                  ? const EdgeInsets.only(top: 20)
-                                  : const EdgeInsets.all(0),
-                              child: SizedBox(
-                                width: isClicked ? 1130 : screenWidth * 0.7,
-                                height: dropvalue == "--SELECT--" ||
-                                        isClicked == true
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 12, horizontal: 22.0),
+                                child: SizedBox(
+                                  width: screenWidth * 0.2,
+                                  child: DropdownMenu<String>(
+                                    onSelected: (String? val) {
+                                      setState(() {
+                                        dropvalue = val ?? "--SELECT--";
+                                      });
+                                    },
+                                    enableSearch: false,
+                                    trailingIcon: const Icon(
+                                      FontAwesomeIcons.chevronDown,
+                                      size: 12,
+                                    ),
+                                    selectedTrailingIcon: const Icon(
+                                      FontAwesomeIcons.chevronUp,
+                                      size: 12,
+                                    ),
+                                    initialSelection: "--SELECT--",
+                                    inputDecorationTheme:
+                                        const InputDecorationTheme(
+                                      contentPadding: EdgeInsets.only(
+                                          bottom: 5.0, left: 8.0),
+                                      hintStyle: TextStyle(
+                                          color: Colors.black, fontSize: 13.8),
+                                      border: OutlineInputBorder(),
+                                      constraints:
+                                          BoxConstraints(maxHeight: 30),
+                                      isDense: true,
+                                    ),
+                                    menuHeight: 350,
+                                    menuStyle: const MenuStyle(
+                                        visualDensity:
+                                            VisualDensity(vertical: -4),
+                                        shadowColor: WidgetStatePropertyAll(
+                                            Colors.black),
+                                        backgroundColor: WidgetStatePropertyAll(
+                                            Colors.white)),
+                                    dropdownMenuEntries: <DropdownMenuEntry<
+                                        String>>[
+                                      const DropdownMenuEntry(
+                                          value: "--SELECT--",
+                                          label: "--SELECT--",
+                                          enabled: false),
+                                      customDropDown("B.Tech", "B.Tech"),
+                                      customDropDown("M.Tech", "M.Tech"),
+                                      customDropDown("MBA", "MBA"),
+                                      customDropDown("MCA", "MCA"),
+                                      customDropDown("B.Arch", "B.Arch"),
+                                      customDropDown("M.Arch", "M.Arch"),
+                                      customDropDown("Hotel",
+                                          "Hotel Management and Catering Technology"),
+                                      customDropDown("MHM", "MHM"),
+                                      customDropDown("B.Plan", "B.Planning"),
+                                      customDropDown(
+                                          "MCA2", "MCA(Second Year Direct)"),
+                                      customDropDown("MCA2deg",
+                                          "MCA Dual degree(INTEGRATED)"),
+                                      customDropDown("PhD", "PhD"),
+                                      customDropDown("B.Des", "B.Des"),
+                                      customDropDown(
+                                          "MCA2Year", "MCA TWO YEARS"),
+                                      customDropDown("B.Voc", "B.Voc"),
+                                      customDropDown(
+                                          "MBAINT", "MBA INTEGRATED"),
+                                      customDropDown(
+                                          "MBASPEC", "MBA WITH SPECIALIZATION"),
+                                      customDropDown("BCA", "BCA"),
+                                      customDropDown("BBA", "BBA"),
+                                    ],
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: isClicked
+                              ? const EdgeInsets.only(top: 20)
+                              : const EdgeInsets.all(0),
+                          child: SizedBox(
+                            width: isClicked ? 1130 : screenWidth * 0.7,
+                            height:
+                                dropvalue == "--SELECT--" || isClicked == true
                                     ? 200
                                     : screenHeight * 0.6407,
-                                child: isClicked
-                                    ? Card(
-                                        elevation: 7,
-                                        color: Colors.white,
-                                        child: Column(
+                            child: isClicked
+                                ? Card(
+                                    elevation: 7,
+                                    color: Colors.white,
+                                    child: Column(
+                                      children: [
+                                        const Row(
                                           children: [
-                                            const Row(
-                                              children: [
-                                                Flexible(
-                                                    flex: 1,
-                                                    child: Padding(
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              horizontal: 14.0,
-                                                              vertical: 10.0),
-                                                      child: Column(
-                                                        children: [
-                                                          Align(
-                                                            alignment: Alignment
-                                                                .topLeft,
-                                                            child: Text(
-                                                              "Register Number",
-                                                              style: TextStyle(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                  fontSize: 16),
-                                                            ),
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsets.only(
-                                                                    top: 8.0),
-                                                            child: TextField(
-                                                              decoration:
-                                                                  InputDecoration(
-                                                                      enabledBorder:
-                                                                          OutlineInputBorder(
-                                                                        borderSide:
-                                                                            BorderSide(
-                                                                          color:
-                                                                              Color(0xffbbbfc1),
-                                                                          width:
-                                                                              1,
-                                                                        ),
-                                                                        borderRadius:
-                                                                            BorderRadius.all(
-                                                                          Radius.circular(
-                                                                              5.5),
-                                                                        ),
-                                                                      ),
-                                                                      label:
-                                                                          Text(
-                                                                        "Enter Register Number",
-                                                                        style: TextStyle(
-                                                                            fontSize:
-                                                                                18,
-                                                                            color:
-                                                                                Color(0xffbbbfc1)),
-                                                                      )),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    )),
-                                                Flexible(
-                                                    flex: 1,
-                                                    child: Padding(
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              horizontal: 14.0,
-                                                              vertical: 10.0),
-                                                      child: Column(
-                                                        children: [
-                                                          Align(
-                                                            alignment: Alignment
-                                                                .topLeft,
-                                                            child: Text(
-                                                              "Date Of Birth",
-                                                              style: TextStyle(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                  fontSize: 16),
-                                                            ),
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsets.only(
-                                                                    top: 8.0),
-                                                            child: TextField(
-                                                              readOnly: true,
-                                                              decoration:
-                                                                  InputDecoration(
-                                                                      enabledBorder:
-                                                                          OutlineInputBorder(
-                                                                              borderSide:
-                                                                                  BorderSide(
-                                                                                color: Color(0xffbbbfc1),
-                                                                                width: 1,
-                                                                              ),
-                                                                              borderRadius: BorderRadius.all(Radius.circular(
-                                                                                  5.5))),
-                                                                      hintText:
-                                                                          "mm/dd/yyyy",
-                                                                      hintStyle: TextStyle(
-                                                                          color: Colors
-                                                                              .black,
-                                                                          fontWeight: FontWeight
-                                                                              .w400),
-                                                                      suffixIcon:
-                                                                          Icon(
-                                                                        FontAwesomeIcons
-                                                                            .calendar,
-                                                                        size:
-                                                                            12.0,
-                                                                      )),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ))
-                                              ],
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 13),
-                                              child: Align(
-                                                alignment:
-                                                    Alignment.bottomRight,
-                                                child: SizedBox(
-                                                  width: 143,
-                                                  height: 40,
-                                                  child: ElevatedButton(
-                                                    style: ElevatedButton
-                                                        .styleFrom(
-                                                      foregroundColor:
-                                                          Colors.white,
-                                                      backgroundColor:
-                                                          const Color(
-                                                              0xff6d52b1),
-                                                      shape:
-                                                          const RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                          Radius.circular(5),
+                                            Flexible(
+                                                flex: 1,
+                                                child: Padding(
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: 14.0,
+                                                      vertical: 10.0),
+                                                  child: Column(
+                                                    children: [
+                                                      Align(
+                                                        alignment:
+                                                            Alignment.topLeft,
+                                                        child: Text(
+                                                          "Register Number",
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: 16),
                                                         ),
                                                       ),
-                                                    ),
-                                                    onPressed: () {},
-                                                    child: const Text(
-                                                      "View Results",
-                                                      style: TextStyle(
-                                                          fontSize: 16.5),
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                top: 8.0),
+                                                        child: TextField(
+                                                          decoration:
+                                                              InputDecoration(
+                                                                  enabledBorder:
+                                                                      OutlineInputBorder(
+                                                                    borderSide:
+                                                                        BorderSide(
+                                                                      color: Color(
+                                                                          0xffbbbfc1),
+                                                                      width: 1,
+                                                                    ),
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .all(
+                                                                      Radius.circular(
+                                                                          5.5),
+                                                                    ),
+                                                                  ),
+                                                                  label: Text(
+                                                                    "Enter Register Number",
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            18,
+                                                                        color: Color(
+                                                                            0xffbbbfc1)),
+                                                                  )),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                )),
+                                            Flexible(
+                                                flex: 1,
+                                                child: Padding(
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: 14.0,
+                                                      vertical: 10.0),
+                                                  child: Column(
+                                                    children: [
+                                                      Align(
+                                                        alignment:
+                                                            Alignment.topLeft,
+                                                        child: Text(
+                                                          "Date Of Birth",
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: 16),
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                top: 8.0),
+                                                        child: TextField(
+                                                          readOnly: true,
+                                                          decoration:
+                                                              InputDecoration(
+                                                                  enabledBorder:
+                                                                      OutlineInputBorder(
+                                                                          borderSide:
+                                                                              BorderSide(
+                                                                            color:
+                                                                                Color(0xffbbbfc1),
+                                                                            width:
+                                                                                1,
+                                                                          ),
+                                                                          borderRadius: BorderRadius.all(Radius.circular(
+                                                                              5.5))),
+                                                                  hintText:
+                                                                      "mm/dd/yyyy",
+                                                                  hintStyle: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400),
+                                                                  suffixIcon:
+                                                                      Icon(
+                                                                    FontAwesomeIcons
+                                                                        .calendar,
+                                                                    size: 12.0,
+                                                                  )),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ))
+                                          ],
+                                        ),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(right: 13),
+                                          child: Align(
+                                            alignment: Alignment.bottomRight,
+                                            child: SizedBox(
+                                              width: 143,
+                                              height: 40,
+                                              child: ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                  foregroundColor: Colors.white,
+                                                  backgroundColor:
+                                                      const Color(0xff6d52b1),
+                                                  shape:
+                                                      const RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                      Radius.circular(5),
                                                     ),
                                                   ),
                                                 ),
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      )
-                                    : Card(
-                                        surfaceTintColor: Colors.grey[400],
-                                        color: Colors.white,
-                                        elevation: 7,
-                                        shadowColor: Colors.black,
-                                        shape: const BeveledRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(3))),
-                                        margin: const EdgeInsets.all(30),
-                                        child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Container(
-                                                padding:
-                                                    const EdgeInsets.all(5),
-                                                height: 30,
+                                                onPressed: () {},
                                                 child: const Text(
-                                                  "Exam",
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold),
+                                                  "View Results",
+                                                  style:
+                                                      TextStyle(fontSize: 16.5),
                                                 ),
                                               ),
-                                              const Divider(),
-                                              resultField(),
-                                            ]),
-                                      ),
-                              ),
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                  Stack(
-                    children: [
-                      Container(
-                        color: const Color(0xff1d2733),
-                        width: screenWidth,
-                        height: 200,
-                      ),
-                      Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 205, vertical: 25),
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  width: screenWidth * 0.2,
-                                  height: 80,
-                                  child:
-                                      Image.asset("assets/images/logo_tr.png"),
-                                ),
-                                const Expanded(child: SizedBox()),
-                                SizedBox(
-                                  child: Row(
-                                    children: [
-                                      iconBtns(
-                                          FontAwesomeIcons.facebook,
-                                          const Color(0xff395498),
-                                          () => launchUrl(
-                                              "https://m.facebook.com/apjaktuofficial/")),
-                                      iconBtns(
-                                          FontAwesomeIcons.linkedin,
-                                          const Color(0xff0270ad),
-                                          () => launchUrl(
-                                              "https://in.linkedin.com/school/apj-abdul-kalam-technological-university/")),
-                                      iconBtns(
-                                          FontAwesomeIcons.instagram,
-                                          const Color(0xffea4c56),
-                                          () => launchUrl(
-                                              "https://instagram.com/keralatechnologicaluniversity/")),
-                                      iconBtns(
-                                          FontAwesomeIcons.twitter,
-                                          const Color(0xff029eec),
-                                          () => launchUrl(
-                                              "https://twitter.com/apjaktuofficial")),
-                                      iconBtns(
-                                          FontAwesomeIcons.youtube,
-                                          const Color(0xfff60002),
-                                          () => launchUrl(
-                                              "https://www.youtube.com/channel/UC4lFeTaXLEhOeharO9-WS6w/featured")),
-                                    ],
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  )
+                                : Card(
+                                    surfaceTintColor: Colors.grey[400],
+                                    color: Colors.white,
+                                    elevation: 7,
+                                    shadowColor: Colors.black,
+                                    shape: const BeveledRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(3))),
+                                    margin: const EdgeInsets.all(30),
+                                    child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                            padding: const EdgeInsets.all(5),
+                                            height: 30,
+                                            child: const Text(
+                                              "Exam",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          const Divider(),
+                                          resultField(),
+                                        ]),
                                   ),
-                                )
-                              ],
-                            ),
                           ),
-                          const Divider(thickness: 0.3),
-                          const Text(
-                            "Copyright@ APJ Abdul Kalam Technological University 2021",
-                            style: TextStyle(color: Color(0xff898b8d)),
-                          )
-                        ],
-                      )
-                    ],
+                        )
+                      ],
+                    ),
                   )
                 ],
               ),
             ),
+            Stack(
+              children: [
+                Container(
+                  color: const Color(0xff1d2733),
+                  width: screenWidth,
+                  height: 200,
+                ),
+                Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 205, vertical: 25),
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: screenWidth * 0.2,
+                            height: 80,
+                            child: Image.asset("assets/images/logo_tr.png"),
+                          ),
+                          const Expanded(child: SizedBox()),
+                          SizedBox(
+                            child: Row(
+                              children: [
+                                iconBtns(
+                                    FontAwesomeIcons.facebook,
+                                    const Color(0xff395498),
+                                    () => launchUrl(
+                                        "https://m.facebook.com/apjaktuofficial/")),
+                                iconBtns(
+                                    FontAwesomeIcons.linkedin,
+                                    const Color(0xff0270ad),
+                                    () => launchUrl(
+                                        "https://in.linkedin.com/school/apj-abdul-kalam-technological-university/")),
+                                iconBtns(
+                                    FontAwesomeIcons.instagram,
+                                    const Color(0xffea4c56),
+                                    () => launchUrl(
+                                        "https://instagram.com/keralatechnologicaluniversity/")),
+                                iconBtns(
+                                    FontAwesomeIcons.twitter,
+                                    const Color(0xff029eec),
+                                    () => launchUrl(
+                                        "https://twitter.com/apjaktuofficial")),
+                                iconBtns(
+                                    FontAwesomeIcons.youtube,
+                                    const Color(0xfff60002),
+                                    () => launchUrl(
+                                        "https://www.youtube.com/channel/UC4lFeTaXLEhOeharO9-WS6w/featured")),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    const Divider(thickness: 0.3),
+                    const Text(
+                      "Copyright@ APJ Abdul Kalam Technological University 2021",
+                      style: TextStyle(color: Color(0xff898b8d)),
+                    )
+                  ],
+                )
+              ],
+            )
           ],
         ),
       ),
