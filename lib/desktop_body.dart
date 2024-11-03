@@ -1,7 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher_string.dart';
-import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'dart:io';
 
@@ -573,7 +574,7 @@ class _AppBodyState extends State<AppBody> {
                             height:
                                 dropvalue == "--SELECT--" || isClicked == true
                                     ? 200
-                                    : screenHeight * 0.6407,
+                                    : screenHeight * 0.75,
                             child: isClicked
                                 ? Card(
                                     elevation: 7,
@@ -1077,15 +1078,11 @@ Future<void> launchUrl(String url) async {
 }
 
 Future<List<dynamic>> publishedResult(int index) async {
-  var url = Uri.parse("https://api.ktu.edu.in/ktu-web-service/anon/result/");
+  var url = Uri.parse("https://proxy-vert-tau.vercel.app/");
   Map<String, String> headers = {
     "Content-Type": "application/json",
-    "Origin": "https://ktu.edu.in",
-    "Referer": "https://ktu.edu.in/",
-    "User-Agent":
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36",
   };
-  Map<String, String> data = {"program": "$index"};
+  Map<String, String> data = {"index": "$index"};
 
   var response = await http.post(url, headers: headers, body: jsonEncode(data));
   return jsonDecode(response.body);

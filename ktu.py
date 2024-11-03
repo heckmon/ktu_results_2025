@@ -6,8 +6,13 @@ def publishedResult(index):
     key_url="https://api.ktu.edu.in/ktu-web-service/anon/result"
 
     headers={
+        "Content-Type":"application/json",
         "Origin":"https://ktu.edu.in/",
         "Referer":"https://ktu.edu.in/",
+        "Host":"api.ktu.edu.in",
+        "Connection":"keep-alive",
+        "Dnt":"1",
+        "Content-Length":"15",
         "User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36",
     }
 
@@ -16,6 +21,7 @@ def publishedResult(index):
     }
 
     response=requests.post(key_url,headers=headers,json=json,verify=False)
+    print(response.content)
     return response.json()
 
 
