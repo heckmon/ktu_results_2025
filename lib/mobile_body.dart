@@ -83,24 +83,7 @@ class _MobileBodyState extends State<MobileBody> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 5.0),
                     child: Column(
-                      children: [
-                        styledListTile(
-                            "Result",
-                            selected: true,
-                            selectedTileColor: const Color(0xff6d52b1),
-                            () {}),
-                        const Divider(height: 0, indent: 4, endIndent: 4),
-                        styledListTile(
-                            "Norms And Rules",
-                            () => launchUrl(
-                                "https://ktu.edu.in/exam/norms-and-rules")),
-                        const Divider(height: 0, indent: 4, endIndent: 4),
-                        styledListTile(
-                            "Notification",
-                            () => launchUrl(
-                                "https://ktu.edu.in/exam/notification")),
-                        const Divider(height: 0, indent: 4, endIndent: 4),
-                      ],
+                      children: styledTiles,
                     ),
                   ),
                 ],
@@ -177,35 +160,7 @@ class _MobileBodyState extends State<MobileBody> {
                                       WidgetStatePropertyAll(Colors.black),
                                   backgroundColor:
                                       WidgetStatePropertyAll(Colors.white)),
-                              dropdownMenuEntries: <DropdownMenuEntry<String>>[
-                                const DropdownMenuEntry(
-                                    value: "--SELECT--",
-                                    label: "--SELECT--",
-                                    enabled: false),
-                                customDropDown("B.Tech", "B.Tech"),
-                                customDropDown("M.Tech", "M.Tech"),
-                                customDropDown("MBA", "MBA"),
-                                customDropDown("MCA", "MCA"),
-                                customDropDown("B.Arch", "B.Arch"),
-                                customDropDown("M.Arch", "M.Arch"),
-                                customDropDown("Hotel",
-                                    "Hotel Management and Catering Technology"),
-                                customDropDown("MHM", "MHM"),
-                                customDropDown("B.Plan", "B.Planning"),
-                                customDropDown(
-                                    "MCA2", "MCA(Second Year Direct)"),
-                                customDropDown(
-                                    "MCA2deg", "MCA Dual degree(INTEGRATED)"),
-                                customDropDown("PhD", "PhD"),
-                                customDropDown("B.Des", "B.Des"),
-                                customDropDown("MCA2Year", "MCA TWO YEARS"),
-                                customDropDown("B.Voc", "B.Voc"),
-                                customDropDown("MBAINT", "MBA INTEGRATED"),
-                                customDropDown(
-                                    "MBASPEC", "MBA WITH SPECIALIZATION"),
-                                customDropDown("BCA", "BCA"),
-                                customDropDown("BBA", "BBA"),
-                              ],
+                              dropdownMenuEntries: dropDowns,
                             ),
                           ),
                         )
@@ -414,33 +369,7 @@ class _MobileBodyState extends State<MobileBody> {
                           padding: const EdgeInsets.only(top: 30, bottom: 20),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              iconBtns(
-                                  FontAwesomeIcons.facebook,
-                                  const Color(0xff395498),
-                                  () => launchUrl(
-                                      "https://m.facebook.com/apjaktuofficial/")),
-                              iconBtns(
-                                  FontAwesomeIcons.linkedin,
-                                  const Color(0xff0270ad),
-                                  () => launchUrl(
-                                      "https://in.linkedin.com/school/apj-abdul-kalam-technological-university/")),
-                              iconBtns(
-                                  FontAwesomeIcons.instagram,
-                                  const Color(0xffea4c56),
-                                  () => launchUrl(
-                                      "https://instagram.com/keralatechnologicaluniversity/")),
-                              iconBtns(
-                                  FontAwesomeIcons.twitter,
-                                  const Color(0xff029eec),
-                                  () => launchUrl(
-                                      "https://twitter.com/apjaktuofficial")),
-                              iconBtns(
-                                  FontAwesomeIcons.youtube,
-                                  const Color(0xfff60002),
-                                  () => launchUrl(
-                                      "https://www.youtube.com/channel/UC4lFeTaXLEhOeharO9-WS6w/featured")),
-                            ],
+                            children: socialMedias,
                           ),
                         ),
                         const Divider(thickness: 0.3),
@@ -465,116 +394,7 @@ class _MobileBodyState extends State<MobileBody> {
                 color: Colors.white,
                 width: screenWidth,
                 child: Wrap(
-                  children: [
-                    styledTButton(
-                      "Home",
-                      () => launchUrl("https://ktu.edu.in/home"),
-                    ),
-                    styledPopup(
-                      "University",
-                      {
-                        "About us": () =>
-                            launchUrl("https://ktu.edu.in/university/about"),
-                        "Values, Vision & Mission": () => launchUrl(
-                            "https://ktu.edu.in/university/visionandmission"),
-                        "Acts and Statutes": () =>
-                            launchUrl("https://ktu.edu.in/university/statutes"),
-                        "Meeting Minutes": () => launchUrl(
-                            "https://ktu.edu.in/university/meetingminutes"),
-                      },
-                    ),
-                    styledPopup(
-                      "People",
-                      {
-                        "Board of Governors": () => launchUrl(
-                            "https://ktu.edu.in/administration/boardofgovernors"),
-                        "Syndicate": () => launchUrl(
-                            "https://ktu.edu.in/administration/syndicate"),
-                        "Authorities": () => launchUrl(
-                            "https://ktu.edu.in/administration/Authorities"),
-                        "Statutory Officers": () => launchUrl(
-                            "https://ktu.edu.in/administration/StatutoryOfficers"),
-                      },
-                    ),
-                    styledPopup(
-                      "Affiliation",
-                      {
-                        "Affiliated Instituitions": () => launchUrl(
-                            "https://ktu.edu.in/affiliation/affiliatedInstitutes"),
-                        "NBA Accredited Institutions": () => launchUrl(
-                            "https://ktu.edu.in/affiliation/affiliationNBAAccreditedInstitutes"),
-                        "Norms and Rules": () => launchUrl(
-                            "https://ktu.edu.in/affiliation/norms-and-rules"),
-                        "Notifications": () => launchUrl(
-                            "https://ktu.edu.in/affiliation/affiliationNotification"),
-                      },
-                    ),
-                    styledPopup(
-                      "Academics",
-                      {
-                        "Academic Calender": () => launchUrl(
-                            "https://ktu.edu.in/academics/academic_calendar"),
-                        "Regulation & Syllabus": () =>
-                            launchUrl("https://ktu.edu.in/academics/scheme"),
-                        "MOOC Courses": () => launchUrl(
-                            "https://ktu.edu.in/academics/mooccources"),
-                        "CGPC": () =>
-                            launchUrl("https://ktu.edu.in/academics/cgpc"),
-                        "Norms And Rules": () => launchUrl(
-                            "https://ktu.edu.in/academics/norms-and-rules"),
-                        "Notification": () => launchUrl(
-                            "https://ktu.edu.in/academics/notification"),
-                      },
-                    ),
-                    styledPopup(
-                      "Examination",
-                      {
-                        "Timetable": () =>
-                            launchUrl("https://ktu.edu.in/exam/Timetable"),
-                        "Result": () => launchUrl(""),
-                        "Norms and Rules": () => launchUrl(
-                            "https://ktu.edu.in/exam/norms-and-rules"),
-                        "Notification": () =>
-                            launchUrl("https://ktu.edu.in/exam/Notification")
-                      },
-                    ),
-                    styledPopup(
-                      "Research",
-                      {
-                        "Plcaes of Reseacrh": () => launchUrl(
-                            "https://ktu.edu.in/research/PlaceOfResearchList"),
-                        "Registered Reasearch Supervisors": () => launchUrl(
-                            "https://ktu.edu.in/research/placeofresearchs"),
-                        "Registered Reseacrh Scholars": () => launchUrl(
-                            "https://ktu.edu.in/research/placeofresearchs"),
-                        "Norms And Rules": () => launchUrl(
-                            "https://ktu.edu.in/research/norms-and-rules"),
-                        "Notification": () => launchUrl(
-                            "https://ktu.edu.in/research/Notification"),
-                      },
-                    ),
-                    styledPopup(
-                      "IQAC",
-                      {
-                        "About": () =>
-                            launchUrl("https://ktu.edu.in/iqac/IQACList"),
-                        "HRDC Centers": () =>
-                            launchUrl("https://ktu.edu.in/iqac/hrdccenters")
-                      },
-                    ),
-                    styledPopup(
-                      "Legal",
-                      {
-                        "RTI": () =>
-                            launchUrl("https://ktu.edu.in/miscellaneous/RTI")
-                      },
-                    ),
-                    styledTButton(
-                      "Jobs/Careers",
-                      () => launchUrl(
-                          "https://ktu.edu.in/job&career/jobnotification"),
-                    ),
-                  ],
+                  children: sidebtnChildren,
                 ),
               ),
             ),
