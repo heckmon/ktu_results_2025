@@ -851,6 +851,10 @@ class _AppBodyState extends State<AppBody> {
                               isClicked = true;
                             });
                             if (dropvalue != "B.Tech") {
+                              setState(() {
+                                heading =
+                                    'Exam: ${snapshot.data![index]["resultName"]}';
+                              });
                             } else {
                               setState(() {
                                 heading = "Exam:  ${data[index]}";

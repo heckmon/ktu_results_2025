@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ktu_results/desktop_body.dart';
+import 'package:date_picker_plus/date_picker_plus.dart';
 
 class MobileBody extends StatefulWidget {
   const MobileBody({super.key});
@@ -10,8 +11,24 @@ class MobileBody extends StatefulWidget {
 }
 
 bool sideBarStat = false;
+bool isChecked = false;
+bool showResult = false;
+DateTime? date;
+final _formKey = GlobalKey<FormState>();
+TextEditingController regNo = TextEditingController();
+TextEditingController dob = TextEditingController();
 
 class _MobileBodyState extends State<MobileBody> {
+  Future<DateTime?> _showDate() async {
+    final date = await showDatePickerDialog(
+      context: context,
+      initialDate: DateTime.now(),
+      minDate: DateTime(1990, 10, 10),
+      maxDate: DateTime.now(),
+    );
+    return date;
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -104,243 +121,344 @@ class _MobileBodyState extends State<MobileBody> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Padding(
-                      padding: EdgeInsets.only(left: 15, top: 10),
-                      child: Text("Examination Results",
-                          style: TextStyle(
-                              fontSize: 22, fontWeight: FontWeight.bold)),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 15, top: 10),
+                      child: Text(
+                        heading,
+                        style: heading == "Examination Result"
+                            ? const TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold)
+                            : const TextStyle(
+                                color: Color(0xff8b0051),
+                                fontSize: 15.0,
+                                fontWeight: FontWeight.bold),
+                      ),
                     ),
-                    Row(
-                      children: [
-                        const Padding(
-                          padding: EdgeInsets.only(left: 16),
-                          child: Text(
-                            "Program",
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 17,
-                              color: Color(0xff364a63),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: screenWidth * 0.76,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 12, horizontal: 15),
-                            child: DropdownMenu<String>(
-                              onSelected: (String? val) {
-                                setState(() {
-                                  dropvalue = val ?? "--SELECT--";
-                                });
-                              },
-                              enableSearch: false,
-                              trailingIcon: const Icon(
-                                FontAwesomeIcons.chevronDown,
-                                size: 12,
-                              ),
-                              selectedTrailingIcon: const Icon(
-                                FontAwesomeIcons.chevronUp,
-                                size: 12,
-                              ),
-                              initialSelection: "--SELECT--",
-                              inputDecorationTheme: const InputDecorationTheme(
-                                contentPadding:
-                                    EdgeInsets.only(bottom: 5.0, left: 8.0),
-                                hintStyle: TextStyle(
-                                    color: Colors.black, fontSize: 13.8),
-                                border: OutlineInputBorder(),
-                                constraints: BoxConstraints(maxHeight: 30),
-                                isDense: true,
-                              ),
-                              menuHeight: 350,
-                              menuStyle: const MenuStyle(
-                                  visualDensity: VisualDensity(vertical: -4),
-                                  shadowColor:
-                                      WidgetStatePropertyAll(Colors.black),
-                                  backgroundColor:
-                                      WidgetStatePropertyAll(Colors.white)),
-                              dropdownMenuEntries: dropDowns,
-                            ),
-                          ),
-                        )
-                      ],
-                    )
-                  ],
-                ),
-              ),
-              Padding(
-                padding: isClicked
-                    ? const EdgeInsets.only(top: 20)
-                    : const EdgeInsets.all(0),
-                child: SizedBox(
-                  width: screenWidth,
-                  height: dropvalue == "--SELECT--" || isClicked == true
-                      ? 230
-                      : screenHeight * 0.8,
-                  child: isClicked
-                      ? Card(
-                          elevation: 7,
-                          color: Colors.white,
-                          child: Column(
+                    isClicked
+                        ? const SizedBox(height: 25.5)
+                        : Row(
                             children: [
-                              const Row(
-                                children: [
-                                  Flexible(
-                                      flex: 1,
-                                      child: Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 14.0, vertical: 10.0),
-                                        child: Column(
-                                          children: [
-                                            Align(
-                                              alignment: Alignment.topLeft,
-                                              child: Text(
-                                                "Register Number",
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 16),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  EdgeInsets.only(top: 8.0),
-                                              child: TextField(
-                                                decoration: InputDecoration(
-                                                    enabledBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            Color(0xffbbbfc1),
-                                                        width: 1,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                        Radius.circular(5.5),
-                                                      ),
-                                                    ),
-                                                    label: Text(
-                                                      "Enter Register Number",
-                                                      style: TextStyle(
-                                                          fontSize: 18,
-                                                          color: Color(
-                                                              0xffbbbfc1)),
-                                                    )),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      )),
-                                  Flexible(
-                                    flex: 1,
-                                    child: Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 14.0, vertical: 10.0),
-                                      child: Column(
-                                        children: [
-                                          Align(
-                                            alignment: Alignment.topLeft,
-                                            child: Text(
-                                              "Date Of Birth",
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 16),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: EdgeInsets.only(top: 8.0),
-                                            child: TextField(
-                                              readOnly: true,
-                                              decoration: InputDecoration(
-                                                  enabledBorder:
-                                                      OutlineInputBorder(
-                                                          borderSide:
-                                                              BorderSide(
-                                                            color: Color(
-                                                                0xffbbbfc1),
-                                                            width: 1,
-                                                          ),
-                                                          borderRadius:
-                                                              BorderRadius.all(
-                                                                  Radius
-                                                                      .circular(
-                                                                          5.5))),
-                                                  hintText: "mm/dd/yyyy",
-                                                  hintStyle: TextStyle(
-                                                      color: Colors.black,
-                                                      fontWeight:
-                                                          FontWeight.w400),
-                                                  suffixIcon: Icon(
-                                                    FontAwesomeIcons.calendar,
-                                                    size: 12.0,
-                                                  )),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  )
-                                ],
+                              const Padding(
+                                padding: EdgeInsets.only(left: 16),
+                                child: Text(
+                                  "Program",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 17,
+                                    color: Color(0xff364a63),
+                                  ),
+                                ),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.only(right: 13),
-                                child: Align(
-                                  alignment: Alignment.bottomRight,
-                                  child: SizedBox(
-                                    width: 143,
-                                    height: 40,
-                                    child: ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                        foregroundColor: Colors.white,
-                                        backgroundColor:
-                                            const Color(0xff6d52b1),
-                                        shape: const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(5),
-                                          ),
-                                        ),
-                                      ),
-                                      onPressed: () {},
-                                      child: const Text(
-                                        "View Results",
-                                        style: TextStyle(fontSize: 16.5),
-                                      ),
+                              SizedBox(
+                                width: screenWidth * 0.76,
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 12, horizontal: 15),
+                                  child: DropdownMenu<String>(
+                                    onSelected: (String? val) {
+                                      setState(() {
+                                        dropvalue = val ?? "--SELECT--";
+                                      });
+                                    },
+                                    enableSearch: false,
+                                    trailingIcon: const Icon(
+                                      FontAwesomeIcons.chevronDown,
+                                      size: 12,
                                     ),
+                                    selectedTrailingIcon: const Icon(
+                                      FontAwesomeIcons.chevronUp,
+                                      size: 12,
+                                    ),
+                                    initialSelection: "--SELECT--",
+                                    inputDecorationTheme:
+                                        const InputDecorationTheme(
+                                      contentPadding: EdgeInsets.only(
+                                          bottom: 5.0, left: 8.0),
+                                      hintStyle: TextStyle(
+                                          color: Colors.black, fontSize: 13.8),
+                                      border: OutlineInputBorder(),
+                                      constraints:
+                                          BoxConstraints(maxHeight: 30),
+                                      isDense: true,
+                                    ),
+                                    menuHeight: 350,
+                                    menuStyle: const MenuStyle(
+                                        visualDensity:
+                                            VisualDensity(vertical: -4),
+                                        shadowColor: WidgetStatePropertyAll(
+                                            Colors.black),
+                                        backgroundColor: WidgetStatePropertyAll(
+                                            Colors.white)),
+                                    dropdownMenuEntries: dropDowns,
                                   ),
                                 ),
                               )
                             ],
-                          ),
-                        )
-                      : Card(
-                          surfaceTintColor: Colors.grey[400],
-                          color: Colors.white,
-                          elevation: 7,
-                          shadowColor: Colors.black,
-                          shape: const BeveledRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(3))),
-                          margin: const EdgeInsets.all(30),
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                          )
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 18),
+                child: Form(
+                  key: _formKey,
+                  child: SizedBox(
+                    width: screenWidth,
+                    height: dropvalue == "--SELECT--"
+                        ? isClicked
+                            ? screenHeight * 0.4
+                            : 230
+                        : screenHeight * 0.8,
+                    child: isClicked
+                        ? Card(
+                            elevation: 7,
+                            color: Colors.white,
+                            child: Column(
                               children: [
-                                Container(
-                                  padding: const EdgeInsets.all(5),
-                                  height: 30,
-                                  child: const Padding(
-                                    padding: EdgeInsets.only(left: 12),
+                                const Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(
+                                        top: 20, bottom: 10, left: 5),
                                     child: Text(
-                                      "Exam",
+                                      "Register Number",
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
-                                          fontSize: 17),
+                                          fontSize: 16),
                                     ),
                                   ),
                                 ),
-                                const Divider(),
-                                resultField(),
-                              ]),
-                        ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                  child: TextFormField(
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return "Mandatory field";
+                                      }
+                                      return null;
+                                    },
+                                    controller: regNo,
+                                    decoration: const InputDecoration(
+                                        enabledBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: Color(0xffbbbfc1),
+                                            width: 1,
+                                          ),
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(5.5),
+                                          ),
+                                        ),
+                                        label: Text(
+                                          "Enter Register Number",
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              color: Color(0xffbbbfc1)),
+                                        )),
+                                  ),
+                                ),
+                                const Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(
+                                        top: 20, bottom: 10, left: 5),
+                                    child: Text(
+                                      "Date Of Birth",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                  child: TextFormField(
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return "Mandatory field";
+                                      }
+                                      return null;
+                                    },
+                                    onTap: () async {
+                                      date = await _showDate();
+                                      if (date != null) {
+                                        setState(() {
+                                          date = date;
+                                          dob.text =
+                                              "${date!.day}/${date!.month}/${date!.year}";
+                                        });
+                                      }
+                                    },
+                                    controller: dob,
+                                    readOnly: true,
+                                    decoration: InputDecoration(
+                                        enabledBorder: const OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Color(0xffbbbfc1),
+                                              width: 1,
+                                            ),
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(5.5))),
+                                        hintText: date == null
+                                            ? "mm/dd/yyyy"
+                                            : "${date!.day}/${date!.month}/${date!.year}",
+                                        hintStyle: const TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w400),
+                                        suffixIcon: const Icon(
+                                          FontAwesomeIcons.calendar,
+                                          size: 12.0,
+                                        )),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10, vertical: 20),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(3)),
+                                        color: const Color(0xfff9f9f9),
+                                        border: Border.all(
+                                            width: 0.5, color: Colors.grey),
+                                      ),
+                                      width: 350,
+                                      height: 80,
+                                      child: Center(
+                                        child: ListTile(
+                                          leading: Transform.scale(
+                                            scale: 1.3,
+                                            child: Checkbox(
+                                                side: BorderSide(
+                                                    color: (!isChecked &&
+                                                                showResult) &&
+                                                            (dob.text != "" &&
+                                                                regNo.text !=
+                                                                    "")
+                                                        ? const Color.fromARGB(
+                                                            255, 236, 10, 10)
+                                                        : Colors.grey,
+                                                    width: (!isChecked &&
+                                                                showResult) &&
+                                                            (dob.text != "" &&
+                                                                regNo.text !=
+                                                                    "")
+                                                        ? 1.1
+                                                        : 0.5),
+                                                checkColor: Colors.green,
+                                                activeColor: Colors.transparent,
+                                                value: isChecked,
+                                                isError:
+                                                    (!isChecked && showResult) &&
+                                                        (dob.text != "" &&
+                                                            regNo.text != ""),
+                                                onChanged: (bool? val) {
+                                                  setState(() {
+                                                    isChecked = true;
+                                                  });
+                                                }),
+                                          ),
+                                          title: const Text("I'm not a robot"),
+                                          trailing: Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 10),
+                                            child: Column(
+                                              children: [
+                                                Expanded(
+                                                  child: Transform.scale(
+                                                    scale: 1.5,
+                                                    child: Image.asset(
+                                                        "assets/images/recaptcha.png"),
+                                                  ),
+                                                ),
+                                                const Padding(
+                                                  padding:
+                                                      EdgeInsets.only(top: 2.5),
+                                                  child: Text("reCAPTCHA",
+                                                      style: TextStyle(
+                                                          fontSize: 12)),
+                                                ),
+                                                const Text("Privacy - Terms",
+                                                    style:
+                                                        TextStyle(fontSize: 8))
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                  child: Align(
+                                    alignment: Alignment.bottomLeft,
+                                    child: SizedBox(
+                                      width: 143,
+                                      height: 40,
+                                      child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          foregroundColor: Colors.white,
+                                          backgroundColor:
+                                              const Color(0xff6d52b1),
+                                          shape: const RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(5),
+                                            ),
+                                          ),
+                                        ),
+                                        onPressed: () {
+                                          if (_formKey.currentState!
+                                              .validate()) {}
+                                          setState(() {
+                                            showResult = true;
+                                          });
+                                        },
+                                        child: const Text(
+                                          "View Results",
+                                          style: TextStyle(fontSize: 16.5),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
+                        : Card(
+                            surfaceTintColor: Colors.grey[400],
+                            color: Colors.white,
+                            elevation: 7,
+                            shadowColor: Colors.black,
+                            shape: const BeveledRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(3))),
+                            margin: const EdgeInsets.all(30),
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    padding: const EdgeInsets.all(5),
+                                    height: 30,
+                                    child: const Padding(
+                                      padding: EdgeInsets.only(left: 12),
+                                      child: Text(
+                                        "Exam",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 17),
+                                      ),
+                                    ),
+                                  ),
+                                  const Divider(),
+                                  resultField(),
+                                ]),
+                          ),
+                  ),
                 ),
               ),
               Padding(
@@ -500,6 +618,10 @@ class _MobileBodyState extends State<MobileBody> {
                                 isClicked = true;
                               });
                               if (dropvalue != "B.Tech") {
+                                setState(() {
+                                  heading =
+                                      'Exam: ${snapshot.data![index]["resultName"]}';
+                                });
                               } else {
                                 setState(() {
                                   heading = "Exam:  ${data[index]}";
