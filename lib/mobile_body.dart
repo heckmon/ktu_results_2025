@@ -435,92 +435,91 @@ class _MobileBodyState extends State<MobileBody> {
         child: SizedBox(
           height: screenHeight * 0.5,
           child: FutureBuilder<List<dynamic>>(
-              future: publishedResult(eachResult[dropvalue] ?? 2),
-              builder: (context, snapshot) {
+            future: publishedResult(eachResult[dropvalue] ?? 2),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
                 return ListView.separated(
                   itemCount: 10,
                   itemBuilder: (ctx, index) {
-                    if (snapshot.hasData) {
-                      return ListTile(
-                        leading: const CircleAvatar(
-                          backgroundColor: Color(0xff8b0051),
-                          radius: 17,
+                    return ListTile(
+                      leading: const CircleAvatar(
+                        backgroundColor: Color(0xff8b0051),
+                        radius: 17,
+                        child: CircleAvatar(
+                          backgroundColor: Colors.white,
+                          radius: 14.5,
                           child: CircleAvatar(
-                            backgroundColor: Colors.white,
-                            radius: 14.5,
-                            child: CircleAvatar(
-                                radius: 13,
-                                backgroundColor: Color(0xff8b0051),
-                                child: Icon(FontAwesomeIcons.fileSignature,
-                                    size: 16, color: Colors.white)),
-                          ),
+                              radius: 13,
+                              backgroundColor: Color(0xff8b0051),
+                              child: Icon(FontAwesomeIcons.fileSignature,
+                                  size: 16, color: Colors.white)),
                         ),
-                        title: dropvalue == "B.Tech"
-                            ? Text(
-                                data[index],
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Color(0xff8b0051),
-                                ),
-                              )
-                            : Text(
-                                "${snapshot.data![index]['resultName']}",
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Color(0xff8b0051),
-                                ),
+                      ),
+                      title: dropvalue == "B.Tech"
+                          ? Text(
+                              data[index],
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xff8b0051),
                               ),
-                        subtitle: dropvalue == "B.Tech"
-                            ? Text(
-                                "Published On: ${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}",
-                                style: const TextStyle(
-                                    fontSize: 15, fontWeight: FontWeight.w500),
-                              )
-                            : Text(
-                                "Published On: ${(() {
-                                  String date =
-                                      snapshot.data![index]['publishDate'];
-                                  List<String> newDate = date.split("-");
-                                  return "${newDate[2]}-${newDate[1]}-${newDate[0]}";
-                                })()}",
-                                style: const TextStyle(
-                                    fontSize: 15, fontWeight: FontWeight.w500),
+                            )
+                          : Text(
+                              "${snapshot.data![index]['resultName']}",
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xff8b0051),
                               ),
-                        trailing: SizedBox(
-                          height: 40,
-                          width: 122.5,
-                          child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  foregroundColor: Colors.black,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(4)),
-                                  backgroundColor: const Color(0xffebebeb)),
-                              onPressed: () {
-                                if (dropvalue != "B.Tech") {
-                                  launchUrl("");
-                                } else {
-                                  setState(() {
-                                    isClicked = true;
-                                    heading = "Exam:  ${data[index]}";
-                                  });
-                                }
-                              },
-                              child: const Text("View Result")),
-                        ),
-                      );
-                    }
-                    return RefreshIndicator(
-                      onRefresh: () async {},
-                      child: Container(
-                        width: screenWidth,
-                        height: 50,
-                        color: const Color.fromARGB(255, 111, 111, 111),
+                            ),
+                      subtitle: dropvalue == "B.Tech"
+                          ? Text(
+                              "Published On: ${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}",
+                              style: const TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.w500),
+                            )
+                          : Text(
+                              "Published On: ${(() {
+                                String date =
+                                    snapshot.data![index]['publishDate'];
+                                List<String> newDate = date.split("-");
+                                return "${newDate[2]}-${newDate[1]}-${newDate[0]}";
+                              })()}",
+                              style: const TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.w500),
+                            ),
+                      trailing: SizedBox(
+                        height: 40,
+                        width: 122.5,
+                        child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                foregroundColor: Colors.black,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(4)),
+                                backgroundColor: const Color(0xffebebeb)),
+                            onPressed: () {
+                              setState(() {
+                                isClicked = true;
+                              });
+                              if (dropvalue != "B.Tech") {
+                              } else {
+                                setState(() {
+                                  heading = "Exam:  ${data[index]}";
+                                });
+                              }
+                            },
+                            child: const Text("View Result")),
                       ),
                     );
                   },
                   separatorBuilder: (ctx, index) => const Divider(),
                 );
-              }),
+              }
+              return RefreshIndicator(
+                  child: const Center(
+                      child:
+                          CircularProgressIndicator(color: Color(0xff0071d1))),
+                  onRefresh: () async {});
+            },
+          ),
         ),
       );
     }
