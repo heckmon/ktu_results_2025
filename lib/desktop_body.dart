@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:ktu_results/mobile_body.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher_string.dart';
@@ -494,12 +494,13 @@ class _AppBodyState extends State<AppBody> {
                                   : const EdgeInsets.all(0),
                               child: SizedBox(
                                 width: isClicked ? 1130 : screenWidth * 0.7,
-                                height: dropvalue == "--SELECT--" ||
-                                        isClicked == true
+                                height: dropvalue == "--SELECT--"
                                     ? 200
                                     : screenHeight > 1200
                                         ? 800
-                                        : screenHeight * 0.8,
+                                        : isClicked
+                                            ? 270
+                                            : screenHeight * 0.8,
                                 child: isClicked
                                     ? Card(
                                         elevation: 7,
@@ -624,6 +625,7 @@ class _AppBodyState extends State<AppBody> {
                                                     ))
                                               ],
                                             ),
+                                            const FakeCaptcha(),
                                             Padding(
                                               padding: const EdgeInsets.only(
                                                   right: 13),
@@ -978,6 +980,102 @@ Widget styledPopup(String hint, Map<String, VoidCallback> data) {
       },
     ),
   );
+}
+
+class FakeCaptcha extends StatefulWidget {
+  const FakeCaptcha({super.key});
+
+  @override
+  State<FakeCaptcha> createState() => _FakeCaptchaState();
+}
+
+class _FakeCaptchaState extends State<FakeCaptcha> {
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+            horizontal: screenHeight > 1200 ? 10 : 14.5, vertical: 20),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.all(Radius.circular(3)),
+            color: const Color(0xfff9f9f9),
+            border: Border.all(width: 0.5, color: Colors.grey),
+          ),
+          width: 310,
+          height: 77,
+          child: Center(
+            child: ListTile(
+              dense: true,
+              leading: Transform.scale(
+                scale: 1.5,
+                child: Checkbox(
+                    side: BorderSide(
+                        color: (!isChecked && showResult) &&
+                                (dob.text != "" && regNo.text != "")
+                            ? const Color.fromARGB(255, 236, 10, 10)
+                            : Colors.grey,
+                        width: (!isChecked && showResult) &&
+                                (dob.text != "" && regNo.text != "")
+                            ? 1.1
+                            : 0.5),
+                    checkColor: Colors.green,
+                    activeColor: Colors.transparent,
+                    value: isChecked,
+                    isError: (!isChecked && showResult) &&
+                        (dob.text != "" && regNo.text != ""),
+                    onChanged: (bool? val) {
+                      setState(() {
+                        isChecked = true;
+                      });
+                    }),
+              ),
+              title: const Text(
+                "I'm not a robot",
+                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
+              ),
+              trailing: Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Flexible(
+                      flex: 1,
+                      child: screenHeight > 1220
+                          ? Transform.scale(
+                              scale: 1.2,
+                              child: Image.asset("assets/images/recaptcha.png"),
+                            )
+                          : Transform.scale(
+                              scale: 1.7,
+                              child: Image.asset("assets/images/recaptcha.png"),
+                            ),
+                    ),
+                    const Flexible(
+                      flex: 1,
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 2.5),
+                        child:
+                            Text("reCAPTCHA", style: TextStyle(fontSize: 10.5)),
+                      ),
+                    ),
+                    const Flexible(
+                      flex: 1,
+                      child: Text(
+                        "Privacy - Terms",
+                        style: TextStyle(fontSize: 8),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 Future<void> launchUrl(String url) async {
