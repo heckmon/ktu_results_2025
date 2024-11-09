@@ -21,7 +21,6 @@ def publishedResult(index):
     }
 
     response=requests.post(key_url,headers=headers,json=json,verify=False)
-    print(response.content)
     return response.json()
 
 
@@ -35,4 +34,4 @@ def proxy():
     return data,200
     
 if __name__=="__main__":
-    app.run(debug=True,port=8000)
+    app.run(debug=True,host="192.168.1.5",port=8000)
