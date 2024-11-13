@@ -34,4 +34,4 @@ def proxy():
     return data,200
     
 if __name__=="__main__":
-    app.run(debug=True,host="192.168.1.5",port=8000)
+    app.run(debug=True,host="192.168.1.3",port=8000)

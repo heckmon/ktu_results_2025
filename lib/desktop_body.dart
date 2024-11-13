@@ -45,7 +45,7 @@ Map<String, int> eachResult = {
   "MBA": 3,
   "MCA": 4,
   "B.Arch": 5,
-  "M.arch": 6,
+  "M.Arch": 6,
   "Hotel": 7,
   "MHM": 8,
   "B.Plan": 9,
@@ -417,7 +417,10 @@ class _AppBodyState extends State<AppBody> {
                               child: Row(
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.only(left: 12.0),
+                                    padding: isClicked
+                                        ? const EdgeInsets.symmetric(
+                                            vertical: 15, horizontal: 12.0)
+                                        : const EdgeInsets.only(left: 12.0),
                                     child: Text(
                                       heading,
                                       style: heading == "Examination Result"
@@ -431,58 +434,67 @@ class _AppBodyState extends State<AppBody> {
                                     ),
                                   ),
                                   const Expanded(child: SizedBox()),
-                                  const Text(
-                                    "Program",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 15,
-                                        color: Color(0xff364a63)),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 12, horizontal: 22.0),
-                                    child: SizedBox(
-                                      width: screenWidth * 0.2,
-                                      child: DropdownMenu<String>(
-                                        focusNode: focusNode,
-                                        onSelected: (String? val) {
-                                          setState(() {
-                                            dropvalue = val ?? "--SELECT--";
-                                          });
-                                        },
-                                        enableSearch: false,
-                                        trailingIcon: const Icon(
-                                          FontAwesomeIcons.chevronDown,
-                                          size: 12,
+                                  Visibility(
+                                    visible: !isClicked,
+                                    child: Row(
+                                      children: [
+                                        const Text(
+                                          "Program",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 15,
+                                              color: Color(0xff364a63)),
                                         ),
-                                        selectedTrailingIcon: const Icon(
-                                          FontAwesomeIcons.chevronUp,
-                                          size: 12,
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 12, horizontal: 22.0),
+                                          child: SizedBox(
+                                            width: screenWidth * 0.2,
+                                            child: DropdownMenu<String>(
+                                              focusNode: focusNode,
+                                              onSelected: (String? val) {
+                                                setState(() {
+                                                  dropvalue =
+                                                      val ?? "--SELECT--";
+                                                });
+                                              },
+                                              enableSearch: false,
+                                              trailingIcon: const Icon(
+                                                FontAwesomeIcons.chevronDown,
+                                                size: 12,
+                                              ),
+                                              selectedTrailingIcon: const Icon(
+                                                FontAwesomeIcons.chevronUp,
+                                                size: 12,
+                                              ),
+                                              initialSelection: "--SELECT--",
+                                              inputDecorationTheme:
+                                                  const InputDecorationTheme(
+                                                contentPadding: EdgeInsets.only(
+                                                    bottom: 5.0, left: 8.0),
+                                                hintStyle: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 13.8),
+                                                border: OutlineInputBorder(),
+                                                constraints: BoxConstraints(
+                                                    maxHeight: 30),
+                                                isDense: true,
+                                              ),
+                                              menuHeight: 350,
+                                              menuStyle: const MenuStyle(
+                                                  visualDensity: VisualDensity(
+                                                      vertical: -4),
+                                                  shadowColor:
+                                                      WidgetStatePropertyAll(
+                                                          Colors.black),
+                                                  backgroundColor:
+                                                      WidgetStatePropertyAll(
+                                                          Colors.white)),
+                                              dropdownMenuEntries: dropDowns,
+                                            ),
+                                          ),
                                         ),
-                                        initialSelection: "--SELECT--",
-                                        inputDecorationTheme:
-                                            const InputDecorationTheme(
-                                          contentPadding: EdgeInsets.only(
-                                              bottom: 5.0, left: 8.0),
-                                          hintStyle: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 13.8),
-                                          border: OutlineInputBorder(),
-                                          constraints:
-                                              BoxConstraints(maxHeight: 30),
-                                          isDense: true,
-                                        ),
-                                        menuHeight: 350,
-                                        menuStyle: const MenuStyle(
-                                            visualDensity:
-                                                VisualDensity(vertical: -4),
-                                            shadowColor: WidgetStatePropertyAll(
-                                                Colors.black),
-                                            backgroundColor:
-                                                WidgetStatePropertyAll(
-                                                    Colors.white)),
-                                        dropdownMenuEntries: dropDowns,
-                                      ),
+                                      ],
                                     ),
                                   )
                                 ],

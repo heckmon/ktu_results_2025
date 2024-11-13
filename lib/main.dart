@@ -60,12 +60,15 @@ class _BaseState extends State<Base> {
       ),
       home: ColorFiltered(
         colorFilter: mat,
-        child: Scaffold(
-            appBar: PreferredSize(
-                preferredSize: Size.fromHeight(
-                    screenWidth > 852 ? 53 : screenHeight * 0.15),
-                child: Appbar(filter: updateColorFilter)),
-            body: screenWidth > 700 ? const AppBody() : const MobileBody()),
+        child: InteractiveViewer(
+          scaleEnabled: screenHeight > 1200 && screenWidth > 700,
+          child: Scaffold(
+              appBar: PreferredSize(
+                  preferredSize: Size.fromHeight(
+                      screenWidth > 852 ? 53 : screenHeight * 0.15),
+                  child: Appbar(filter: updateColorFilter)),
+              body: screenWidth > 700 ? const AppBody() : const MobileBody()),
+        ),
       ),
     );
   }
