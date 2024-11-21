@@ -454,6 +454,7 @@ class _AppBodyState extends State<AppBody> {
                                               child:DropdownMenu<String>(
                                               focusNode: focusNode,
                                               onSelected: (String? val) {
+                                                FocusManager.instance.primaryFocus?.unfocus();
                                                 setState(() {
                                                   dropvalue =
                                                       val ?? "--SELECT--";
