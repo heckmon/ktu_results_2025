@@ -227,7 +227,6 @@ class _AppBodyState extends State<AppBody> {
     super.initState();
     focusNode.addListener(() {
       if (focusNode.hasFocus) {
-        FocusManager.instance.primaryFocus?.unfocus();
         focusNode.unfocus();
       }
     });
