@@ -450,8 +450,7 @@ class _AppBodyState extends State<AppBody> {
                                               vertical: 12, horizontal: 22.0),
                                           child: SizedBox(
                                             width: screenWidth * 0.2,
-                                            child: IgnorePointer(
-                                              child:DropdownMenu<String>(
+                                            child: DropdownMenu<String>(
                                               focusNode: focusNode,
                                               onSelected: (String? val) {
                                                 setState(() {
@@ -492,8 +491,7 @@ class _AppBodyState extends State<AppBody> {
                                                       WidgetStatePropertyAll(
                                                           Colors.white)),
                                               dropdownMenuEntries: dropDowns,
-                                             ),
-                                           ),
+                                            ),
                                           ),
                                         ),
                                       ],
