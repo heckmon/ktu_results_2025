@@ -227,6 +227,7 @@ class _AppBodyState extends State<AppBody> {
     super.initState();
     focusNode.addListener(() {
       if (focusNode.hasFocus) {
+        FocusManager.instance.primaryFocus?.unfocus();
         focusNode.unfocus();
       }
     });
@@ -452,7 +453,6 @@ class _AppBodyState extends State<AppBody> {
                                             width: screenWidth * 0.2,
                                             child: IgnorePointer(
                                               child:DropdownMenu<String>(
-                                              requestFocusOnTap:false,
                                               focusNode: focusNode,
                                               onSelected: (String? val) {
                                                 setState(() {
