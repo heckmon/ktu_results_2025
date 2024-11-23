@@ -63,6 +63,7 @@ class _BaseState extends State<Base> {
         child: InteractiveViewer(
           scaleEnabled: screenHeight > 1200 && screenWidth > 700,
           child: Scaffold(
+              resizeToAvoidBottomInset:false,
               appBar: PreferredSize(
                   preferredSize: Size.fromHeight(
                       screenWidth > 852 ? 53 : screenHeight * 0.15),
