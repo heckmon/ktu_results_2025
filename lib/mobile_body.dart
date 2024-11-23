@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ktu_results/desktop_body.dart';
+import 'package:ktu_results/result.dart';
 
 class MobileBody extends StatefulWidget {
   const MobileBody({super.key});
@@ -12,9 +13,6 @@ class MobileBody extends StatefulWidget {
 bool sideBarStat = false;
 bool isChecked = false;
 DateTime? date;
-final formKey = GlobalKey<FormState>();
-TextEditingController regNo = TextEditingController();
-TextEditingController dob = TextEditingController();
 
 class _MobileBodyState extends State<MobileBody> {
   @override
@@ -190,195 +188,210 @@ class _MobileBodyState extends State<MobileBody> {
                 padding: const EdgeInsets.only(top: 18),
                 child: Form(
                   key: formKey,
-                  child: SizedBox(
-                    width: screenWidth,
-                    height: dropvalue == "--SELECT--"
-                        ? isClicked
-                            ? screenHeight * 0.4
-                            : 230
-                        : screenHeight * 0.8,
-                    child: isClicked
-                        ? Card(
-                            elevation: 7,
-                            color: Colors.white,
-                            child: Column(
-                              children: [
-                                const Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Padding(
-                                    padding: EdgeInsets.only(
-                                        top: 20, bottom: 10, left: 10),
-                                    child: Text(
-                                      "Register Number",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 14),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10),
-                                  child: SizedBox(
-                                    height: 40,
-                                    child: TextFormField(
-                                      validator: (value) {
-                                        if (value == null || value.isEmpty) {
-                                          return "Mandatory field";
-                                        }
-                                        return null;
-                                      },
-                                      controller: regNo,
-                                      decoration: const InputDecoration(
-                                          enabledBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                              color: Color(0xffbbbfc1),
-                                              width: 1,
-                                            ),
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(5.5),
-                                            ),
-                                          ),
-                                          label: Text(
-                                            "Enter Register Number",
+                  child: showResult
+                      ? const Result()
+                      : SizedBox(
+                          width: screenWidth,
+                          height: dropvalue == "--SELECT--"
+                              ? isClicked
+                                  ? screenHeight * 0.4
+                                  : 230
+                              : screenHeight * 0.8,
+                          child: isClicked
+                              ? Card(
+                                  elevation: 7,
+                                  color: Colors.white,
+                                  child: Column(
+                                    children: [
+                                      const Align(
+                                        alignment: Alignment.topLeft,
+                                        child: Padding(
+                                          padding: EdgeInsets.only(
+                                              top: 20, bottom: 10, left: 10),
+                                          child: Text(
+                                            "Register Number",
                                             style: TextStyle(
-                                                fontSize: 18,
-                                                color: Color(0xffbbbfc1)),
-                                          )),
-                                    ),
-                                  ),
-                                ),
-                                const Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Padding(
-                                    padding: EdgeInsets.only(
-                                        top: 20, bottom: 10, left: 10),
-                                    child: Text(
-                                      "Date Of Birth",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 14),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10),
-                                  child: SizedBox(
-                                    height: 40,
-                                    child: TextFormField(
-                                      validator: (value) {
-                                        if (value == null || value.isEmpty) {
-                                          return "Mandatory field";
-                                        }
-                                        return null;
-                                      },
-                                      onTap: () async {
-                                        date = await showDate(context);
-                                        if (date != null) {
-                                          setState(() {
-                                            date = date;
-                                            dob.text =
-                                                "${date!.day}/${date!.month}/${date!.year}";
-                                          });
-                                        }
-                                      },
-                                      controller: dob,
-                                      readOnly: true,
-                                      decoration: InputDecoration(
-                                          filled: true,
-                                          fillColor: const Color(0xffefefef),
-                                          enabledBorder:
-                                              const OutlineInputBorder(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 14),
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 10),
+                                        child: SizedBox(
+                                          height: 40,
+                                          child: TextFormField(
+                                            validator: (value) {
+                                              if (value == null ||
+                                                  value.isEmpty) {
+                                                return "Mandatory field";
+                                              }
+                                              return null;
+                                            },
+                                            controller: regNo,
+                                            decoration: const InputDecoration(
+                                                enabledBorder:
+                                                    OutlineInputBorder(
                                                   borderSide: BorderSide(
                                                     color: Color(0xffbbbfc1),
                                                     width: 1,
                                                   ),
                                                   borderRadius:
                                                       BorderRadius.all(
-                                                          Radius.circular(
-                                                              5.5))),
-                                          hintText: date == null
-                                              ? ""
-                                              : "${date!.day}/${date!.month}/${date!.year}",
-                                          hintStyle: const TextStyle(
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.w400),
-                                          suffixIcon: const Icon(
-                                            FontAwesomeIcons.chevronDown,
-                                            size: 12.0,
-                                          )),
-                                    ),
-                                  ),
-                                ),
-                                const FakeCaptcha(),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10),
-                                  child: Align(
-                                    alignment: Alignment.bottomLeft,
-                                    child: SizedBox(
-                                      width: 143,
-                                      height: 40,
-                                      child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          foregroundColor: Colors.white,
-                                          backgroundColor:
-                                              const Color(0xff6d52b1),
-                                          shape: const RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(5),
+                                                    Radius.circular(5.5),
+                                                  ),
+                                                ),
+                                                label: Text(
+                                                  "Enter Register Number",
+                                                  style: TextStyle(
+                                                      fontSize: 18,
+                                                      color: Color(0xffbbbfc1)),
+                                                )),
+                                          ),
+                                        ),
+                                      ),
+                                      const Align(
+                                        alignment: Alignment.topLeft,
+                                        child: Padding(
+                                          padding: EdgeInsets.only(
+                                              top: 20, bottom: 10, left: 10),
+                                          child: Text(
+                                            "Date Of Birth",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 14),
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 10),
+                                        child: SizedBox(
+                                          height: 40,
+                                          child: TextFormField(
+                                            validator: (value) {
+                                              if (value == null ||
+                                                  value.isEmpty) {
+                                                return "Mandatory field";
+                                              }
+                                              return null;
+                                            },
+                                            onTap: () async {
+                                              date = await showDate(context);
+                                              if (date != null) {
+                                                setState(() {
+                                                  date = date;
+                                                  dob.text =
+                                                      "${date!.day}/${date!.month}/${date!.year}";
+                                                });
+                                              }
+                                            },
+                                            controller: dob,
+                                            readOnly: true,
+                                            decoration: InputDecoration(
+                                                filled: true,
+                                                fillColor:
+                                                    const Color(0xffefefef),
+                                                enabledBorder:
+                                                    const OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color:
+                                                              Color(0xffbbbfc1),
+                                                          width: 1,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    5.5))),
+                                                hintText: date == null
+                                                    ? ""
+                                                    : "${date!.day}/${date!.month}/${date!.year}",
+                                                hintStyle: const TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight:
+                                                        FontWeight.w400),
+                                                suffixIcon: const Icon(
+                                                  FontAwesomeIcons.chevronDown,
+                                                  size: 12.0,
+                                                )),
+                                          ),
+                                        ),
+                                      ),
+                                      const FakeCaptcha(),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 10),
+                                        child: Align(
+                                          alignment: Alignment.bottomLeft,
+                                          child: SizedBox(
+                                            width: 143,
+                                            height: 40,
+                                            child: ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                foregroundColor: Colors.white,
+                                                backgroundColor:
+                                                    const Color(0xff6d52b1),
+                                                shape:
+                                                    const RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                    Radius.circular(5),
+                                                  ),
+                                                ),
+                                              ),
+                                              onPressed: () {
+                                                if (formKey.currentState!
+                                                        .validate() &&
+                                                    isChecked) {
+                                                  setState(() {
+                                                    showResult = true;
+                                                  });
+                                                }
+                                              },
+                                              child: const Text(
+                                                "View Results",
+                                                style:
+                                                    TextStyle(fontSize: 16.5),
+                                              ),
                                             ),
                                           ),
                                         ),
-                                        onPressed: () {
-                                          if (formKey.currentState!
-                                              .validate()) {}
-                                          setState(() {
-                                            showResult = true;
-                                          });
-                                        },
-                                        child: const Text(
-                                          "View Results",
-                                          style: TextStyle(fontSize: 16.5),
-                                        ),
-                                      ),
-                                    ),
+                                      )
+                                    ],
                                   ),
                                 )
-                              ],
-                            ),
-                          )
-                        : Card(
-                            surfaceTintColor: Colors.grey[400],
-                            color: Colors.white,
-                            elevation: 7,
-                            shadowColor: Colors.black,
-                            shape: const BeveledRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(3))),
-                            margin: const EdgeInsets.all(30),
-                            child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    padding: const EdgeInsets.all(5),
-                                    height: 30,
-                                    child: const Padding(
-                                      padding: EdgeInsets.only(left: 12),
-                                      child: Text(
-                                        "Exam",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 17),
-                                      ),
-                                    ),
-                                  ),
-                                  const Divider(),
-                                  resultField(),
-                                ]),
-                          ),
-                  ),
+                              : Card(
+                                  surfaceTintColor: Colors.grey[400],
+                                  color: Colors.white,
+                                  elevation: 7,
+                                  shadowColor: Colors.black,
+                                  shape: const BeveledRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(3))),
+                                  margin: const EdgeInsets.all(30),
+                                  child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          padding: const EdgeInsets.all(5),
+                                          height: 30,
+                                          child: const Padding(
+                                            padding: EdgeInsets.only(left: 12),
+                                            child: Text(
+                                              "Exam",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 17),
+                                            ),
+                                          ),
+                                        ),
+                                        const Divider(),
+                                        resultField(),
+                                      ]),
+                                ),
+                        ),
                 ),
               ),
               Padding(

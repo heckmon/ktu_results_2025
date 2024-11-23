@@ -2,11 +2,14 @@ import 'dart:convert';
 import 'package:ktu_results/mobile_body.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ktu_results/result.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io';
 import 'package:date_picker_plus/date_picker_plus.dart';
+import 'dart:html' as html;
 
+// ignore_for_file: avoid_web_libraries_in_flutter
 class MyHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
@@ -23,6 +26,9 @@ class AppBody extends StatefulWidget {
   State<AppBody> createState() => _AppBodyState();
 }
 
+final formKey = GlobalKey<FormState>();
+TextEditingController regNo = TextEditingController();
+TextEditingController dob = TextEditingController();
 String dropvalue = "--SELECT--";
 bool isClicked = false;
 bool showResult = false;
@@ -371,10 +377,8 @@ class _AppBodyState extends State<AppBody> {
                 ),
                 SizedBox(
                   width: screenWidth,
-                  height: 1200 > screenHeight
-                      ? screenHeight * 0.9
-                      : screenHeight * 0.7,
                   child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Flexible(
                         flex: 1,
@@ -399,7 +403,24 @@ class _AppBodyState extends State<AppBody> {
                           ],
                         ),
                       ),
-                      const VerticalDivider(width: 3.5),
+                      Column(
+                        children: [
+                          Container(
+                            width: 0.75,
+                            height: 1200 > screenHeight
+                                ? screenHeight * 0.9
+                                : screenHeight * 0.7,
+                            color: Colors.grey,
+                          ),
+                          showResult && screenHeight < 1200
+                              ? Container(
+                                  width: 0.75,
+                                  height: screenHeight * 0.9,
+                                  color: Colors.grey,
+                                )
+                              : const SizedBox.shrink()
+                        ],
+                      ),
                       Flexible(
                         flex: 3,
                         child: Column(
@@ -513,214 +534,220 @@ class _AppBodyState extends State<AppBody> {
                                     : screenHeight > 1200
                                         ? 800
                                         : isClicked
-                                            ? 270
+                                            ? 295
                                             : screenHeight * 0.8,
                                 child: isClicked
-                                    ? Card(
-                                        elevation: 7,
-                                        color: Colors.white,
-                                        child: Column(
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Flexible(
-                                                    flex: 1,
-                                                    child: Padding(
-                                                      padding: const EdgeInsets
-                                                          .symmetric(
-                                                          horizontal: 14.0,
-                                                          vertical: 10.0),
-                                                      child: Column(
-                                                        children: [
-                                                          const Align(
-                                                            alignment: Alignment
-                                                                .topLeft,
-                                                            child: Text(
-                                                              "Register Number",
-                                                              style: TextStyle(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                  fontSize: 16),
+                                    ? Form(
+                                        key: formKey,
+                                        child: Card(
+                                          elevation: 7,
+                                          color: Colors.white,
+                                          child: Column(
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Flexible(
+                                                      flex: 1,
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .symmetric(
+                                                                horizontal:
+                                                                    14.0,
+                                                                vertical: 10.0),
+                                                        child: Column(
+                                                          children: [
+                                                            const Align(
+                                                              alignment:
+                                                                  Alignment
+                                                                      .topLeft,
+                                                              child: Text(
+                                                                "Register Number",
+                                                                style: TextStyle(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontSize:
+                                                                        16),
+                                                              ),
                                                             ),
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .only(
-                                                                    top: 8.0),
-                                                            child:
-                                                                TextFormField(
-                                                              controller: regNo,
-                                                              validator:
-                                                                  (value) {
-                                                                if (value ==
-                                                                        null ||
-                                                                    value
-                                                                        .isEmpty) {
-                                                                  return "Mandatory field";
-                                                                }
-                                                                return null;
-                                                              },
-                                                              decoration:
-                                                                  const InputDecoration(
-                                                                      enabledBorder:
-                                                                          OutlineInputBorder(
-                                                                        borderSide:
-                                                                            BorderSide(
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .only(
+                                                                      top: 8.0),
+                                                              child:
+                                                                  TextFormField(
+                                                                controller:
+                                                                    regNo,
+                                                                validator:
+                                                                    (value) {
+                                                                  if (value ==
+                                                                          null ||
+                                                                      value
+                                                                          .isEmpty) {
+                                                                    return "Mandatory field";
+                                                                  }
+                                                                  return null;
+                                                                },
+                                                                decoration:
+                                                                    const InputDecoration(
+                                                                        enabledBorder:
+                                                                            OutlineInputBorder(
+                                                                          borderSide:
+                                                                              BorderSide(
+                                                                            color:
+                                                                                Color(0xffbbbfc1),
+                                                                            width:
+                                                                                1,
+                                                                          ),
+                                                                          borderRadius:
+                                                                              BorderRadius.all(
+                                                                            Radius.circular(5.5),
+                                                                          ),
+                                                                        ),
+                                                                        label:
+                                                                            Text(
+                                                                          "Enter Register Number",
+                                                                          style: TextStyle(
+                                                                              fontSize: 18,
+                                                                              color: Color(0xffbbbfc1)),
+                                                                        )),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      )),
+                                                  Flexible(
+                                                      flex: 1,
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .symmetric(
+                                                                horizontal:
+                                                                    14.0,
+                                                                vertical: 10.0),
+                                                        child: Column(
+                                                          children: [
+                                                            const Align(
+                                                              alignment:
+                                                                  Alignment
+                                                                      .topLeft,
+                                                              child: Text(
+                                                                "Date Of Birth",
+                                                                style: TextStyle(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontSize:
+                                                                        16),
+                                                              ),
+                                                            ),
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .only(
+                                                                      top: 8.0),
+                                                              child:
+                                                                  TextFormField(
+                                                                onTap:
+                                                                    () async {
+                                                                  date = await showDate(
+                                                                      context);
+                                                                  if (date !=
+                                                                      null) {
+                                                                    setState(
+                                                                        () {
+                                                                      date =
+                                                                          date;
+                                                                      dob.text =
+                                                                          "${date!.day}/${date!.month}/${date!.year}";
+                                                                    });
+                                                                  }
+                                                                },
+                                                                controller: dob,
+                                                                validator:
+                                                                    (value) {
+                                                                  if (value ==
+                                                                          null ||
+                                                                      value
+                                                                          .isEmpty) {
+                                                                    return "Mandatory field";
+                                                                  }
+                                                                  return null;
+                                                                },
+                                                                readOnly: true,
+                                                                decoration: const InputDecoration(
+                                                                    enabledBorder: OutlineInputBorder(
+                                                                        borderSide: BorderSide(
                                                                           color:
                                                                               Color(0xffbbbfc1),
                                                                           width:
                                                                               1,
                                                                         ),
-                                                                        borderRadius:
-                                                                            BorderRadius.all(
-                                                                          Radius.circular(
-                                                                              5.5),
-                                                                        ),
-                                                                      ),
-                                                                      label:
-                                                                          Text(
-                                                                        "Enter Register Number",
-                                                                        style: TextStyle(
-                                                                            fontSize:
-                                                                                18,
-                                                                            color:
-                                                                                Color(0xffbbbfc1)),
-                                                                      )),
+                                                                        borderRadius: BorderRadius.all(Radius.circular(5.5))),
+                                                                    hintText: "mm/dd/yyyy",
+                                                                    hintStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.w400),
+                                                                    suffixIcon: Icon(
+                                                                      FontAwesomeIcons
+                                                                          .calendar,
+                                                                      size:
+                                                                          12.0,
+                                                                    )),
+                                                              ),
                                                             ),
+                                                          ],
+                                                        ),
+                                                      ))
+                                                ],
+                                              ),
+                                              const FakeCaptcha(),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    right: 13),
+                                                child: Align(
+                                                  alignment:
+                                                      Alignment.bottomRight,
+                                                  child: SizedBox(
+                                                    width: 143,
+                                                    height: 40,
+                                                    child: ElevatedButton(
+                                                      style: ElevatedButton
+                                                          .styleFrom(
+                                                        foregroundColor:
+                                                            Colors.white,
+                                                        backgroundColor:
+                                                            const Color(
+                                                                0xff6d52b1),
+                                                        shape:
+                                                            const RoundedRectangleBorder(
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                            Radius.circular(5),
                                                           ),
-                                                        ],
-                                                      ),
-                                                    )),
-                                                Flexible(
-                                                    flex: 1,
-                                                    child: Padding(
-                                                      padding: const EdgeInsets
-                                                          .symmetric(
-                                                          horizontal: 14.0,
-                                                          vertical: 10.0),
-                                                      child: Column(
-                                                        children: [
-                                                          const Align(
-                                                            alignment: Alignment
-                                                                .topLeft,
-                                                            child: Text(
-                                                              "Date Of Birth",
-                                                              style: TextStyle(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                  fontSize: 16),
-                                                            ),
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .only(
-                                                                    top: 8.0),
-                                                            child:
-                                                                TextFormField(
-                                                              onTap: () async {
-                                                                date =
-                                                                    await showDate(
-                                                                        context);
-                                                                if (date !=
-                                                                    null) {
-                                                                  setState(() {
-                                                                    date = date;
-                                                                    dob.text =
-                                                                        "${date!.day}/${date!.month}/${date!.year}";
-                                                                  });
-                                                                }
-                                                              },
-                                                              controller: dob,
-                                                              validator:
-                                                                  (value) {
-                                                                if (value ==
-                                                                        null ||
-                                                                    value
-                                                                        .isEmpty) {
-                                                                  return "Mandatory field";
-                                                                }
-                                                                return null;
-                                                              },
-                                                              readOnly: true,
-                                                              decoration:
-                                                                  const InputDecoration(
-                                                                      enabledBorder:
-                                                                          OutlineInputBorder(
-                                                                              borderSide:
-                                                                                  BorderSide(
-                                                                                color: Color(0xffbbbfc1),
-                                                                                width: 1,
-                                                                              ),
-                                                                              borderRadius: BorderRadius.all(Radius.circular(
-                                                                                  5.5))),
-                                                                      hintText:
-                                                                          "mm/dd/yyyy",
-                                                                      hintStyle: TextStyle(
-                                                                          color: Colors
-                                                                              .black,
-                                                                          fontWeight: FontWeight
-                                                                              .w400),
-                                                                      suffixIcon:
-                                                                          Icon(
-                                                                        FontAwesomeIcons
-                                                                            .calendar,
-                                                                        size:
-                                                                            12.0,
-                                                                      )),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ))
-                                              ],
-                                            ),
-                                            const FakeCaptcha(),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 13),
-                                              child: Align(
-                                                alignment:
-                                                    Alignment.bottomRight,
-                                                child: SizedBox(
-                                                  width: 143,
-                                                  height: 40,
-                                                  child: ElevatedButton(
-                                                    style: ElevatedButton
-                                                        .styleFrom(
-                                                      foregroundColor:
-                                                          Colors.white,
-                                                      backgroundColor:
-                                                          const Color(
-                                                              0xff6d52b1),
-                                                      shape:
-                                                          const RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                          Radius.circular(5),
                                                         ),
                                                       ),
-                                                    ),
-                                                    onPressed: () {
-                                                      if (formKey.currentState!
-                                                          .validate()) {}
-                                                      setState(() {
-                                                        showResult = true;
-                                                      });
-                                                    },
-                                                    child: const Text(
-                                                      "View Results",
-                                                      style: TextStyle(
-                                                          fontSize: 16.5),
+                                                      onPressed: () {
+                                                        if (formKey
+                                                                .currentState!
+                                                                .validate() &&
+                                                            isChecked) {
+                                                          setState(() {
+                                                            showResult = true;
+                                                          });
+                                                        }
+                                                      },
+                                                      child: const Text(
+                                                        "View Results",
+                                                        style: TextStyle(
+                                                            fontSize: 16.5),
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
-                                              ),
-                                            )
-                                          ],
+                                              )
+                                            ],
+                                          ),
                                         ),
                                       )
                                     : Card(
@@ -747,7 +774,10 @@ class _AppBodyState extends State<AppBody> {
                                         ]),
                                       ),
                               ),
-                            )
+                            ),
+                            showResult
+                                ? const SizedBox(width: 1130, child: Result())
+                                : const SizedBox.shrink()
                           ],
                         ),
                       )
@@ -1071,8 +1101,7 @@ class _FakeCaptchaState extends State<FakeCaptcha> {
                 scale: 1.5,
                 child: Checkbox(
                     side: BorderSide(
-                        color: (!isChecked && showResult) &&
-                                (dob.text != "" && regNo.text != "")
+                        color: (!isChecked && showResult)
                             ? const Color.fromARGB(255, 236, 10, 10)
                             : Colors.grey,
                         width: (!isChecked && showResult) &&
@@ -1082,8 +1111,7 @@ class _FakeCaptchaState extends State<FakeCaptcha> {
                     checkColor: Colors.green,
                     activeColor: Colors.transparent,
                     value: isChecked,
-                    isError: (!isChecked && showResult) &&
-                        (dob.text != "" && regNo.text != ""),
+                    isError: (!isChecked && showResult),
                     onChanged: (bool? val) {
                       setState(() {
                         isChecked = true;
@@ -1148,7 +1176,23 @@ Future<List<dynamic>> publishedResult(int index) async {
   };
   Map<String, String> data = {"index": "$index"};
 
+  String? cachedData = html.window.localStorage['publishedResult_$index'];
+  String? cachedTimestamp =
+      html.window.localStorage['publishedResult_${index}_timestamp'];
+
+  if (cachedData != null && cachedTimestamp != null) {
+    var cacheAge =
+        DateTime.now().millisecondsSinceEpoch - int.parse(cachedTimestamp);
+    if (cacheAge < 3600000) {
+      return jsonDecode(cachedData);
+    }
+  }
+
   var response = await http.post(url, headers: headers, body: jsonEncode(data));
+  html.window.localStorage['publishedResult_$index'] = response.body;
+  html.window.localStorage['publishedResult_${index}_timestamp'] =
+      DateTime.now().millisecondsSinceEpoch.toString();
+
   return jsonDecode(response.body);
 }
 
