@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ktu_results/desktop_body.dart';
-import 'package:date_picker_plus/date_picker_plus.dart';
 
 class MobileBody extends StatefulWidget {
   const MobileBody({super.key});
@@ -12,23 +11,12 @@ class MobileBody extends StatefulWidget {
 
 bool sideBarStat = false;
 bool isChecked = false;
-bool showResult = false;
 DateTime? date;
-final _formKey = GlobalKey<FormState>();
+final formKey = GlobalKey<FormState>();
 TextEditingController regNo = TextEditingController();
 TextEditingController dob = TextEditingController();
 
 class _MobileBodyState extends State<MobileBody> {
-  Future<DateTime?> _showDate() async {
-    final date = await showDatePickerDialog(
-      context: context,
-      initialDate: DateTime.now(),
-      minDate: DateTime(1990, 10, 10),
-      maxDate: DateTime.now(),
-    );
-    return date;
-  }
-
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -201,7 +189,7 @@ class _MobileBodyState extends State<MobileBody> {
               Padding(
                 padding: const EdgeInsets.only(top: 18),
                 child: Form(
-                  key: _formKey,
+                  key: formKey,
                   child: SizedBox(
                     width: screenWidth,
                     height: dropvalue == "--SELECT--"
@@ -286,7 +274,7 @@ class _MobileBodyState extends State<MobileBody> {
                                         return null;
                                       },
                                       onTap: () async {
-                                        date = await _showDate();
+                                        date = await showDate(context);
                                         if (date != null) {
                                           setState(() {
                                             date = date;
@@ -344,7 +332,7 @@ class _MobileBodyState extends State<MobileBody> {
                                           ),
                                         ),
                                         onPressed: () {
-                                          if (_formKey.currentState!
+                                          if (formKey.currentState!
                                               .validate()) {}
                                           setState(() {
                                             showResult = true;

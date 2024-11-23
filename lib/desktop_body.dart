@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io';
+import 'package:date_picker_plus/date_picker_plus.dart';
 
 class MyHttpOverrides extends HttpOverrides {
   @override
@@ -24,6 +25,7 @@ class AppBody extends StatefulWidget {
 
 String dropvalue = "--SELECT--";
 bool isClicked = false;
+bool showResult = false;
 String heading = "Examination Result";
 List<String> data = [
   "B.Tech S8 (S) Exam Aug 2024 (2019 Scheme) (S8 Result)",
@@ -519,18 +521,18 @@ class _AppBodyState extends State<AppBody> {
                                         color: Colors.white,
                                         child: Column(
                                           children: [
-                                            const Row(
+                                            Row(
                                               children: [
                                                 Flexible(
                                                     flex: 1,
                                                     child: Padding(
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              horizontal: 14.0,
-                                                              vertical: 10.0),
+                                                      padding: const EdgeInsets
+                                                          .symmetric(
+                                                          horizontal: 14.0,
+                                                          vertical: 10.0),
                                                       child: Column(
                                                         children: [
-                                                          Align(
+                                                          const Align(
                                                             alignment: Alignment
                                                                 .topLeft,
                                                             child: Text(
@@ -544,11 +546,24 @@ class _AppBodyState extends State<AppBody> {
                                                           ),
                                                           Padding(
                                                             padding:
-                                                                EdgeInsets.only(
+                                                                const EdgeInsets
+                                                                    .only(
                                                                     top: 8.0),
-                                                            child: TextField(
+                                                            child:
+                                                                TextFormField(
+                                                              controller: regNo,
+                                                              validator:
+                                                                  (value) {
+                                                                if (value ==
+                                                                        null ||
+                                                                    value
+                                                                        .isEmpty) {
+                                                                  return "Mandatory field";
+                                                                }
+                                                                return null;
+                                                              },
                                                               decoration:
-                                                                  InputDecoration(
+                                                                  const InputDecoration(
                                                                       enabledBorder:
                                                                           OutlineInputBorder(
                                                                         borderSide:
@@ -581,13 +596,13 @@ class _AppBodyState extends State<AppBody> {
                                                 Flexible(
                                                     flex: 1,
                                                     child: Padding(
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              horizontal: 14.0,
-                                                              vertical: 10.0),
+                                                      padding: const EdgeInsets
+                                                          .symmetric(
+                                                          horizontal: 14.0,
+                                                          vertical: 10.0),
                                                       child: Column(
                                                         children: [
-                                                          Align(
+                                                          const Align(
                                                             alignment: Alignment
                                                                 .topLeft,
                                                             child: Text(
@@ -601,12 +616,38 @@ class _AppBodyState extends State<AppBody> {
                                                           ),
                                                           Padding(
                                                             padding:
-                                                                EdgeInsets.only(
+                                                                const EdgeInsets
+                                                                    .only(
                                                                     top: 8.0),
-                                                            child: TextField(
+                                                            child:
+                                                                TextFormField(
+                                                              onTap: () async {
+                                                                date =
+                                                                    await showDate(
+                                                                        context);
+                                                                if (date !=
+                                                                    null) {
+                                                                  setState(() {
+                                                                    date = date;
+                                                                    dob.text =
+                                                                        "${date!.day}/${date!.month}/${date!.year}";
+                                                                  });
+                                                                }
+                                                              },
+                                                              controller: dob,
+                                                              validator:
+                                                                  (value) {
+                                                                if (value ==
+                                                                        null ||
+                                                                    value
+                                                                        .isEmpty) {
+                                                                  return "Mandatory field";
+                                                                }
+                                                                return null;
+                                                              },
                                                               readOnly: true,
                                                               decoration:
-                                                                  InputDecoration(
+                                                                  const InputDecoration(
                                                                       enabledBorder:
                                                                           OutlineInputBorder(
                                                                               borderSide:
@@ -663,7 +704,13 @@ class _AppBodyState extends State<AppBody> {
                                                         ),
                                                       ),
                                                     ),
-                                                    onPressed: () {},
+                                                    onPressed: () {
+                                                      if (formKey.currentState!
+                                                          .validate()) {}
+                                                      setState(() {
+                                                        showResult = true;
+                                                      });
+                                                    },
                                                     child: const Text(
                                                       "View Results",
                                                       style: TextStyle(
@@ -1103,4 +1150,14 @@ Future<List<dynamic>> publishedResult(int index) async {
 
   var response = await http.post(url, headers: headers, body: jsonEncode(data));
   return jsonDecode(response.body);
+}
+
+Future<DateTime?> showDate(BuildContext context) async {
+  final date = await showDatePickerDialog(
+    context: context,
+    initialDate: DateTime.now(),
+    minDate: DateTime(1990, 10, 10),
+    maxDate: DateTime.now(),
+  );
+  return date;
 }
