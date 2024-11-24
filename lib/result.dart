@@ -71,7 +71,7 @@ class _ResultState extends State<Result> {
                     ]),
                     TableRow(children: [
                       customCell("Exam"),
-                      customCell(heading),
+                      customCell(heading.substring(7)),
                     ]),
                   ],
                 ),

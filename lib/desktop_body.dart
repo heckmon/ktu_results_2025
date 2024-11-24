@@ -235,7 +235,7 @@ class _AppBodyState extends State<AppBody> {
     super.initState();
     focusNode.addListener(() {
       if (focusNode.hasFocus) {
-         focusNode.unfocus();
+        focusNode.unfocus();
       }
     });
   }
@@ -532,7 +532,9 @@ class _AppBodyState extends State<AppBody> {
                                 height: dropvalue == "--SELECT--"
                                     ? 200
                                     : screenHeight > 1200
-                                        ? isClicked?300:800
+                                        ? isClicked
+                                            ? 300
+                                            : 800
                                         : isClicked
                                             ? 295
                                             : screenHeight * 0.8,
@@ -733,7 +735,10 @@ class _AppBodyState extends State<AppBody> {
                                                                 .validate() &&
                                                             isChecked) {
                                                           if (dropvalue ==
-                                                              "B.Tech") {
+                                                                  "B.Tech" &&
+                                                              heading.substring(
+                                                                      7) ==
+                                                                  data[0]) {
                                                             await getStudentData(
                                                                 regNo.text);
                                                             setState(() {
