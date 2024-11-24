@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:ktu_results/desktop_body.dart';
 
@@ -8,15 +9,17 @@ class Result extends StatefulWidget {
   State<Result> createState() => _ResultState();
 }
 
-String studentName = "";
-// String college = "";
-String registerNumber = "";
-// String semester = "";
-String branch = "";
-String grade = "";
-String credits = "";
+FirebaseFirestore db = FirebaseFirestore.instance;
+
+String studentName = "", registerNumber = "";
+Map<dynamic, dynamic> grades = {};
 
 class _ResultState extends State<Result> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -106,57 +109,57 @@ class _ResultState extends State<Result> {
                       resultCell("1"),
                       resultCell("DATA STRUCTURES",
                           alignment: Alignment.centerLeft),
-                      resultCell(grade),
-                      resultCell(credits),
+                      resultCell(grades["CST201"] ?? ""),
+                      resultCell(grades["CST201"] == "F" ? "0" : "4"),
                     ]),
                     TableRow(children: [
                       resultCell("2"),
                       resultCell("DATA STRUCTURES LAB",
                           alignment: Alignment.centerLeft),
-                      resultCell(grade),
-                      resultCell(credits),
+                      resultCell(grades["CSL201"] ?? ""),
+                      resultCell(grades["CSL201"] == "F" ? "0" : "2"),
                     ]),
                     TableRow(children: [
                       resultCell("3"),
                       resultCell("DESIGN AND ENGINEERING",
                           alignment: Alignment.centerLeft),
-                      resultCell(grade),
-                      resultCell(credits),
+                      resultCell(grades["EST200"] ?? ""),
+                      resultCell(grades["EST200"] == "F" ? "0" : "2"),
                     ]),
                     TableRow(children: [
                       resultCell("4"),
                       resultCell("DISCRETE MATHEMATICAL STRUCTURES",
                           alignment: Alignment.centerLeft),
-                      resultCell(grade),
-                      resultCell(credits),
+                      resultCell(grades["MAT203"] ?? ""),
+                      resultCell(grades["MAT203"] == "F" ? "0" : "4"),
                     ]),
                     TableRow(children: [
                       resultCell("5"),
                       resultCell("LOGIC SYSTEM DESIGN",
                           alignment: Alignment.centerLeft),
-                      resultCell(grade),
-                      resultCell(credits),
+                      resultCell(grades["CST203"] ?? ""),
+                      resultCell(grades["CST203"] == "F" ? "0" : "4"),
                     ]),
                     TableRow(children: [
                       resultCell("6"),
                       resultCell("OBJECT ORIENTED PROGRAMMING USING JAVA",
                           alignment: Alignment.centerLeft),
-                      resultCell(grade),
-                      resultCell(credits),
+                      resultCell(grades["CST205"] ?? ""),
+                      resultCell(grades["CST205"] == "F" ? "0" : "4"),
                     ]),
                     TableRow(children: [
                       resultCell("7"),
                       resultCell("OBJECT ORIENTED PROGRAMMING LAB (IN JAVA)",
                           alignment: Alignment.centerLeft),
-                      resultCell(grade),
-                      resultCell(credits),
+                      resultCell(grades["CSL203"] ?? ""),
+                      resultCell(grades["CSL203"] == "F" ? "0" : "2"),
                     ]),
                     TableRow(children: [
                       resultCell("8"),
                       resultCell("SUSTAINABLE ENGINEERING",
                           alignment: Alignment.centerLeft),
-                      resultCell(grade),
-                      resultCell(credits),
+                      resultCell("P"),
+                      resultCell("0"),
                     ]),
                   ],
                 ),
@@ -332,7 +335,10 @@ TableCell resultCell(String text,
           alignment: alignment,
           child: Text(
             text,
-            style: TextStyle(color: textColor, fontWeight: FontWeight.w500),
+            style: TextStyle(
+                color: textColor,
+                fontWeight: FontWeight.w500,
+                fontSize: screenWidth < 448 ? 12.5 : 15),
           ),
         ),
       ),
@@ -350,4 +356,16 @@ TableCell customCell(String text) {
       ),
     ),
   );
+}
+
+Future<void> getStudentData(String reg) async {
+  CollectionReference students = db.collection('students');
+  DocumentSnapshot doc = await students.doc(reg).get();
+  if (doc.exists) {
+    registerNumber = reg;
+    studentName = doc.get("name");
+    grades = doc.get("grades");
+  } else {
+    studentName = "none";
+  }
 }

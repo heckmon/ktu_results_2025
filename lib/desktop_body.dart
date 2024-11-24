@@ -27,13 +27,16 @@ class AppBody extends StatefulWidget {
 }
 
 final formKey = GlobalKey<FormState>();
-TextEditingController regNo = TextEditingController();
-TextEditingController dob = TextEditingController();
-String dropvalue = "--SELECT--";
-bool isClicked = false;
-bool showResult = false;
-String heading = "Examination Result";
+TextEditingController regNo = TextEditingController(),
+    dob = TextEditingController();
+String dropvalue = "--SELECT--", heading = "Examination Result";
+bool isClicked = false,
+    showResult = false,
+    badGateway = false,
+    sideBarStat = false;
+
 List<String> data = [
+  "B.Tech S3 (S) Exam November 2024 (2019 Scheme) (S3 Result)",
   "B.Tech S8 (S) Exam Aug 2024 (2019 Scheme) (S8 Result)",
   "B.Tech S8 (PT) (S) Exam August 2024 (2019 Scheme) (S8 Result",
   "B.Tech S3 (S, FE) Exam June 2024 (2019 Scheme) (S3 Result)",
@@ -43,7 +46,6 @@ List<String> data = [
   "B.Tech S4 (minor) Exam June 2024 (2022 admn) (S4 Result)",
   "B.Tech S4 (Hons.) Exam June 2024 (2022 admn) (S4 Result)",
   "B.Tech S1 (S, FE) Exam June 2024 (2019 Scheme) (S1 Result)",
-  "B.Tech S5 (S, FE) Exam June 2024 (2015 Scheme) (S5 Result)"
 ];
 
 Map<String, int> eachResult = {
@@ -69,9 +71,7 @@ Map<String, int> eachResult = {
   "BBA": 19,
 };
 
-double screenWidth = 0;
-double screenHeight = 0;
-bool sideBarStat = false;
+double screenWidth = 0, screenHeight = 0;
 final focusNode = FocusNode();
 final sidebtnChildren = [
   styledTButton(
@@ -219,7 +219,7 @@ final socialMedias = [
       () => launchUrl(
           "https://in.linkedin.com/school/apj-abdul-kalam-technological-university/")),
   iconBtns(FontAwesomeIcons.instagram, const Color(0xffea4c56),
-      () => launchUrl("https://instagram.com/keralatechnologicaluniversity/")),
+      () => launchUrl("https://www.instagram.com/apjaktuofficial/")),
   iconBtns(FontAwesomeIcons.twitter, const Color(0xff029eec),
       () => launchUrl("https://twitter.com/apjaktuofficial")),
   iconBtns(
@@ -235,7 +235,7 @@ class _AppBodyState extends State<AppBody> {
     super.initState();
     focusNode.addListener(() {
       if (focusNode.hasFocus) {
-        focusNode.unfocus();
+         focusNode.unfocus();
       }
     });
   }
@@ -532,7 +532,7 @@ class _AppBodyState extends State<AppBody> {
                                 height: dropvalue == "--SELECT--"
                                     ? 200
                                     : screenHeight > 1200
-                                        ? 800
+                                        ? isClicked?300:800
                                         : isClicked
                                             ? 295
                                             : screenHeight * 0.8,
@@ -727,14 +727,21 @@ class _AppBodyState extends State<AppBody> {
                                                           ),
                                                         ),
                                                       ),
-                                                      onPressed: () {
+                                                      onPressed: () async {
                                                         if (formKey
                                                                 .currentState!
                                                                 .validate() &&
                                                             isChecked) {
-                                                          setState(() {
-                                                            showResult = true;
-                                                          });
+                                                          if (dropvalue ==
+                                                              "B.Tech") {
+                                                            await getStudentData(
+                                                                regNo.text);
+                                                            setState(() {
+                                                              showResult = true;
+                                                            });
+                                                          } else {
+                                                            badGateway = true;
+                                                          }
                                                         }
                                                       },
                                                       child: const Text(

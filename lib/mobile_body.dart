@@ -10,8 +10,7 @@ class MobileBody extends StatefulWidget {
   State<MobileBody> createState() => _MobileBodyState();
 }
 
-bool sideBarStat = false;
-bool isChecked = false;
+bool sideBarStat = false, isChecked = false;
 DateTime? date;
 
 class _MobileBodyState extends State<MobileBody> {
@@ -340,13 +339,19 @@ class _MobileBodyState extends State<MobileBody> {
                                                   ),
                                                 ),
                                               ),
-                                              onPressed: () {
+                                              onPressed: () async {
                                                 if (formKey.currentState!
                                                         .validate() &&
                                                     isChecked) {
-                                                  setState(() {
-                                                    showResult = true;
-                                                  });
+                                                  if (dropvalue == "B.Tech") {
+                                                    await getStudentData(
+                                                        regNo.text);
+                                                    setState(() {
+                                                      showResult = true;
+                                                    });
+                                                  } else {
+                                                    badGateway = true;
+                                                  }
                                                 }
                                               },
                                               child: const Text(
