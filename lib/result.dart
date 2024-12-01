@@ -358,7 +358,7 @@ TableCell resultCell(String text,
             style: TextStyle(
                 color: textColor,
                 fontWeight: FontWeight.w500,
-                fontSize: screenWidth < 448 ? 12.5 : 15),
+                fontSize: screenWidth < 470 ? 11 : 15),
           ),
         ),
       ),
