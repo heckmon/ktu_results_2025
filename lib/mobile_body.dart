@@ -222,6 +222,7 @@ class _MobileBodyState extends State<MobileBody> {
                                         child: SizedBox(
                                           height: 40,
                                           child: TextFormField(
+                                            enabled: !showResult,
                                             validator: (value) {
                                               if (value == null ||
                                                   value.isEmpty) {
@@ -270,6 +271,7 @@ class _MobileBodyState extends State<MobileBody> {
                                         child: SizedBox(
                                           height: 40,
                                           child: TextFormField(
+                                            enabled: !showResult,
                                             validator: (value) {
                                               if (value == null ||
                                                   value.isEmpty) {
@@ -459,21 +461,28 @@ class _MobileBodyState extends State<MobileBody> {
                                               ),
                                               onPressed: () async {
                                                 if (formKey.currentState!
-                                                        .validate() &&
-                                                    isChecked) {
-                                                  if (dropvalue == "B.Tech") {
-                                                    await getStudentData(
-                                                        regNo.text);
-                                                    setState(() {
-                                                      showResult = true;
-                                                    });
+                                                    .validate()) {
+                                                  if (isChecked) {
+                                                    if (dropvalue == "B.Tech" &&
+                                                        heading.substring(7) ==
+                                                            data[0]) {
+                                                      await getStudentData(
+                                                          regNo.text);
+                                                      setState(() {
+                                                        showResult = true;
+                                                      });
+                                                    } else {
+                                                      Navigator.of(context)
+                                                          .pushReplacement(
+                                                              MaterialPageRoute(
+                                                                  builder:
+                                                                      (context) =>
+                                                                          const BadGateway()));
+                                                    }
                                                   } else {
-                                                    Navigator.of(context)
-                                                        .pushReplacement(
-                                                            MaterialPageRoute(
-                                                                builder:
-                                                                    (context) =>
-                                                                        const BadGateway()));
+                                                    setState(() {
+                                                      captchaStat = true;
+                                                    });
                                                   }
                                                 }
                                               },

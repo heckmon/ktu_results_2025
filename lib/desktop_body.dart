@@ -567,6 +567,8 @@ class _AppBodyState extends State<AppBody> {
                                                                       top: 8.0),
                                                               child:
                                                                   TextFormField(
+                                                                enabled:
+                                                                    !showResult,
                                                                 controller:
                                                                     regNo,
                                                                 validator:
@@ -639,6 +641,8 @@ class _AppBodyState extends State<AppBody> {
                                                                       top: 8.0),
                                                               child:
                                                                   TextFormField(
+                                                                enabled:
+                                                                    !showResult,
                                                                 onTap:
                                                                     () async {
                                                                   date =
