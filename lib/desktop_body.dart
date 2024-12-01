@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:ktu_results/bad_gateway.dart';
 import 'package:ktu_results/mobile_body.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -6,7 +7,6 @@ import 'package:ktu_results/result.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io';
-import 'package:date_picker_plus/date_picker_plus.dart';
 import 'dart:html' as html;
 
 // ignore_for_file: avoid_web_libraries_in_flutter
@@ -32,8 +32,8 @@ TextEditingController regNo = TextEditingController(),
 String dropvalue = "--SELECT--", heading = "Examination Result";
 bool isClicked = false,
     showResult = false,
-    badGateway = false,
-    sideBarStat = false;
+    sideBarStat = false,
+    captchaStat = false;
 
 List<String> data = [
   "B.Tech S3 (S) Exam November 2024 (2019 Scheme) (S3 Result)",
@@ -238,19 +238,6 @@ class _AppBodyState extends State<AppBody> {
         focusNode.unfocus();
       }
     });
-  }
-
-  showLoaderDialog(BuildContext context) {
-    AlertDialog alert = const AlertDialog(
-      content: CircularProgressIndicator(),
-    );
-    showDialog(
-      barrierDismissible: false,
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
   }
 
   @override
@@ -654,8 +641,22 @@ class _AppBodyState extends State<AppBody> {
                                                                   TextFormField(
                                                                 onTap:
                                                                     () async {
-                                                                  date = await showDate(
-                                                                      context);
+                                                                  date =
+                                                                      await showDatePicker(
+                                                                    context:
+                                                                        context,
+                                                                    initialDate:
+                                                                        DateTime
+                                                                            .now(),
+                                                                    firstDate:
+                                                                        DateTime(
+                                                                            1990,
+                                                                            1,
+                                                                            1),
+                                                                    lastDate:
+                                                                        DateTime
+                                                                            .now(),
+                                                                  );
                                                                   if (date !=
                                                                       null) {
                                                                     setState(
@@ -703,7 +704,143 @@ class _AppBodyState extends State<AppBody> {
                                                       ))
                                                 ],
                                               ),
-                                              const FakeCaptcha(),
+                                              Align(
+                                                alignment: Alignment.centerLeft,
+                                                child: Padding(
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal:
+                                                          screenHeight > 1200
+                                                              ? 10
+                                                              : 14.5,
+                                                      vertical: 20),
+                                                  child: Container(
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          const BorderRadius
+                                                              .all(
+                                                              Radius.circular(
+                                                                  3)),
+                                                      color: const Color(
+                                                          0xfff9f9f9),
+                                                      border: Border.all(
+                                                          width: 0.5,
+                                                          color: Colors.grey),
+                                                    ),
+                                                    width: 310,
+                                                    height: 77,
+                                                    child: Center(
+                                                      child: ListTile(
+                                                        dense: true,
+                                                        leading:
+                                                            Transform.scale(
+                                                          scale: 1.5,
+                                                          child: Checkbox(
+                                                              side: BorderSide(
+                                                                  color: (!isChecked &&
+                                                                          captchaStat)
+                                                                      ? const Color.fromARGB(
+                                                                          255,
+                                                                          236,
+                                                                          10,
+                                                                          10)
+                                                                      : Colors
+                                                                          .grey,
+                                                                  width: (!isChecked &&
+                                                                              captchaStat) &&
+                                                                          (dob.text != "" &&
+                                                                              regNo.text !=
+                                                                                  "")
+                                                                      ? 1.1
+                                                                      : 0.5),
+                                                              checkColor:
+                                                                  Colors.green,
+                                                              activeColor: Colors
+                                                                  .transparent,
+                                                              value: isChecked,
+                                                              isError:
+                                                                  (!isChecked &&
+                                                                      captchaStat),
+                                                              onChanged:
+                                                                  (bool? val) {
+                                                                setState(() {
+                                                                  isChecked =
+                                                                      true;
+                                                                });
+                                                              }),
+                                                        ),
+                                                        title: Text(
+                                                          "I'm not a robot",
+                                                          style: TextStyle(
+                                                              color: !isChecked &&
+                                                                      captchaStat
+                                                                  ? Colors.red
+                                                                  : Colors
+                                                                      .black,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              fontSize: 15),
+                                                        ),
+                                                        trailing: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .only(
+                                                                  left: 10),
+                                                          child: Column(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .end,
+                                                            children: [
+                                                              Flexible(
+                                                                flex: 1,
+                                                                child: screenHeight >
+                                                                        1220
+                                                                    ? Transform
+                                                                        .scale(
+                                                                        scale:
+                                                                            1.2,
+                                                                        child: Image.asset(
+                                                                            "assets/images/recaptcha.png"),
+                                                                      )
+                                                                    : Transform
+                                                                        .scale(
+                                                                        scale:
+                                                                            1.7,
+                                                                        child: Image.asset(
+                                                                            "assets/images/recaptcha.png"),
+                                                                      ),
+                                                              ),
+                                                              const Flexible(
+                                                                flex: 1,
+                                                                child: Padding(
+                                                                  padding:
+                                                                      EdgeInsets
+                                                                          .only(
+                                                                              top: 2.5),
+                                                                  child: Text(
+                                                                      "reCAPTCHA",
+                                                                      style: TextStyle(
+                                                                          fontSize:
+                                                                              10.5)),
+                                                                ),
+                                                              ),
+                                                              const Flexible(
+                                                                flex: 1,
+                                                                child: Text(
+                                                                  "Privacy - Terms",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          8),
+                                                                ),
+                                                              )
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
                                               Padding(
                                                 padding: const EdgeInsets.only(
                                                     right: 13),
@@ -731,21 +868,33 @@ class _AppBodyState extends State<AppBody> {
                                                       ),
                                                       onPressed: () async {
                                                         if (formKey
-                                                                .currentState!
-                                                                .validate() &&
-                                                            isChecked) {
-                                                          if (dropvalue ==
-                                                                  "B.Tech" &&
-                                                              heading.substring(
-                                                                      7) ==
-                                                                  data[0]) {
-                                                            await getStudentData(
-                                                                regNo.text);
-                                                            setState(() {
-                                                              showResult = true;
-                                                            });
+                                                            .currentState!
+                                                            .validate()) {
+                                                          if (isChecked) {
+                                                            if (dropvalue ==
+                                                                    "B.Tech" &&
+                                                                heading.substring(
+                                                                        7) ==
+                                                                    data[0]) {
+                                                              await getStudentData(
+                                                                  regNo.text);
+                                                              setState(() {
+                                                                showResult =
+                                                                    true;
+                                                              });
+                                                            } else {
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pushReplacement(
+                                                                      MaterialPageRoute(
+                                                                          builder: (context) =>
+                                                                              const BadGateway()));
+                                                            }
                                                           } else {
-                                                            badGateway = true;
+                                                            setState(() {
+                                                              captchaStat =
+                                                                  true;
+                                                            });
                                                           }
                                                         }
                                                       },
@@ -1083,100 +1232,6 @@ Widget styledPopup(String hint, Map<String, VoidCallback> data) {
   );
 }
 
-class FakeCaptcha extends StatefulWidget {
-  const FakeCaptcha({super.key});
-
-  @override
-  State<FakeCaptcha> createState() => _FakeCaptchaState();
-}
-
-class _FakeCaptchaState extends State<FakeCaptcha> {
-  @override
-  Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-            horizontal: screenHeight > 1200 ? 10 : 14.5, vertical: 20),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.all(Radius.circular(3)),
-            color: const Color(0xfff9f9f9),
-            border: Border.all(width: 0.5, color: Colors.grey),
-          ),
-          width: 310,
-          height: 77,
-          child: Center(
-            child: ListTile(
-              dense: true,
-              leading: Transform.scale(
-                scale: 1.5,
-                child: Checkbox(
-                    side: BorderSide(
-                        color: (!isChecked && showResult)
-                            ? const Color.fromARGB(255, 236, 10, 10)
-                            : Colors.grey,
-                        width: (!isChecked && showResult) &&
-                                (dob.text != "" && regNo.text != "")
-                            ? 1.1
-                            : 0.5),
-                    checkColor: Colors.green,
-                    activeColor: Colors.transparent,
-                    value: isChecked,
-                    isError: (!isChecked && showResult),
-                    onChanged: (bool? val) {
-                      setState(() {
-                        isChecked = true;
-                      });
-                    }),
-              ),
-              title: const Text(
-                "I'm not a robot",
-                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
-              ),
-              trailing: Padding(
-                padding: const EdgeInsets.only(left: 10),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Flexible(
-                      flex: 1,
-                      child: screenHeight > 1220
-                          ? Transform.scale(
-                              scale: 1.2,
-                              child: Image.asset("assets/images/recaptcha.png"),
-                            )
-                          : Transform.scale(
-                              scale: 1.7,
-                              child: Image.asset("assets/images/recaptcha.png"),
-                            ),
-                    ),
-                    const Flexible(
-                      flex: 1,
-                      child: Padding(
-                        padding: EdgeInsets.only(top: 2.5),
-                        child:
-                            Text("reCAPTCHA", style: TextStyle(fontSize: 10.5)),
-                      ),
-                    ),
-                    const Flexible(
-                      flex: 1,
-                      child: Text(
-                        "Privacy - Terms",
-                        style: TextStyle(fontSize: 8),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 Future<void> launchUrl(String url) async {
   await launchUrlString(url);
 }
@@ -1206,14 +1261,4 @@ Future<List<dynamic>> publishedResult(int index) async {
       DateTime.now().millisecondsSinceEpoch.toString();
 
   return jsonDecode(response.body);
-}
-
-Future<DateTime?> showDate(BuildContext context) async {
-  final date = await showDatePickerDialog(
-    context: context,
-    initialDate: DateTime.now(),
-    minDate: DateTime(1990, 10, 10),
-    maxDate: DateTime.now(),
-  );
-  return date;
 }

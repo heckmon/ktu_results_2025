@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ktu_results/bad_gateway.dart';
 import 'package:ktu_results/desktop_body.dart';
 import 'package:ktu_results/result.dart';
 
@@ -277,7 +278,12 @@ class _MobileBodyState extends State<MobileBody> {
                                               return null;
                                             },
                                             onTap: () async {
-                                              date = await showDate(context);
+                                              date = await showDatePicker(
+                                                context: context,
+                                                initialDate: DateTime.now(),
+                                                firstDate: DateTime(1990, 1, 1),
+                                                lastDate: DateTime.now(),
+                                              );
                                               if (date != null) {
                                                 setState(() {
                                                   date = date;
@@ -317,7 +323,119 @@ class _MobileBodyState extends State<MobileBody> {
                                           ),
                                         ),
                                       ),
-                                      const FakeCaptcha(),
+                                      Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: screenHeight > 1200
+                                                  ? 10
+                                                  : 14.5,
+                                              vertical: 20),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  const BorderRadius.all(
+                                                      Radius.circular(3)),
+                                              color: const Color(0xfff9f9f9),
+                                              border: Border.all(
+                                                  width: 0.5,
+                                                  color: Colors.grey),
+                                            ),
+                                            width: 310,
+                                            height: 77,
+                                            child: Center(
+                                              child: ListTile(
+                                                dense: true,
+                                                leading: Transform.scale(
+                                                  scale: 1.5,
+                                                  child: Checkbox(
+                                                      side: BorderSide(
+                                                          color: (!isChecked &&
+                                                                  showResult)
+                                                              ? const Color
+                                                                  .fromARGB(255,
+                                                                  236, 10, 10)
+                                                              : Colors.grey,
+                                                          width: (!isChecked &&
+                                                                      showResult) &&
+                                                                  (dob.text !=
+                                                                          "" &&
+                                                                      regNo
+                                                                              .text !=
+                                                                          "")
+                                                              ? 1.1
+                                                              : 0.5),
+                                                      checkColor: Colors.green,
+                                                      activeColor:
+                                                          Colors.transparent,
+                                                      value: isChecked,
+                                                      isError: (!isChecked &&
+                                                          showResult),
+                                                      onChanged: (bool? val) {
+                                                        setState(() {
+                                                          isChecked = true;
+                                                        });
+                                                      }),
+                                                ),
+                                                title: const Text(
+                                                  "I'm not a robot",
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontSize: 15),
+                                                ),
+                                                trailing: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 10),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.end,
+                                                    children: [
+                                                      Flexible(
+                                                        flex: 1,
+                                                        child: screenHeight >
+                                                                1220
+                                                            ? Transform.scale(
+                                                                scale: 1.2,
+                                                                child: Image.asset(
+                                                                    "assets/images/recaptcha.png"),
+                                                              )
+                                                            : Transform.scale(
+                                                                scale: 1.7,
+                                                                child: Image.asset(
+                                                                    "assets/images/recaptcha.png"),
+                                                              ),
+                                                      ),
+                                                      const Flexible(
+                                                        flex: 1,
+                                                        child: Padding(
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  top: 2.5),
+                                                          child: Text(
+                                                              "reCAPTCHA",
+                                                              style: TextStyle(
+                                                                  fontSize:
+                                                                      10.5)),
+                                                        ),
+                                                      ),
+                                                      const Flexible(
+                                                        flex: 1,
+                                                        child: Text(
+                                                          "Privacy - Terms",
+                                                          style: TextStyle(
+                                                              fontSize: 8),
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
                                       Padding(
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 10),
@@ -350,7 +468,12 @@ class _MobileBodyState extends State<MobileBody> {
                                                       showResult = true;
                                                     });
                                                   } else {
-                                                    badGateway = true;
+                                                    Navigator.of(context)
+                                                        .pushReplacement(
+                                                            MaterialPageRoute(
+                                                                builder:
+                                                                    (context) =>
+                                                                        const BadGateway()));
                                                   }
                                                 }
                                               },

@@ -20,28 +20,8 @@ Future<void> main() async {
   runApp(const Base());
 }
 
-ColorFilter mat = const ColorFilter.matrix([
-  1,
-  0,
-  0,
-  0,
-  0,
-  0,
-  1,
-  0,
-  0,
-  0,
-  0,
-  0,
-  1,
-  0,
-  0,
-  0,
-  0,
-  0,
-  1,
-  0,
-]);
+ColorFilter mat = const ColorFilter.matrix(
+    [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0]);
 
 class Base extends StatefulWidget {
   const Base({super.key});
@@ -65,6 +45,8 @@ class _BaseState extends State<Base> {
       title: "APJ Abdul Kalam Technological University",
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        datePickerTheme:
+            const DatePickerThemeData(backgroundColor: Colors.white),
         scaffoldBackgroundColor: Colors.white,
         textTheme: GoogleFonts.latoTextTheme(),
       ),

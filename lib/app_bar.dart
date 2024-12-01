@@ -84,58 +84,22 @@ class _AppbarState extends State<Appbar> {
                     0,
                     0,
                     1,
-                    0,
+                    0
                   ]));
                 }),
                 styledIconButton(const Color(0xff989a9e), Colors.white,
                     FontAwesomeIcons.droplet, 13.75, 5.5, () {
-                  widget.filter(const ColorFilter.matrix([
-                    0.33,
-                    0.33,
-                    0.33,
-                    0,
-                    0,
-                    0.33,
-                    0.33,
-                    0.33,
-                    0,
-                    0,
-                    0.33,
-                    0.33,
-                    0.33,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1,
-                    0,
-                  ]));
+                  widget.filter(const ColorFilter.matrix(
+                    [0.33,0.33,0.33,0
+                    ,0,0.33,0.33,0.33,
+                    0,0,0.33,0.33,0.33,
+                    0,0,0,0,0,1,0],));
                 }),
                 styledIconButton(const Color(0xff1d2733), Colors.white,
                     FontAwesomeIcons.droplet, 13.75, 5.5, () {
-                  widget.filter(const ColorFilter.matrix([
-                    -1,
-                    0,
-                    0,
-                    0,
-                    1,
-                    0,
-                    -1,
-                    0,
-                    0,
-                    1,
-                    0,
-                    0,
-                    -1,
-                    0,
-                    1,
-                    0,
-                    0,
-                    0,
-                    1,
-                    0,
-                  ]));
+                  widget.filter(const ColorFilter.matrix(
+                    [-1,0,0,0,1,0,-1,0,0,1,0,0,-1,0,1,0,0,0,1,0]
+                    ));
                 }),
                 styledIconButton(Colors.transparent, Colors.white,
                     FontAwesomeIcons.font, 12.0, 0, () {}),
