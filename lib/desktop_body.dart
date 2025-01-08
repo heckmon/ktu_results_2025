@@ -462,7 +462,7 @@ class _AppBodyState extends State<AppBody> {
                                             width: screenWidth * 0.2,
                                             child: DropdownButton<String>(
                                               focusNode: focusNode,
-                                              onSelected: (String? val) {
+                                              onChanged: (String? val) {
                                                 setState(() {
                                                   dropvalue =
                                                       val ?? "--SELECT--";
