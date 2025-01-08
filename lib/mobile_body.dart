@@ -13,6 +13,29 @@ class MobileBody extends StatefulWidget {
 
 bool sideBarStat = false, isChecked = false;
 DateTime? date;
+final dropDowns = <DropdownMenuEntry<String>>[
+  const DropdownMenuEntry(
+      value: "--SELECT--", label: "--SELECT--", enabled: false),
+  customDropDownMobile("B.Tech", "B.Tech"),
+  customDropDownMobile("M.Tech", "M.Tech"),
+  customDropDownMobile("MBA", "MBA"),
+  customDropDownMobile("MCA", "MCA"),
+  customDropDownMobile("B.Arch", "B.Arch"),
+  customDropDownMobile("M.Arch", "M.Arch"),
+  customDropDownMobile("Hotel", "Hotel Management and Catering Technology"),
+  customDropDownMobile("MHM", "MHM"),
+  customDropDownMobile("B.Plan", "B.Planning"),
+  customDropDownMobile("MCA2", "MCA(Second Year Direct)"),
+  customDropDownMobile("MCA2deg", "MCA Dual degree(INTEGRATED)"),
+  customDropDownMobile("PhD", "PhD"),
+  customDropDownMobile("B.Des", "B.Des"),
+  customDropDownMobile("MCA2Year", "MCA TWO YEARS"),
+  customDropDownMobile("B.Voc", "B.Voc"),
+  customDropDownMobile("MBAINT", "MBA INTEGRATED"),
+  customDropDownMobile("MBASPEC", "MBA WITH SPECIALIZATION"),
+  customDropDownMobile("BCA", "BCA"),
+  customDropDownMobile("BBA", "BBA"),
+];
 
 class _MobileBodyState extends State<MobileBody> {
   @override
@@ -138,36 +161,46 @@ class _MobileBodyState extends State<MobileBody> {
                               SizedBox(
                                 width: screenWidth * 0.76,
                                 child: Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 15),
-                                  child:  Container(
-                                    height: 30,
-                                    decoration: const ShapeDecoration(
-                                      shape: BeveledRectangleBorder(
-                                        side: BorderSide(width: 0.25,color: Colors.grey),
-                                        borderRadius: BorderRadius.all(Radius.circular(2))
-                                      )),
-                                    child: DropdownButtonHideUnderline(
-                                      child: DropdownButton<String>(
-                                        menuMaxHeight: 350,
-                                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                                        value: dropvalue,
-                                        focusNode: focusNode,
-                                        onChanged: (String? val) {
-                                          setState(() {
-                                            dropvalue =
-                                                val ?? "--SELECT--";
-                                          });
-                                        },
-                                        icon: const Icon(
-                                          FontAwesomeIcons.chevronDown,
-                                          size: 12,
-                                        ),
-                                        hint: const Text("--SELECT--"),
-                                        items: dropDowns,
-                                      ),
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 12, horizontal: 15),
+                                  child: DropdownMenu<String>(
+                                    onSelected: (String? val) {
+                                      setState(() {
+                                        dropvalue = val ?? "--SELECT--";
+                                      });
+                                    },
+                                    enableSearch: false,
+                                    trailingIcon: const Icon(
+                                      FontAwesomeIcons.chevronDown,
+                                      size: 12,
                                     ),
+                                    selectedTrailingIcon: const Icon(
+                                      FontAwesomeIcons.chevronUp,
+                                      size: 12,
+                                    ),
+                                    initialSelection: "--SELECT--",
+                                    inputDecorationTheme:
+                                        const InputDecorationTheme(
+                                      contentPadding: EdgeInsets.only(
+                                          bottom: 5.0, left: 8.0),
+                                      hintStyle: TextStyle(
+                                          color: Colors.black, fontSize: 13.8),
+                                      border: OutlineInputBorder(),
+                                      constraints:
+                                          BoxConstraints(maxHeight: 30),
+                                      isDense: true,
+                                    ),
+                                    menuHeight: 350,
+                                    menuStyle: const MenuStyle(
+                                        visualDensity:
+                                            VisualDensity(vertical: -4),
+                                        shadowColor: WidgetStatePropertyAll(
+                                            Colors.black),
+                                        backgroundColor: WidgetStatePropertyAll(
+                                            Colors.white)),
+                                    dropdownMenuEntries: dropDowns,
                                   ),
-                      ),
+                                ),
                               )
                             ],
                           )
@@ -706,4 +739,19 @@ class _MobileBodyState extends State<MobileBody> {
       );
     }
   }
+}
+
+DropdownMenuEntry<String> customDropDownMobile(dynamic value, String label) {
+  return DropdownMenuEntry(
+    style: ButtonStyle(
+        foregroundColor: WidgetStateProperty.resolveWith<Color?>((states) {
+          if (states.contains(WidgetState.hovered)) {
+            return Colors.white;
+          }
+          return Colors.black;
+        }),
+        overlayColor: const WidgetStatePropertyAll(Color(0xff005faf))),
+    value: value,
+    label: label,
+  );
 }

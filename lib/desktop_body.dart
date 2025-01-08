@@ -9,7 +9,6 @@ import 'package:http/http.dart' as http;
 import 'dart:io';
 import 'dart:html' as html;
 
-// ignore_for_file: avoid_web_libraries_in_flutter
 class MyHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
