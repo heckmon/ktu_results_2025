@@ -187,9 +187,9 @@ final styledTiles = [
       "Notification", () => launchUrl("https://ktu.edu.in/exam/notification")),
   const Divider(height: 0, indent: 4, endIndent: 4),
 ];
-final dropDowns = <DropdownMenuEntry<String>>[
-  const DropdownMenuEntry(
-      value: "--SELECT--", label: "--SELECT--", enabled: false),
+final dropDowns = <DropdownMenuItem<String>>[
+  const DropdownMenuItem(
+      value: "--SELECT--", enabled: false, child: Text("--SELECT--")),
   customDropDown("B.Tech", "B.Tech"),
   customDropDown("M.Tech", "M.Tech"),
   customDropDown("MBA", "MBA"),
@@ -456,25 +456,33 @@ class _AppBodyState extends State<AppBody> {
                                               color: Color(0xff364a63)),
                                         ),
                                         Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 12, horizontal: 22.0),
-                                          child: SizedBox(
-                                            width: screenWidth * 0.2,
-                                            child: DropdownButton<String>(
-                                              value: dropvalue,
-                                              focusNode: focusNode,
-                                              onChanged: (String? val) {
-                                                setState(() {
-                                                  dropvalue =
-                                                      val ?? "--SELECT--";
-                                                });
-                                              },
-                                              icon: const Icon(
-                                                FontAwesomeIcons.chevronDown,
-                                                size: 12,
+                                          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 22.0),
+                                          child: Container(
+                                            height: 30,
+                                            decoration: const ShapeDecoration(
+                                              shape: BeveledRectangleBorder(
+                                                side: BorderSide(width: 0.25,color: Colors.grey),
+                                                borderRadius: BorderRadius.all(Radius.circular(2))
+                                              )),
+                                            child: DropdownButtonHideUnderline(
+                                              child: DropdownButton<String>(
+                                                padding: const EdgeInsets.symmetric(horizontal: 10),
+                                                menuWidth: screenWidth * 0.2,
+                                                menuMaxHeight: 350,
+                                                value: dropvalue,
+                                                focusNode: focusNode,
+                                                onChanged: (String? val) {
+                                                  setState(() {
+                                                    dropvalue = val ?? "--SELECT--";
+                                                  });
+                                                },
+                                                icon: const Icon(
+                                                  FontAwesomeIcons.chevronDown,
+                                                  size: 12,
+                                                ),
+                                                hint: const Text("--SELECT--"),
+                                                items: dropDowns,
                                               ),
-                                              hint: Text("--SELECT--"),
-                                              items: dropDowns,
                                             ),
                                           ),
                                         ),
@@ -1109,18 +1117,18 @@ class _AppBodyState extends State<AppBody> {
   }
 }
 
-DropdownMenuEntry<String> customDropDown(dynamic value, String label) {
-  return DropdownMenuEntry(
-    style: ButtonStyle(
+DropdownMenuItem<String> customDropDown(dynamic value, String label) {
+  return DropdownMenuItem(
+    /* style: ButtonStyle(
         foregroundColor: WidgetStateProperty.resolveWith<Color?>((states) {
           if (states.contains(WidgetState.hovered)) {
             return Colors.white;
           }
           return Colors.black;
         }),
-        overlayColor: const WidgetStatePropertyAll(Color(0xff005faf))),
+        overlayColor: const WidgetStatePropertyAll(Color(0xff005faf))), */
     value: value,
-    label: label,
+    child: Text(label),
   );
 }
 

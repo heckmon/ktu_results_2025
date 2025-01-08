@@ -138,46 +138,36 @@ class _MobileBodyState extends State<MobileBody> {
                               SizedBox(
                                 width: screenWidth * 0.76,
                                 child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 12, horizontal: 15),
-                                  child: DropdownMenu<String>(
-                                    onSelected: (String? val) {
-                                      setState(() {
-                                        dropvalue = val ?? "--SELECT--";
-                                      });
-                                    },
-                                    enableSearch: false,
-                                    trailingIcon: const Icon(
-                                      FontAwesomeIcons.chevronDown,
-                                      size: 12,
+                                  padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 15),
+                                  child:  Container(
+                                    height: 30,
+                                    decoration: const ShapeDecoration(
+                                      shape: BeveledRectangleBorder(
+                                        side: BorderSide(width: 0.25,color: Colors.grey),
+                                        borderRadius: BorderRadius.all(Radius.circular(2))
+                                      )),
+                                    child: DropdownButtonHideUnderline(
+                                      child: DropdownButton<String>(
+                                        menuMaxHeight: 350,
+                                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                                        value: dropvalue,
+                                        focusNode: focusNode,
+                                        onChanged: (String? val) {
+                                          setState(() {
+                                            dropvalue =
+                                                val ?? "--SELECT--";
+                                          });
+                                        },
+                                        icon: const Icon(
+                                          FontAwesomeIcons.chevronDown,
+                                          size: 12,
+                                        ),
+                                        hint: const Text("--SELECT--"),
+                                        items: dropDowns,
+                                      ),
                                     ),
-                                    selectedTrailingIcon: const Icon(
-                                      FontAwesomeIcons.chevronUp,
-                                      size: 12,
-                                    ),
-                                    initialSelection: "--SELECT--",
-                                    inputDecorationTheme:
-                                        const InputDecorationTheme(
-                                      contentPadding: EdgeInsets.only(
-                                          bottom: 5.0, left: 8.0),
-                                      hintStyle: TextStyle(
-                                          color: Colors.black, fontSize: 13.8),
-                                      border: OutlineInputBorder(),
-                                      constraints:
-                                          BoxConstraints(maxHeight: 30),
-                                      isDense: true,
-                                    ),
-                                    menuHeight: 350,
-                                    menuStyle: const MenuStyle(
-                                        visualDensity:
-                                            VisualDensity(vertical: -4),
-                                        shadowColor: WidgetStatePropertyAll(
-                                            Colors.black),
-                                        backgroundColor: WidgetStatePropertyAll(
-                                            Colors.white)),
-                                    dropdownMenuEntries: dropDowns,
                                   ),
-                                ),
+                      ),
                               )
                             ],
                           )
