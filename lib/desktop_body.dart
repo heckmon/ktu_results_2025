@@ -460,7 +460,7 @@ class _AppBodyState extends State<AppBody> {
                                               vertical: 12, horizontal: 22.0),
                                           child: SizedBox(
                                             width: screenWidth * 0.2,
-                                            child: DropdownMenu<String>(
+                                            child: DropdownButton<String>(
                                               focusNode: focusNode,
                                               onSelected: (String? val) {
                                                 setState(() {
