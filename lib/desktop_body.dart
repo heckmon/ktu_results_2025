@@ -461,6 +461,7 @@ class _AppBodyState extends State<AppBody> {
                                           child: SizedBox(
                                             width: screenWidth * 0.2,
                                             child: DropdownButton<String>(
+                                              value: dropvalue,
                                               focusNode: focusNode,
                                               onChanged: (String? val) {
                                                 setState(() {
@@ -468,39 +469,12 @@ class _AppBodyState extends State<AppBody> {
                                                       val ?? "--SELECT--";
                                                 });
                                               },
-                                              enableSearch: false,
-                                              trailingIcon: const Icon(
+                                              icon: const Icon(
                                                 FontAwesomeIcons.chevronDown,
                                                 size: 12,
                                               ),
-                                              selectedTrailingIcon: const Icon(
-                                                FontAwesomeIcons.chevronUp,
-                                                size: 12,
-                                              ),
-                                              initialSelection: "--SELECT--",
-                                              inputDecorationTheme:
-                                                  const InputDecorationTheme(
-                                                contentPadding: EdgeInsets.only(
-                                                    bottom: 5.0, left: 8.0),
-                                                hintStyle: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 13.8),
-                                                border: OutlineInputBorder(),
-                                                constraints: BoxConstraints(
-                                                    maxHeight: 30),
-                                                isDense: true,
-                                              ),
-                                              menuHeight: 350,
-                                              menuStyle: const MenuStyle(
-                                                  visualDensity: VisualDensity(
-                                                      vertical: -4),
-                                                  shadowColor:
-                                                      WidgetStatePropertyAll(
-                                                          Colors.black),
-                                                  backgroundColor:
-                                                      WidgetStatePropertyAll(
-                                                          Colors.white)),
-                                              dropdownMenuEntries: dropDowns,
+                                              hint: Text("--SELECT--"),
+                                              items: dropDowns,
                                             ),
                                           ),
                                         ),
