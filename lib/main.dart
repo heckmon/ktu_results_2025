@@ -57,10 +57,7 @@ class _BaseState extends State<Base> {
             appBar: PreferredSize(
               preferredSize: Size.fromHeight(screenWidth > 852 ? 53 : screenHeight * 0.15),
               child: Appbar(filter: updateColorFilter)),
-            body: screenWidth > 700 ? InteractiveViewer(
-              scaleEnabled: screenHeight > 1200,
-              child: const AppBody(),
-              ): const MobileBody()),
+            body: screenWidth > 700 ? const AppBody(): const MobileBody()),
       ),
     );
   }
