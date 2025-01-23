@@ -683,7 +683,7 @@ class _MobileBodyState extends State<MobileBody> {
                             ),
                       subtitle: dropvalue == "B.Tech"
                           ? Text(
-                              "Published On: ${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}",
+                              "Published On: ${(DateTime.now().day)-index}-${DateTime.now().month}-${DateTime.now().year}",
                               style: const TextStyle(
                                   fontSize: 15, fontWeight: FontWeight.w500),
                             )
