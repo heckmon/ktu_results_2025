@@ -35,7 +35,7 @@ bool isClicked = false,
     captchaStat = false;
 
 List<String> data = [
-  "B.Tech S3 (S) Exam November 2024 (2019 Scheme) (S3 Result)",
+  "B.Tech S3 (R) Exam November 2024 (2019 Scheme) (S3 Result)",
   "B.Tech S8 (S) Exam August 2024 (2019 Scheme) (S8 Result)",
   "B.Tech S8 (PT) (S) Exam August 2024 (2019 Scheme) (S8 Result",
   "B.Tech S3 (S, FE) Exam June 2024 (2019 Scheme) (S3 Result)",
