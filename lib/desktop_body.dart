@@ -9,7 +9,6 @@ import 'package:http/http.dart' as http;
 import 'dart:io';
 import 'dart:html' as html;
 
-// ignore_for_file: avoid_web_libraries_in_flutter
 class MyHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
@@ -36,16 +35,16 @@ bool isClicked = false,
     captchaStat = false;
 
 List<String> data = [
-  "B.Tech S3 (S) Exam November 2024 (2019 Scheme) (S3 Result)",
-  "B.Tech S8 (S) Exam August 2024 (2019 Scheme) (S8 Result)",
-  "B.Tech S8 (PT) (S) Exam August 2024 (2019 Scheme) (S8 Result",
+  "B.Tech S3 (R) Exam November 2024 (2019 Scheme) (S3 Result)",
+  /* "B.Tech S7 (R, S) Exam Nov 2024 (2019 Scheme) (S7 Result)",
+  "B.Tech S8 (S) Exam Aug 2024 (2019 Scheme) (S8 Result)",
+  "B.Tech S8 (PT) (S) Exam August 2024 (2019 Scheme) (S8 Result)",
   "B.Tech S3 (S, FE) Exam June 2024 (2019 Scheme) (S3 Result)",
   "B.Tech S5 (S, FE) Exam June 2024 (2019 Scheme) (S5 Result)",
-  "B.Tech S6 (Minor) Exam June 2024 (2021 Admn) (S6 Result)",
   "B.Tech S6 (Hons.) Exam June 2024 (2021 Admn) (S6 Result)",
   "B.Tech S4 (minor) Exam June 2024 (2022 admn) (S4 Result)",
   "B.Tech S4 (Hons.) Exam June 2024 (2022 admn) (S4 Result)",
-  "B.Tech S1 (S, FE) Exam June 2024 (2019 Scheme) (S1 Result)",
+  "B.Tech S1 (S, FE) Exam June 2024 (2019 Scheme) (S1 Result)", */
 ];
 
 Map<String, int> eachResult = {
@@ -187,9 +186,9 @@ final styledTiles = [
       "Notification", () => launchUrl("https://ktu.edu.in/exam/notification")),
   const Divider(height: 0, indent: 4, endIndent: 4),
 ];
-final dropDowns = <DropdownMenuEntry<String>>[
-  const DropdownMenuEntry(
-      value: "--SELECT--", label: "--SELECT--", enabled: false),
+final dropDowns = <DropdownMenuItem<String>>[
+  const DropdownMenuItem(
+      value: "--SELECT--", enabled: false, child: Text("--SELECT--")),
   customDropDown("B.Tech", "B.Tech"),
   customDropDown("M.Tech", "M.Tech"),
   customDropDown("MBA", "MBA"),
@@ -235,7 +234,7 @@ class _AppBodyState extends State<AppBody> {
     super.initState();
     focusNode.addListener(() {
       if (focusNode.hasFocus) {
-        focusNode.unfocus();
+         
       }
     });
   }
@@ -456,51 +455,33 @@ class _AppBodyState extends State<AppBody> {
                                               color: Color(0xff364a63)),
                                         ),
                                         Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 12, horizontal: 22.0),
-                                          child: SizedBox(
-                                            width: screenWidth * 0.2,
-                                            child: DropdownMenu<String>(
-                                              focusNode: focusNode,
-                                              onSelected: (String? val) {
-                                                setState(() {
-                                                  dropvalue =
-                                                      val ?? "--SELECT--";
-                                                });
-                                              },
-                                              enableSearch: false,
-                                              trailingIcon: const Icon(
-                                                FontAwesomeIcons.chevronDown,
-                                                size: 12,
+                                          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 22.0),
+                                          child: Container(
+                                            height: 30,
+                                            decoration: const ShapeDecoration(
+                                              shape: BeveledRectangleBorder(
+                                                side: BorderSide(width: 0.25,color: Colors.grey),
+                                                borderRadius: BorderRadius.all(Radius.circular(2))
+                                              )),
+                                            child: DropdownButtonHideUnderline(
+                                              child: DropdownButton<String>(
+                                                padding: const EdgeInsets.symmetric(horizontal: 10),
+                                                menuWidth: screenWidth * 0.2,
+                                                menuMaxHeight: 350,
+                                                value: dropvalue,
+                                                focusNode: focusNode,
+                                                onChanged: (String? val) {
+                                                  setState(() {
+                                                    dropvalue = val ?? "--SELECT--";
+                                                  });
+                                                },
+                                                icon: const Icon(
+                                                  FontAwesomeIcons.chevronDown,
+                                                  size: 12,
+                                                ),
+                                                hint: const Text("--SELECT--"),
+                                                items: dropDowns,
                                               ),
-                                              selectedTrailingIcon: const Icon(
-                                                FontAwesomeIcons.chevronUp,
-                                                size: 12,
-                                              ),
-                                              initialSelection: "--SELECT--",
-                                              inputDecorationTheme:
-                                                  const InputDecorationTheme(
-                                                contentPadding: EdgeInsets.only(
-                                                    bottom: 5.0, left: 8.0),
-                                                hintStyle: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 13.8),
-                                                border: OutlineInputBorder(),
-                                                constraints: BoxConstraints(
-                                                    maxHeight: 30),
-                                                isDense: true,
-                                              ),
-                                              menuHeight: 350,
-                                              menuStyle: const MenuStyle(
-                                                  visualDensity: VisualDensity(
-                                                      vertical: -4),
-                                                  shadowColor:
-                                                      WidgetStatePropertyAll(
-                                                          Colors.black),
-                                                  backgroundColor:
-                                                      WidgetStatePropertyAll(
-                                                          Colors.white)),
-                                              dropdownMenuEntries: dropDowns,
                                             ),
                                           ),
                                         ),
@@ -1064,7 +1045,12 @@ class _AppBodyState extends State<AppBody> {
                     ),
                     title: dropvalue == "B.Tech"
                         ? Text(
-                            data[index],
+                            ((){
+                              if(index == 0){
+                                return data[index];
+                              }
+                              return snapshot.data![index-1]['resultName'];
+                            })(),
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Color(0xff8b0051),
@@ -1079,7 +1065,21 @@ class _AppBodyState extends State<AppBody> {
                           ),
                     subtitle: dropvalue == "B.Tech"
                         ? Text(
-                            "Published On: ${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}",
+                            "Published On: ${(() {
+                              late String date;
+                              if(index == 0){
+                                String month = ((){
+                                  String m = DateTime.now().month.toString();
+                                  return m.length == 1 ? "0$m": m;
+                                })(); 
+                                date = "${DateTime.now().year}-$month-${DateTime.now().day}";
+                              }else {
+                                date =
+                                  snapshot.data![index-1]['publishDate'];
+                              }
+                              List<String> newDate = date.split("-");
+                              return "${newDate[2]}-${newDate[1]}-${newDate[0]}";
+                            })()}",
                             style: const TextStyle(
                                 fontSize: 15, fontWeight: FontWeight.w500),
                           )
@@ -1135,18 +1135,18 @@ class _AppBodyState extends State<AppBody> {
   }
 }
 
-DropdownMenuEntry<String> customDropDown(dynamic value, String label) {
-  return DropdownMenuEntry(
-    style: ButtonStyle(
+DropdownMenuItem<String> customDropDown(dynamic value, String label) {
+  return DropdownMenuItem(
+    /* style: ButtonStyle(
         foregroundColor: WidgetStateProperty.resolveWith<Color?>((states) {
           if (states.contains(WidgetState.hovered)) {
             return Colors.white;
           }
           return Colors.black;
         }),
-        overlayColor: const WidgetStatePropertyAll(Color(0xff005faf))),
+        overlayColor: const WidgetStatePropertyAll(Color(0xff005faf))), */
     value: value,
-    label: label,
+    child: Text(label),
   );
 }
 

@@ -13,6 +13,29 @@ class MobileBody extends StatefulWidget {
 
 bool sideBarStat = false, isChecked = false;
 DateTime? date;
+final dropDowns = <DropdownMenuEntry<String>>[
+  const DropdownMenuEntry(
+      value: "--SELECT--", label: "--SELECT--", enabled: false),
+  customDropDownMobile("B.Tech", "B.Tech"),
+  customDropDownMobile("M.Tech", "M.Tech"),
+  customDropDownMobile("MBA", "MBA"),
+  customDropDownMobile("MCA", "MCA"),
+  customDropDownMobile("B.Arch", "B.Arch"),
+  customDropDownMobile("M.Arch", "M.Arch"),
+  customDropDownMobile("Hotel", "Hotel Management and Catering Technology"),
+  customDropDownMobile("MHM", "MHM"),
+  customDropDownMobile("B.Plan", "B.Planning"),
+  customDropDownMobile("MCA2", "MCA(Second Year Direct)"),
+  customDropDownMobile("MCA2deg", "MCA Dual degree(INTEGRATED)"),
+  customDropDownMobile("PhD", "PhD"),
+  customDropDownMobile("B.Des", "B.Des"),
+  customDropDownMobile("MCA2Year", "MCA TWO YEARS"),
+  customDropDownMobile("B.Voc", "B.Voc"),
+  customDropDownMobile("MBAINT", "MBA INTEGRATED"),
+  customDropDownMobile("MBASPEC", "MBA WITH SPECIALIZATION"),
+  customDropDownMobile("BCA", "BCA"),
+  customDropDownMobile("BBA", "BBA"),
+];
 
 class _MobileBodyState extends State<MobileBody> {
   @override
@@ -645,12 +668,17 @@ class _MobileBodyState extends State<MobileBody> {
                       ),
                       title: dropvalue == "B.Tech"
                           ? Text(
-                              data[index],
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xff8b0051),
-                              ),
-                            )
+                            ((){
+                              if(index == 0){
+                                return data[index];
+                              }
+                              return snapshot.data![index-1]['resultName'];
+                            })(),
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xff8b0051),
+                            ),
+                          )
                           : Text(
                               "${snapshot.data![index]['resultName']}",
                               style: const TextStyle(
@@ -660,10 +688,24 @@ class _MobileBodyState extends State<MobileBody> {
                             ),
                       subtitle: dropvalue == "B.Tech"
                           ? Text(
-                              "Published On: ${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}",
-                              style: const TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.w500),
-                            )
+                            "Published On: ${(() {
+                              late String date;
+                              if(index == 0){
+                                String month = ((){
+                                  String m = DateTime.now().month.toString();
+                                  return m.length == 1 ? "0$m": m;
+                                })(); 
+                                date = "${DateTime.now().year}-$month-${DateTime.now().day}";
+                              }else {
+                                date =
+                                  snapshot.data![index-1]['publishDate'];
+                              }
+                              List<String> newDate = date.split("-");
+                              return "${newDate[2]}-${newDate[1]}-${newDate[0]}";
+                            })()}",
+                            style: const TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.w500),
+                          )
                           : Text(
                               "Published On: ${(() {
                                 String date =
@@ -716,4 +758,19 @@ class _MobileBodyState extends State<MobileBody> {
       );
     }
   }
+}
+
+DropdownMenuEntry<String> customDropDownMobile(dynamic value, String label) {
+  return DropdownMenuEntry(
+    style: ButtonStyle(
+        foregroundColor: WidgetStateProperty.resolveWith<Color?>((states) {
+          if (states.contains(WidgetState.hovered)) {
+            return Colors.white;
+          }
+          return Colors.black;
+        }),
+        overlayColor: const WidgetStatePropertyAll(Color(0xff005faf))),
+    value: value,
+    label: label,
+  );
 }

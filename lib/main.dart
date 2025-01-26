@@ -55,10 +55,9 @@ class _BaseState extends State<Base> {
         child: Scaffold(
             resizeToAvoidBottomInset: false,
             appBar: PreferredSize(
-                preferredSize: Size.fromHeight(
-                    screenWidth > 852 ? 53 : screenHeight * 0.15),
-                child: Appbar(filter: updateColorFilter)),
-            body: screenWidth > 700 ? const AppBody() : const MobileBody()),
+              preferredSize: Size.fromHeight(screenWidth > 852 ? 53 : screenHeight * 0.15),
+              child: Appbar(filter: updateColorFilter)),
+            body: screenWidth > 700 ? const AppBody(): const MobileBody()),
       ),
     );
   }
